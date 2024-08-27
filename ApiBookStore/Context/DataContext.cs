@@ -41,6 +41,10 @@ namespace ApiBookStore.Context
                 .WithMany(r => r.Users)
                 .UsingEntity(j => j.ToTable("RoleUser"));
 
+            modelBuilder.Entity<User>()
+                .HasIndex(u => u.Email)
+                .IsUnique();
+
             modelBuilder.Entity<Cart>()
                 .HasMany(c => c.Books)
                 .WithOne(ci => ci.Cart)

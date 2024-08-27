@@ -12,47 +12,47 @@ namespace ApiBookStore.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthorController : ControllerBase
+    public class DiscountController : ControllerBase
     {
         private readonly DataContext _context;
 
-        public AuthorController(DataContext context)
+        public DiscountController(DataContext context)
         {
             _context = context;
         }
 
-        // GET: api/Author
+        // GET: api/Discount
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Author>>> GetAuthors()
+        public async Task<ActionResult<IEnumerable<Discount>>> GetDiscounts()
         {
-            return await _context.Authors.ToListAsync();
+            return await _context.Discounts.ToListAsync();
         }
 
-        // GET: api/Author/5
+        // GET: api/Discount/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Author>> GetAuthor(int id)
+        public async Task<ActionResult<Discount>> GetDiscount(int id)
         {
-            var author = await _context.Authors.FindAsync(id);
+            var discount = await _context.Discounts.FindAsync(id);
 
-            if (author == null)
+            if (discount == null)
             {
                 return NotFound();
             }
 
-            return author;
+            return discount;
         }
 
-        // PUT: api/Author/5
+        // PUT: api/Discount/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAuthor(int id, Author author)
+        public async Task<IActionResult> PutDiscount(int id, Discount discount)
         {
-            if (id != author.AuthorId)
+            if (id != discount.DiscountId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(author).State = EntityState.Modified;
+            _context.Entry(discount).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace ApiBookStore.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!AuthorExists(id))
+                if (!DiscountExists(id))
                 {
                     return NotFound();
                 }
@@ -73,36 +73,36 @@ namespace ApiBookStore.Controllers
             return NoContent();
         }
 
-        // POST: api/Author
+        // POST: api/Discount
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Author>> PostAuthor(Author author)
+        public async Task<ActionResult<Discount>> PostDiscount(Discount discount)
         {
-            _context.Authors.Add(author);
+            _context.Discounts.Add(discount);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetAuthor", new { id = author.AuthorId }, author);
+            return CreatedAtAction("GetDiscount", new { id = discount.DiscountId }, discount);
         }
 
-        // DELETE: api/Author/5
+        // DELETE: api/Discount/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAuthor(int id)
+        public async Task<IActionResult> DeleteDiscount(int id)
         {
-            var author = await _context.Authors.FindAsync(id);
-            if (author == null)
+            var discount = await _context.Discounts.FindAsync(id);
+            if (discount == null)
             {
                 return NotFound();
             }
 
-            _context.Authors.Remove(author);
+            _context.Discounts.Remove(discount);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool AuthorExists(int id)
+        private bool DiscountExists(int id)
         {
-            return _context.Authors.Any(e => e.AuthorId == id);
+            return _context.Discounts.Any(e => e.DiscountId == id);
         }
     }
 }

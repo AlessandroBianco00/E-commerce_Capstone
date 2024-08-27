@@ -7,11 +7,12 @@ namespace ApiBookStore.Services
 {
     public class AuthService : IAuthService
     {
-        // private readonly IPasswordEncoder _passwordEncoder;
+        private readonly IPasswordEncoder _passwordEncoder;
         private readonly DataContext _ctx;
 
-        public AuthService(IConfiguration config, DataContext dataContext) : base()
+        public AuthService(IPasswordEncoder passwordEncoder, IConfiguration config, DataContext dataContext) : base()
         {
+            _passwordEncoder = passwordEncoder;
             _ctx = dataContext;
         }
         public async Task<User> CreateUser(User user)
@@ -27,7 +28,7 @@ namespace ApiBookStore.Services
                 .Include(u => u.Roles)
                 .FirstOrDefaultAsync(u => u.Email == email);
 
-            if (user != null && password == user.Password)
+            if (user != null && _passwordEncoder.IsSame(password, user.Password))
             {
                 return user;
             }
@@ -42,7 +43,7 @@ namespace ApiBookStore.Services
             {
                 Name = user.Name,
                 Email = user.Email,
-                Password = user.Password,
+                Password = _passwordEncoder.Encode(user.Password),
             };
             var userRole = _ctx.Roles.FirstOrDefault(r => r.RoleName == "User");
             if (userRole != null)
