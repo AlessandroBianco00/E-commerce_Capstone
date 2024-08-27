@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace PizzeriaWebApp.Models.Entities
+namespace ApiBookStore.Models.Entities
 {
     public class Role
     {

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ApiBookStore.Context;
-using ApiBookStore.Models;
+using ApiBookStore.Models.Entities;
 
 namespace ApiBookStore.Controllers
 {

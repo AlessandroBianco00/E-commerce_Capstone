@@ -1,8 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using PizzeriaWebApp.Models.Entities;
 
-namespace ApiBookStore.Models
+namespace ApiBookStore.Models.Entities
 {
     //Placeholder Class. In seguito potranno essere aggiunti altri campi per rendere funzionante anche questa feature
     public class Payment

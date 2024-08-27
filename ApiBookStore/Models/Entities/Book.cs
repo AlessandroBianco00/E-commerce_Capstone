@@ -1,8 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using PizzeriaWebApp.Models.Entities;
 
-namespace ApiBookStore.Models
+namespace ApiBookStore.Models.Entities
 {
     public class Book
     {
@@ -72,5 +71,5 @@ namespace ApiBookStore.Models
         public List<CartItem> Carts { get; set; } = new List<CartItem>();
 
         public List<OrderItem> Orders { get; set; } = new List<OrderItem>();
-    }   
+    }
 }

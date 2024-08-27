@@ -1,8 +1,7 @@
-﻿using PizzeriaWebApp.Models.Entities;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace ApiBookStore.Models
+namespace ApiBookStore.Models.Entities
 {
     public class ShippingAddress
     {
@@ -11,15 +10,15 @@ namespace ApiBookStore.Models
 
         [Required]
         [StringLength(100)]
-        public string StreetAddress { get; set; }  
+        public string StreetAddress { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string City { get; set; } 
+        public string City { get; set; }
 
         [Required]
         [RegularExpression(@"^\d{5}$", ErrorMessage = "Invalid ZIP Code format")]
-        public int ZipCode { get; set; }  
+        public int ZipCode { get; set; }
 
         [Required]
         [StringLength(40)]

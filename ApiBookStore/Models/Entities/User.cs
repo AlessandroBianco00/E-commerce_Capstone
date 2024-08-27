@@ -1,10 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Data;
-using ApiBookStore.Models;
 using System.Net;
 
-namespace PizzeriaWebApp.Models.Entities
+namespace ApiBookStore.Models.Entities
 {
     public class User
     {

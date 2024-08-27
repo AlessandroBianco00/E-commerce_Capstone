@@ -1,16 +1,18 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using PizzeriaWebApp.Models.Entities;
 
-namespace ApiBookStore.Models
+namespace ApiBookStore.Models.Entities
 {
-    public class Wishlist
+    public class Cart
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int WishlistId { get; set; }
+        public int CartId { get; set; }
+
         public int UserId { get; set; }
+
         [ForeignKey("UserId")]
         public User User { get; set; }
-        public List<Book> Books { get; set; }
+
+        public List<CartItem> Books { get; set; } = new List<CartItem>();
     }
 }

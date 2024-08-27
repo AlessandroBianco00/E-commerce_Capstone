@@ -1,6 +1,5 @@
-﻿using ApiBookStore.Models;
+﻿using ApiBookStore.Models.Entities;
 using Microsoft.EntityFrameworkCore;
-using PizzeriaWebApp.Models.Entities;
 
 namespace ApiBookStore.Context
 {

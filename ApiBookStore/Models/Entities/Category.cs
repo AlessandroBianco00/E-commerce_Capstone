@@ -1,16 +1,16 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace ApiBookStore.Models
+namespace ApiBookStore.Models.Entities
 {
-    public class Translator
+    public class Category
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int TranslatorId { get; set; }
+        public int CategoryId { get; set; }
 
         [Required]
-        [StringLength(100)]
-        public string TranslatorName { get; set; }
+        [StringLength(50)]
+        public string CategoryName { get; set; }
 
         public List<Book> Books { get; set; } = new List<Book>();
     }

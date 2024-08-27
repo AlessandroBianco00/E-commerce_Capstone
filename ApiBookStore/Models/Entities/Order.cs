@@ -1,9 +1,8 @@
-﻿using PizzeriaWebApp.Models.Entities;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Net;
 
-namespace ApiBookStore.Models
+namespace ApiBookStore.Models.Entities
 {
     public class Order
     {
