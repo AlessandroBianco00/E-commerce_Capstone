@@ -4,19 +4,29 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ApiBookStore.Models
 {
-    public class Address
+    public class ShippingAddress
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int AddressId { get; set; }
+
         [Required]
-        public string StreetAddress { get; set; }
+        [StringLength(100)]
+        public string StreetAddress { get; set; }  
+
         [Required]
-        public string City { get; set; }
+        [StringLength(50)]
+        public string City { get; set; } 
+
         [Required]
-        public int ZipCode { get; set; }
+        [RegularExpression(@"^\d{5}$", ErrorMessage = "Invalid ZIP Code format")]
+        public int ZipCode { get; set; }  
+
         [Required]
+        [StringLength(40)]
         public string Country { get; set; }
+
         public int UserId { get; set; }
+
         [ForeignKey("UserId")]
         public User User { get; set; }
     }

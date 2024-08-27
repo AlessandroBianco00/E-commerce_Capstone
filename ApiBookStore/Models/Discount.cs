@@ -7,10 +7,15 @@ namespace ApiBookStore.Models
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int DiscountId { get; set; }
+
         [Required]
+        [Range(1, 100)]
         public int DiscountPercentage { get; set; }
+
         [Required]
-        public int Description { get; set; }
+        [StringLength(500)]
+        public string Description { get; set; }
+
         [Required]
         public DateOnly EndingDate { get; set; }
     }

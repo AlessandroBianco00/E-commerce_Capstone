@@ -7,9 +7,11 @@ namespace ApiBookStore.Models
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CategoryId { get; set; }
+
         [Required]
-        [StringLength(30)]
+        [StringLength(50)]
         public string CategoryName { get; set; }
-        public List<Book> Books { get; set; }
+
+        public List<Book> Books { get; set; } = new List<Book>();
     }
 }
