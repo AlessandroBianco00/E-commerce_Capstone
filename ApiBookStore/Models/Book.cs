@@ -66,5 +66,11 @@ namespace ApiBookStore.Models
         public Discount Discount { get; set; }
 
         public List<Category> Categories { get; set; } = new List<Category>();
+
+        public List<Wishlist> Wishlists { get; set; } = new List<Wishlist>();
+
+        public List<CartItem> Carts { get; set; } = new List<CartItem>();
+
+        public List<OrderItem> Orders { get; set; } = new List<OrderItem>();
     }   
 }

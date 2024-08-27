@@ -14,6 +14,6 @@ namespace ApiBookStore.Models
         [ForeignKey("UserId")]
         public User User { get; set; }
     
-        public List<CartItem> CartItems { get; set; } = new List<CartItem>();
+        public List<CartItem> Books { get; set; } = new List<CartItem>();
     }
 }

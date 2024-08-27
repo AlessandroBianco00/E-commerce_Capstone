@@ -26,6 +26,6 @@ namespace ApiBookStore.Models
         [ForeignKey("ShippingAddressId")]
         public ShippingAddress ShippingAddress { get; set; }
 
-        public List<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
+        public List<OrderItem> Books { get; set; } = new List<OrderItem>();
     }
 }

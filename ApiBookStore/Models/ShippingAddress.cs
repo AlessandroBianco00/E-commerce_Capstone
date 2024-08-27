@@ -7,7 +7,7 @@ namespace ApiBookStore.Models
     public class ShippingAddress
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int AddressId { get; set; }
+        public int ShippingAddressId { get; set; }
 
         [Required]
         [StringLength(100)]
