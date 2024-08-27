@@ -33,6 +33,8 @@ namespace PizzeriaWebApp.Models.Entities
         [Required]
         [Column(TypeName = "nvarchar(max)")]
         public string Password { get; set; }
+        [Required]
+        public DateTime DeletedAt { get; set; }
 
         public List<ShippingAddress> ShippingAddresses { get; set; } = new List<ShippingAddress>();
 
