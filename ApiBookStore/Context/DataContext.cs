@@ -51,6 +51,19 @@ namespace ApiBookStore.Context
                 .HasMany(o => o.Books)
                 .WithOne(oi => oi.Order)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Order>()
+                .HasOne(o => o.User)
+                .WithMany(u => u.Orders)
+                .HasForeignKey(o => o.UserId)
+                .OnDelete(DeleteBehavior.Restrict); //Previene l'emliminazione a cascata degli utenti quando elimino un ordine
+
+            modelBuilder.Entity<Order>()
+                .HasOne(o => o.ShippingAddress)
+                .WithOne()
+                .HasForeignKey<Order>(o => o.UserId)
+                .OnDelete(DeleteBehavior.Restrict); //Previene l'emliminazione a cascata degli indirizzi quando elimino un ordine
+
         }
     }
 }

@@ -10,9 +10,9 @@ namespace ApiBookStore.Models
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int OrderId { get; set; }
 
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
 
-        public int ShippingAddressId { get; set; }
+        public int? ShippingAddressId { get; set; }
 
         [Required]
         public DateOnly OrderDate { get; set; }
@@ -21,10 +21,10 @@ namespace ApiBookStore.Models
         public int Status { get; set; }
 
         [ForeignKey("UserId")]
-        public User User { get; set; }
+        public User? User { get; set; }
 
         [ForeignKey("ShippingAddressId")]
-        public ShippingAddress ShippingAddress { get; set; }
+        public ShippingAddress? ShippingAddress { get; set; }
 
         public List<OrderItem> Books { get; set; } = new List<OrderItem>();
     }
