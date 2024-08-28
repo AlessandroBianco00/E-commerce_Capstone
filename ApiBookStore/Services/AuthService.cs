@@ -68,7 +68,7 @@ namespace ApiBookStore.Services
             return null;
         }
 
-        //inutilizzato
+        //inutilizzato (sincrono)
         public async Task<JwtSecurityToken> GenerateToken(User user)
         {
             var claims = new List<Claim> {
