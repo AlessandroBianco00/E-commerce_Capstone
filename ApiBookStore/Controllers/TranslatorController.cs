@@ -44,7 +44,7 @@ namespace ApiBookStore.Controllers
 
         // PUT: api/Translator/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTranslator(int id, Translator translator)
+        public async Task<IActionResult> PutTranslator(int id, [FromForm] Translator translator)
         {
             if (id != translator.TranslatorId)
             {
