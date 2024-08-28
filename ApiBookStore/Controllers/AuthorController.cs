@@ -26,8 +26,8 @@ namespace ApiBookStore.Controllers
             _imageService = imageService;
         }
 
-        [Authorize]
         // GET: api/Author
+        [Authorize] // Authorize di prova
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Author>>> GetAuthors()
         {

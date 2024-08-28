@@ -16,6 +16,8 @@ namespace ApiBookStore.Controllers
     {
         private readonly DataContext _context;
 
+        // Il carrello viene creato insieme alla creazione Utente è unico e non può essere cancellato o modificato. L'utente può interagirci solo aggiungendo e rimuovendo libri dal carrello.
+
         public CartController(DataContext context)
         {
             _context = context;
@@ -29,10 +31,10 @@ namespace ApiBookStore.Controllers
         }
 
         // GET: api/Cart/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Cart>> GetCart(int id)
+        [HttpGet("{userId}")]
+        public async Task<ActionResult<Cart>> GetCart(int userId)
         {
-            var cart = await _context.Carts.FindAsync(id);
+            var cart = await _context.Carts.AsNoTracking().Include(c => c.Books).ThenInclude(ci => ci.Book).SingleOrDefaultAsync(c => c.UserId == userId);
 
             if (cart == null)
             {
@@ -43,66 +45,10 @@ namespace ApiBookStore.Controllers
         }
 
         // PUT: api/Cart/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutCart(int id, Cart cart)
-        {
-            if (id != cart.CartId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(cart).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CartExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
 
         // POST: api/Cart
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Cart>> PostCart(Cart cart)
-        {
-            _context.Carts.Add(cart);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetCart", new { id = cart.CartId }, cart);
-        }
-
+        
         // DELETE: api/Cart/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCart(int id)
-        {
-            var cart = await _context.Carts.FindAsync(id);
-            if (cart == null)
-            {
-                return NotFound();
-            }
-
-            _context.Carts.Remove(cart);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool CartExists(int id)
-        {
-            return _context.Carts.Any(e => e.CartId == id);
-        }
+        
     }
 }
