@@ -42,8 +42,11 @@ namespace ApiBookStore.Services
             new User
             {
                 Name = user.Name,
+                Surname = user.Surname,
                 Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
                 Password = _passwordEncoder.Encode(user.Password),
+                DeletedAt = null
             };
             var userRole = _ctx.Roles.FirstOrDefault(r => r.RoleName == "User");
             if (userRole != null)
