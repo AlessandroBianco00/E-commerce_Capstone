@@ -25,7 +25,7 @@ namespace ApiBookStore.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Discount>>> GetDiscounts()
         {
-            return await _context.Discounts.ToListAsync();
+            return await _context.Discounts.AsNoTracking().ToListAsync();
         }
 
         // GET: api/Discount/5
@@ -43,9 +43,8 @@ namespace ApiBookStore.Controllers
         }
 
         // PUT: api/Discount/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutDiscount(int id, Discount discount)
+        public async Task<IActionResult> PutDiscount(int id, [FromForm] Discount discount)
         {
             if (id != discount.DiscountId)
             {
@@ -74,9 +73,8 @@ namespace ApiBookStore.Controllers
         }
 
         // POST: api/Discount
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Discount>> PostDiscount(Discount discount)
+        public async Task<ActionResult<Discount>> PostDiscount([FromForm] Discount discount)
         {
             _context.Discounts.Add(discount);
             await _context.SaveChangesAsync();

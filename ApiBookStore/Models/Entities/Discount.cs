@@ -9,6 +9,10 @@ namespace ApiBookStore.Models.Entities
         public int DiscountId { get; set; }
 
         [Required]
+        [StringLength(100)]
+        public string DiscountName { get; set; }
+
+        [Required]
         [Range(1, 100)]
         public int DiscountPercentage { get; set; }
 
