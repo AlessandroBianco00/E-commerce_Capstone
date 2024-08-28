@@ -18,7 +18,7 @@ namespace ApiBookStore.Controllers
     public class AuthenticationController : ControllerBase
     {
         
-        private readonly DataContext dataContext;
+        private readonly DataContext _ctx;
         private readonly IPasswordEncoder _passwordEncoder;
         private readonly IAuthService _authService;
         private readonly string issuer;
@@ -27,7 +27,7 @@ namespace ApiBookStore.Controllers
 
         public AuthenticationController(DataContext dataContext, IConfiguration config, IPasswordEncoder passwordEncoder, IAuthService authService)
         {
-            this.dataContext = dataContext;
+            _ctx = dataContext;
             _passwordEncoder = passwordEncoder;
             _authService = authService;
             // apsettings.json data
@@ -41,10 +41,11 @@ namespace ApiBookStore.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody] LoginModel model)
         {
-            // recupera l'utente dal database.
-            var user = await dataContext.Users.Include(u => u.Roles).FirstOrDefaultAsync(u => u.Email == model.Email && _passwordEncoder.IsSame(model.Password ,u.Password));
-            // se non viene recuperato l'utente, rilascia un codice Unauthorized
+
+            var user = await _authService.Login(model);
+
             if (user == null) return Unauthorized();
+
             var claims = new List<Claim> { // Claim da inserire nel token
                 new Claim(JwtRegisteredClaimNames.Name, model.Email),
                 new Claim(JwtRegisteredClaimNames.Sub, model.Email),
