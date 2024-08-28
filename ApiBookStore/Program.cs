@@ -48,6 +48,7 @@ builder.Services
 builder.Services
     .AddScoped<IAuthService, AuthService>()
     .AddScoped<IPasswordEncoder, PasswordEncoder>()
+    .AddScoped<IImageService, ImageService>()
     ;
 
 var app = builder.Build();

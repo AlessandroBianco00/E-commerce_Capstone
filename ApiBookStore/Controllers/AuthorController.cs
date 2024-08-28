@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using ApiBookStore.Context;
 using ApiBookStore.Models.Entities;
 using Microsoft.AspNetCore.Authorization;
+using ApiBookStore.Interfaces;
+using ApiBookStore.Models;
 
 namespace ApiBookStore.Controllers
 {
@@ -16,10 +18,12 @@ namespace ApiBookStore.Controllers
     public class AuthorController : ControllerBase
     {
         private readonly DataContext _context;
+        private readonly IImageService _imageService;
 
-        public AuthorController(DataContext context)
+        public AuthorController(DataContext context, IImageService imageService)
         {
             _context = context;
+            _imageService = imageService;
         }
 
         [Authorize]
@@ -76,8 +80,17 @@ namespace ApiBookStore.Controllers
 
         // POST: api/Author
         [HttpPost]
-        public async Task<ActionResult<Author>> PostAuthor(Author author)
+        public async Task<ActionResult<Author>> PostAuthor([FromForm] AuthorModel authorModel)
         {
+            var imgBase64 = _imageService.ConvertImage(authorModel.Image);
+
+            var author = new Author
+            {
+                AuthorName = authorModel.AuthorName,
+                Image = imgBase64,
+                Description = authorModel.Description
+            };
+
             _context.Authors.Add(author);
             await _context.SaveChangesAsync();
 

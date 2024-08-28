@@ -1,6 +1,8 @@
-﻿namespace ApiBookStore.Services
+﻿using ApiBookStore.Interfaces;
+
+namespace ApiBookStore.Services
 {
-    public class ImageService
+    public class ImageService : IImageService
     {
         public string ConvertImage(IFormFile file)
         {
