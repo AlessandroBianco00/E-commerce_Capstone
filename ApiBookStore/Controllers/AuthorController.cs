@@ -36,7 +36,7 @@ namespace ApiBookStore.Controllers
 
         // GET: api/Author/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Author>> GetAuthor(int id)
+        public async Task<ActionResult<Author>> GetAuthor([FromRoute] int id)
         {
             var author = await _context.Authors.AsNoTracking().Include(a => a.Books).SingleOrDefaultAsync(a => a.AuthorId == id);
 
@@ -50,8 +50,18 @@ namespace ApiBookStore.Controllers
 
         // PUT: api/Author/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAuthor(int id, Author author)
+        public async Task<IActionResult> PutAuthor([FromRoute] int id, [FromForm] AuthorModel authorModel)
         {
+            var imgBase64 = _imageService.ConvertImage(authorModel.Image);
+
+            var author = new Author
+            {
+                AuthorId = id,
+                AuthorName = authorModel.AuthorName,
+                Image = imgBase64,
+                Description = authorModel.Description
+            };
+
             if (id != author.AuthorId)
             {
                 return BadRequest();
@@ -99,7 +109,7 @@ namespace ApiBookStore.Controllers
 
         // DELETE: api/Author/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAuthor(int id)
+        public async Task<IActionResult> DeleteAuthor([FromRoute] int id)
         {
             var author = await _context.Authors.FindAsync(id);
             if (author == null)

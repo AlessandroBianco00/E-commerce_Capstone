@@ -25,14 +25,14 @@ namespace ApiBookStore.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Translator>>> GetTranslators()
         {
-            return await _context.Translators.ToListAsync();
+            return await _context.Translators.AsNoTracking().Include(t => t.Books).ToListAsync();
         }
 
         // GET: api/Translator/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Translator>> GetTranslator(int id)
         {
-            var translator = await _context.Translators.FindAsync(id);
+            var translator = await _context.Translators.AsNoTracking().Include(t => t.Books).SingleOrDefaultAsync(t => t.TranslatorId == id);
 
             if (translator == null)
             {
@@ -43,7 +43,6 @@ namespace ApiBookStore.Controllers
         }
 
         // PUT: api/Translator/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutTranslator(int id, Translator translator)
         {
@@ -74,9 +73,8 @@ namespace ApiBookStore.Controllers
         }
 
         // POST: api/Translator
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Translator>> PostTranslator(Translator translator)
+        public async Task<ActionResult<Translator>> PostTranslator([FromForm] Translator translator)
         {
             _context.Translators.Add(translator);
             await _context.SaveChangesAsync();
