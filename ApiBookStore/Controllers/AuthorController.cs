@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ApiBookStore.Context;
 using ApiBookStore.Models.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ApiBookStore.Controllers
 {
@@ -21,18 +22,19 @@ namespace ApiBookStore.Controllers
             _context = context;
         }
 
+        [Authorize]
         // GET: api/Author
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Author>>> GetAuthors()
         {
-            return await _context.Authors.ToListAsync();
+            return await _context.Authors.AsNoTracking().Include(a => a.Books).ToListAsync();
         }
 
         // GET: api/Author/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Author>> GetAuthor(int id)
         {
-            var author = await _context.Authors.FindAsync(id);
+            var author = await _context.Authors.AsNoTracking().Include(a => a.Books).SingleOrDefaultAsync(a => a.AuthorId == id);
 
             if (author == null)
             {
@@ -43,7 +45,6 @@ namespace ApiBookStore.Controllers
         }
 
         // PUT: api/Author/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAuthor(int id, Author author)
         {
@@ -74,7 +75,6 @@ namespace ApiBookStore.Controllers
         }
 
         // POST: api/Author
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Author>> PostAuthor(Author author)
         {
