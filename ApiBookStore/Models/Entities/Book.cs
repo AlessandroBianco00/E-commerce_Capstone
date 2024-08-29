@@ -66,6 +66,8 @@ namespace ApiBookStore.Models.Entities
 
         public List<Category> Categories { get; set; } = new List<Category>();
 
+        public List<Review> Reviews { get; set; } = new List<Review>();
+
         public List<Wishlist> Wishlists { get; set; } = new List<Wishlist>();
 
         public List<CartItem> Carts { get; set; } = new List<CartItem>();

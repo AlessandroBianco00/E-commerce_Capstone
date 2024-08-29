@@ -27,7 +27,12 @@ namespace ApiBookStore.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Cart>>> GetCarts()
         {
-            var carts = await _context.Carts.ToListAsync();
+            var carts = await _context.Carts
+                .AsNoTracking()
+                .Include(c => c.Books)
+                .ThenInclude(ci => ci.Book)
+                .ToListAsync();
+
             return Ok(carts);
         }
 
@@ -35,7 +40,11 @@ namespace ApiBookStore.Controllers
         [HttpGet("{userId}")]
         public async Task<ActionResult<Cart>> GetCart(int userId)
         {
-            var cart = await _context.Carts.AsNoTracking().Include(c => c.Books).ThenInclude(ci => ci.Book).SingleOrDefaultAsync(c => c.UserId == userId);
+            var cart = await _context.Carts
+                .AsNoTracking()
+                .Include(c => c.Books)
+                .ThenInclude(ci => ci.Book)
+                .SingleOrDefaultAsync(c => c.UserId == userId);
 
             if (cart == null)
             {
@@ -50,7 +59,11 @@ namespace ApiBookStore.Controllers
         public async Task<ActionResult<Cart>> GetMyWishlist()
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
-            var cart = await _context.Carts.AsNoTracking().Include(c => c.Books).ThenInclude(ci => ci.Book).SingleOrDefaultAsync(w => w.UserId.ToString() == userId);
+
+            var cart = await _context.Carts
+                .AsNoTracking().Include(c => c.Books)
+                .ThenInclude(ci => ci.Book)
+                .SingleOrDefaultAsync(w => w.UserId.ToString() == userId);
 
             if (cart == null)
             {

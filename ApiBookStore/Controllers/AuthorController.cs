@@ -31,7 +31,11 @@ namespace ApiBookStore.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Author>>> GetAuthors()
         {
-            var authors = await _context.Authors.AsNoTracking().Include(a => a.Books).ToListAsync();
+            var authors = await _context.Authors
+                .AsNoTracking()
+                .Include(a => a.Books)
+                .ToListAsync();
+
             return Ok(authors);
         }
 
@@ -39,7 +43,10 @@ namespace ApiBookStore.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Author>> GetAuthor([FromRoute] int id)
         {
-            var author = await _context.Authors.AsNoTracking().Include(a => a.Books).SingleOrDefaultAsync(a => a.AuthorId == id);
+            var author = await _context.Authors
+                .AsNoTracking()
+                .Include(a => a.Books)
+                .SingleOrDefaultAsync(a => a.AuthorId == id);
 
             if (author == null)
             {

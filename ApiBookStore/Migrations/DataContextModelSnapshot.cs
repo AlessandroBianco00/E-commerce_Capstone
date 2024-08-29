@@ -46,7 +46,7 @@ namespace ApiBookStore.Migrations
 
                     b.HasKey("AuthorId");
 
-                    b.ToTable("Authors");
+                    b.ToTable("Authors", (string)null);
                 });
 
             modelBuilder.Entity("ApiBookStore.Models.Entities.Book", b =>
@@ -115,7 +115,7 @@ namespace ApiBookStore.Migrations
 
                     b.HasIndex("TranslatorId");
 
-                    b.ToTable("Books");
+                    b.ToTable("Books", (string)null);
                 });
 
             modelBuilder.Entity("ApiBookStore.Models.Entities.Cart", b =>
@@ -133,7 +133,7 @@ namespace ApiBookStore.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Carts");
+                    b.ToTable("Carts", (string)null);
                 });
 
             modelBuilder.Entity("ApiBookStore.Models.Entities.CartItem", b =>
@@ -159,7 +159,7 @@ namespace ApiBookStore.Migrations
 
                     b.HasIndex("CartId");
 
-                    b.ToTable("CartItems");
+                    b.ToTable("CartItems", (string)null);
                 });
 
             modelBuilder.Entity("ApiBookStore.Models.Entities.Category", b =>
@@ -177,7 +177,7 @@ namespace ApiBookStore.Migrations
 
                     b.HasKey("CategoryId");
 
-                    b.ToTable("Category");
+                    b.ToTable("Category", (string)null);
                 });
 
             modelBuilder.Entity("ApiBookStore.Models.Entities.Discount", b =>
@@ -206,7 +206,7 @@ namespace ApiBookStore.Migrations
 
                     b.HasKey("DiscountId");
 
-                    b.ToTable("Discounts");
+                    b.ToTable("Discounts", (string)null);
                 });
 
             modelBuilder.Entity("ApiBookStore.Models.Entities.Order", b =>
@@ -235,7 +235,7 @@ namespace ApiBookStore.Migrations
                         .IsUnique()
                         .HasFilter("[UserId] IS NOT NULL");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("ApiBookStore.Models.Entities.OrderItem", b =>
@@ -264,7 +264,7 @@ namespace ApiBookStore.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("OrderItems");
+                    b.ToTable("OrderItems", (string)null);
                 });
 
             modelBuilder.Entity("ApiBookStore.Models.Entities.Payment", b =>
@@ -282,7 +282,7 @@ namespace ApiBookStore.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Payments");
+                    b.ToTable("Payments", (string)null);
                 });
 
             modelBuilder.Entity("ApiBookStore.Models.Entities.Review", b =>
@@ -313,7 +313,7 @@ namespace ApiBookStore.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Reviews");
+                    b.ToTable("Reviews", (string)null);
                 });
 
             modelBuilder.Entity("ApiBookStore.Models.Entities.Role", b =>
@@ -331,7 +331,7 @@ namespace ApiBookStore.Migrations
 
                     b.HasKey("RoleId");
 
-                    b.ToTable("Roles");
+                    b.ToTable("Roles", (string)null);
                 });
 
             modelBuilder.Entity("ApiBookStore.Models.Entities.ShippingAddress", b =>
@@ -367,7 +367,7 @@ namespace ApiBookStore.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ShippingAddresses");
+                    b.ToTable("ShippingAddresses", (string)null);
                 });
 
             modelBuilder.Entity("ApiBookStore.Models.Entities.Translator", b =>
@@ -385,7 +385,7 @@ namespace ApiBookStore.Migrations
 
                     b.HasKey("TranslatorId");
 
-                    b.ToTable("Translators");
+                    b.ToTable("Translators", (string)null);
                 });
 
             modelBuilder.Entity("ApiBookStore.Models.Entities.User", b =>
@@ -428,7 +428,7 @@ namespace ApiBookStore.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("ApiBookStore.Models.Entities.Wishlist", b =>
@@ -446,7 +446,7 @@ namespace ApiBookStore.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Wishlists");
+                    b.ToTable("Wishlists", (string)null);
                 });
 
             modelBuilder.Entity("BookCategory", b =>

@@ -46,7 +46,7 @@ namespace ApiBookStore.Services
                 Password = _passwordEncoder.Encode(user.Password),
                 DeletedAt = null
             };
-            var userRole = _context.Roles.FirstOrDefault(r => r.RoleName == "User");
+            var userRole = _context.Roles.FirstOrDefault(r => r.RoleName == "User"); // Necessario che sia presente il Role "User" nel DB affinchè sia assegnato
             if (userRole != null)
             {
                 u.Roles.Add(userRole);

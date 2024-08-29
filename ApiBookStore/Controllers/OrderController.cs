@@ -25,7 +25,12 @@ namespace ApiBookStore.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Order>>> GetOrders()
         {
-            var orders = await _context.Orders.ToListAsync();
+            var orders = await _context.Orders
+                .AsNoTracking()
+                .Include(o => o.Books)
+                .ThenInclude(oi => oi.Book)
+                .ToListAsync();
+
             return Ok(orders);
         }
 
@@ -33,7 +38,11 @@ namespace ApiBookStore.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Order>> GetOrder(int id)
         {
-            var order = await _context.Orders.FindAsync(id);
+            var order = await _context.Orders
+                .AsNoTracking()
+                .Include(o => o.Books)
+                .ThenInclude(oi => oi.Book)
+                .SingleOrDefaultAsync(o => o.OrderId == id);
 
             if (order == null)
             {
@@ -43,39 +52,43 @@ namespace ApiBookStore.Controllers
             return Ok(order);
         }
 
-        // PUT: api/Order/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutOrder(int id, Order order)
+        // GET: api/Order/MyOrders
+        [HttpGet("MyOrders")]
+        public async Task<ActionResult<IEnumerable<Order>>> GetMyOrders()
         {
-            if (id != order.OrderId)
+            var userId = User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
+            var myOrders = await _context.Orders
+                .AsNoTracking()
+                .Where(o => o.UserId.ToString() == userId)
+                .Include(o => o.Books)
+                .ThenInclude(oi => oi.Book)
+                .ToListAsync();
+
+            return Ok(myOrders);
+        }
+
+        // GET: api/Order/myOrder/5
+        [HttpGet("myOrder/{id}")]
+        public async Task<ActionResult<Order>> GetMyOrder(int id)
+        {
+            var userId = User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
+            var myOrder = await _context.Orders
+                .AsNoTracking()
+                .Where(o => o.UserId
+                .ToString() == userId)
+                .Include(o => o.Books)
+                .ThenInclude(oi => oi.Book)
+                .SingleOrDefaultAsync(o => o.OrderId == id);
+
+            if (myOrder == null)
             {
-                return BadRequest();
+                return NotFound();
             }
 
-            _context.Entry(order).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!OrderExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            return Ok(myOrder);
         }
 
         // POST: api/Order
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Order>> PostOrder(Order order)
         {
@@ -85,25 +98,9 @@ namespace ApiBookStore.Controllers
             return CreatedAtAction("GetOrder", new { id = order.OrderId }, order);
         }
 
+        // PUT: api/Order/5
+
         // DELETE: api/Order/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteOrder(int id)
-        {
-            var order = await _context.Orders.FindAsync(id);
-            if (order == null)
-            {
-                return NotFound();
-            }
 
-            _context.Orders.Remove(order);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool OrderExists(int id)
-        {
-            return _context.Orders.Any(e => e.OrderId == id);
-        }
     }
 }

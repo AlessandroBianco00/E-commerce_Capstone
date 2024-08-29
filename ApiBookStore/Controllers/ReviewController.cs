@@ -44,7 +44,6 @@ namespace ApiBookStore.Controllers
         }
 
         // PUT: api/Review/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutReview(int id, Review review)
         {
@@ -75,7 +74,6 @@ namespace ApiBookStore.Controllers
         }
 
         // POST: api/Review
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Review>> PostReview(Review review)
         {

@@ -4,6 +4,7 @@ using System.Net;
 
 namespace ApiBookStore.Models.Entities
 {
+    // Nullable asssegnati per risolvere errore di cancellazione a cascata
     public class Order
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]

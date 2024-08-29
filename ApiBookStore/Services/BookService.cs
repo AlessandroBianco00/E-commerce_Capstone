@@ -89,6 +89,20 @@ namespace ApiBookStore.Services
                     {
                         CategoryId = c.CategoryId,
                         CategoryName = c.CategoryName
+                    }).ToList(),
+                    Reviews = b.Reviews.Select(r => new Review
+                    {
+                        ReviewId = r.ReviewId,
+                        Score = r.Score,
+                        Description = r.Description,
+                        UserId = r.UserId,
+                        BookId = r.BookId,
+                        User = new User
+                        {
+                            Name = r.User.Name,
+                            Surname = r.User.Surname,
+                            Email = r.User.Email
+                        }
                     }).ToList()
                 }).SingleOrDefaultAsync(b => b.BookId == id);
 
