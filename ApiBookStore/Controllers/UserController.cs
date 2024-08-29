@@ -25,15 +25,26 @@ namespace ApiBookStore.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
-            var users = await _context.Users.ToListAsync();
+            var users = await _context.Users
+                .AsNoTracking()
+                .Where(u => u.DeletedAt == null)
+                .Include(u => u.Roles)
+                .ToListAsync();
+
             return Ok(users);
         }
+
+        // Get per visitare la pagina dettaglio di un altro utente
 
         // GET: api/User/5
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
-            var user = await _context.Users.FindAsync(id);
+            var user = await _context.Users
+                .AsNoTracking()
+                .Where(u => u.DeletedAt == null)
+                .Include(u => u.Reviews)
+                .SingleOrDefaultAsync(c => c.UserId == id);
 
             if (user == null)
             {
@@ -43,14 +54,80 @@ namespace ApiBookStore.Controllers
             return Ok(user);
         }
 
-        // PUT: api/User/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, User user)
+        // Get per visitare la propria pagina utente
+
+        // GET: api/User/myUser/5
+        [HttpGet("myUser/{id}")]
+        public async Task<ActionResult<User>> GetMyUser(int id)
+        {
+            var userId = User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
+
+            var user = await _context.Users
+                .AsNoTracking()
+                .Where(u => u.DeletedAt == null)
+                .Include(u => u.Reviews)
+                .SingleOrDefaultAsync(c => c.UserId == id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(user);
+        }
+
+        // Patch: api/User/5
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> PatchUser(int id, [FromForm] User user)
         {
             if (id != user.UserId)
             {
                 return BadRequest();
             }
+
+            _context.Entry(user).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!UserExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
+        // Cancellazione dati dell'utente loggato
+        // Non va ha cancellare i dati (utili perchè legati ad altre tabelle)
+        //Il campo DeletedAt viene riempito e non sarà più visualizzabile dai non admin
+
+        // DeleteUser: api/User/deleteUser/5
+        [HttpPatch("deleteUser/{id}")]
+        public async Task<IActionResult> DeleteUser([FromRoute] int id)
+        {
+            var userId = User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
+
+            if (id.ToString() != userId)
+            {
+                return BadRequest();
+            }
+            var user = await _context.Users.FindAsync(id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            user.DeletedAt = DateTime.Now;
 
             _context.Entry(user).State = EntityState.Modified;
 
@@ -81,22 +158,6 @@ namespace ApiBookStore.Controllers
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetUser", new { id = user.UserId }, user);
-        }
-
-        // DELETE: api/User/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(int id)
-        {
-            var user = await _context.Users.FindAsync(id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            _context.Users.Remove(user);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
         }
 
         private bool UserExists(int id)

@@ -61,7 +61,8 @@ namespace ApiBookStore.Controllers
             var userId = User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
 
             var cart = await _context.Carts
-                .AsNoTracking().Include(c => c.Books)
+                .AsNoTracking()
+                .Include(c => c.Books)
                 .ThenInclude(ci => ci.Book)
                 .SingleOrDefaultAsync(w => w.UserId.ToString() == userId);
 

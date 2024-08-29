@@ -58,7 +58,10 @@ namespace ApiBookStore.Services
         public async Task<User> Login(LoginModel model)
         {
             var encodedPassword = _passwordEncoder.Encode(model.Password);
-            var user = await _context.Users.Include(u => u.Roles).FirstOrDefaultAsync(u => u.Email == model.Email && encodedPassword == u.Password);
+            var user = await _context.Users
+                .Where(u => u.DeletedAt == null)
+                .Include(u => u.Roles)
+                .FirstOrDefaultAsync(u => u.Email == model.Email && encodedPassword == u.Password);
 
             if (user != null )
             {
