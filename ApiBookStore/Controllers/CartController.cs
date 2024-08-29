@@ -27,7 +27,8 @@ namespace ApiBookStore.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Cart>>> GetCarts()
         {
-            return await _context.Carts.ToListAsync();
+            var carts = await _context.Carts.ToListAsync();
+            return Ok(carts);
         }
 
         // GET: api/Cart/5
@@ -41,7 +42,7 @@ namespace ApiBookStore.Controllers
                 return NotFound();
             }
 
-            return cart;
+            return Ok(cart);
         }
 
         // PUT: api/Cart/5

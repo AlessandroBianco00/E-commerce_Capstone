@@ -27,7 +27,8 @@ namespace ApiBookStore.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Wishlist>>> GetWishlists()
         {
-            return await _context.Wishlists.AsNoTracking().Include(w => w.Books).ToListAsync();
+            var lists = await _context.Wishlists.AsNoTracking().Include(w => w.Books).ToListAsync();
+            return Ok(lists);
         }
 
         // GET: api/Wishlist/5
@@ -41,7 +42,7 @@ namespace ApiBookStore.Controllers
                 return NotFound();
             }
 
-            return wishlist;
+            return Ok(wishlist);
         }
 
         // PUT: api/Wishlist/5

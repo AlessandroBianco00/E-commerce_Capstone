@@ -25,7 +25,8 @@ namespace ApiBookStore.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Review>>> GetReviews()
         {
-            return await _context.Reviews.ToListAsync();
+            var reviews = await _context.Reviews.ToListAsync();
+            return Ok(reviews);
         }
 
         // GET: api/Review/5
@@ -39,7 +40,7 @@ namespace ApiBookStore.Controllers
                 return NotFound();
             }
 
-            return review;
+            return Ok(review);
         }
 
         // PUT: api/Review/5

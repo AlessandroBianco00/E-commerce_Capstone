@@ -13,7 +13,7 @@ namespace ApiBookStore.Services
     public class AuthService : IAuthService
     {
         private readonly IPasswordEncoder _passwordEncoder;
-        private readonly DataContext _ctx;
+        private readonly DataContext _context;
         private readonly string issuer;
         private readonly string audience;
         private readonly string key;
@@ -21,7 +21,7 @@ namespace ApiBookStore.Services
         public AuthService(IPasswordEncoder passwordEncoder, IConfiguration config, DataContext dataContext) : base()
         {
             _passwordEncoder = passwordEncoder;
-            _ctx = dataContext;
+            _context = dataContext;
             // apsettings.json data
             issuer = config["Jwt:Issuer"]!;
             audience = config["Jwt:Audience"]!;
@@ -29,8 +29,8 @@ namespace ApiBookStore.Services
         }
         public async Task<User> CreateUser(User user)
         {
-            _ctx.Users.Add(user);
-            await _ctx.SaveChangesAsync();
+            _context.Users.Add(user);
+            await _context.SaveChangesAsync();
             return user;
         }
 
@@ -46,7 +46,7 @@ namespace ApiBookStore.Services
                 Password = _passwordEncoder.Encode(user.Password),
                 DeletedAt = null
             };
-            var userRole = _ctx.Roles.FirstOrDefault(r => r.RoleName == "User");
+            var userRole = _context.Roles.FirstOrDefault(r => r.RoleName == "User");
             if (userRole != null)
             {
                 u.Roles.Add(userRole);
@@ -58,7 +58,7 @@ namespace ApiBookStore.Services
         public async Task<User> Login(LoginModel model)
         {
             var encodedPassword = _passwordEncoder.Encode(model.Password);
-            var user = await _ctx.Users.Include(u => u.Roles).FirstOrDefaultAsync(u => u.Email == model.Email && encodedPassword == u.Password);
+            var user = await _context.Users.Include(u => u.Roles).FirstOrDefaultAsync(u => u.Email == model.Email && encodedPassword == u.Password);
 
             if (user != null )
             {

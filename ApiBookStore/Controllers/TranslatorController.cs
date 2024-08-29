@@ -25,7 +25,8 @@ namespace ApiBookStore.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Translator>>> GetTranslators()
         {
-            return await _context.Translators.AsNoTracking().Include(t => t.Books).ToListAsync();
+            var translators = await _context.Translators.AsNoTracking().Include(t => t.Books).ToListAsync();
+            return Ok(translators);
         }
 
         // GET: api/Translator/5
@@ -39,7 +40,7 @@ namespace ApiBookStore.Controllers
                 return NotFound();
             }
 
-            return translator;
+            return Ok(translator);
         }
 
         // PUT: api/Translator/5

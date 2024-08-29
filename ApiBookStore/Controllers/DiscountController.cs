@@ -25,7 +25,8 @@ namespace ApiBookStore.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Discount>>> GetDiscounts()
         {
-            return await _context.Discounts.AsNoTracking().ToListAsync();
+            var discounts = await _context.Discounts.AsNoTracking().ToListAsync();
+            return Ok(discounts);
         }
 
         // GET: api/Discount/5
@@ -39,7 +40,7 @@ namespace ApiBookStore.Controllers
                 return NotFound();
             }
 
-            return discount;
+            return Ok(discount);
         }
 
         // PUT: api/Discount/5

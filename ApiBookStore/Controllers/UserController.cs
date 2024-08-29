@@ -25,7 +25,8 @@ namespace ApiBookStore.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
-            return await _context.Users.ToListAsync();
+            var users = await _context.Users.ToListAsync();
+            return Ok(users);
         }
 
         // GET: api/User/5
@@ -39,7 +40,7 @@ namespace ApiBookStore.Controllers
                 return NotFound();
             }
 
-            return user;
+            return Ok(user);
         }
 
         // PUT: api/User/5

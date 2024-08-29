@@ -25,7 +25,8 @@ namespace ApiBookStore.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ShippingAddress>>> GetShippingAddresses()
         {
-            return await _context.ShippingAddresses.ToListAsync();
+            var addresses = await _context.ShippingAddresses.ToListAsync();
+            return Ok(addresses);
         }
 
         // GET: api/ShippingAddress/5
@@ -39,7 +40,7 @@ namespace ApiBookStore.Controllers
                 return NotFound();
             }
 
-            return shippingAddress;
+            return Ok(shippingAddress);
         }
 
         // PUT: api/ShippingAddress/5
