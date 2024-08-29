@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ApiBookStore.Context;
 using ApiBookStore.Models.Entities;
+using System.Security.Claims;
 
 namespace ApiBookStore.Controllers
 {
@@ -36,6 +37,21 @@ namespace ApiBookStore.Controllers
         public async Task<ActionResult<Wishlist>> GetWishlist(int userId)
         {
             var wishlist = await _context.Wishlists.AsNoTracking().Include(w => w.Books).SingleOrDefaultAsync(w => w.UserId == userId);
+
+            if (wishlist == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(wishlist);
+        }
+
+        // GET: api/Wishlist/myList
+        [HttpGet("myList")]
+        public async Task<ActionResult<Wishlist>> GetMyWishlist()
+        {
+            var userId = User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
+            var wishlist = await _context.Wishlists.AsNoTracking().Include(w => w.Books).SingleOrDefaultAsync(w => w.UserId.ToString() == userId);
 
             if (wishlist == null)
             {

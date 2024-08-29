@@ -45,11 +45,26 @@ namespace ApiBookStore.Controllers
             return Ok(cart);
         }
 
+        // GET: api/Cart/myCart
+        [HttpGet("myCart")]
+        public async Task<ActionResult<Cart>> GetMyWishlist()
+        {
+            var userId = User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
+            var cart = await _context.Carts.AsNoTracking().Include(c => c.Books).ThenInclude(ci => ci.Book).SingleOrDefaultAsync(w => w.UserId.ToString() == userId);
+
+            if (cart == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(cart);
+        }
+
         // PUT: api/Cart/5
 
         // POST: api/Cart
-        
+
         // DELETE: api/Cart/5
-        
+
     }
 }
