@@ -26,6 +26,7 @@ namespace ApiBookStore.Services
                     BookId = b.BookId,
                     Title = b.Title,
                     Description = b.Description,
+                    Image = b.Image,
                     Price = b.Price,
                     Editor = b.Editor,
                     Pages = b.Pages,
@@ -33,6 +34,9 @@ namespace ApiBookStore.Services
                     Language = b.Language,
                     PublicationDate = b.PublicationDate,
                     QuantityAvailable = b.QuantityAvailable,
+                    AuthorId = b.AuthorId,
+                    TranslatorId = b.TranslatorId,
+                    DiscountId = b.DiscountId,
                     Author = new Author
                     {
                         AuthorId = b.Author.AuthorId,
@@ -65,6 +69,7 @@ namespace ApiBookStore.Services
                     BookId = b.BookId,
                     Title = b.Title,
                     Description = b.Description,
+                    Image = b.Image,
                     Price = b.Price,
                     Editor = b.Editor,
                     Pages = b.Pages,
@@ -72,6 +77,9 @@ namespace ApiBookStore.Services
                     Language = b.Language,
                     PublicationDate = b.PublicationDate,
                     QuantityAvailable = b.QuantityAvailable,
+                    AuthorId = b.AuthorId,
+                    TranslatorId = b.TranslatorId,
+                    DiscountId = b.DiscountId,
                     Author = new Author
                     {
                         AuthorId = b.Author.AuthorId,
