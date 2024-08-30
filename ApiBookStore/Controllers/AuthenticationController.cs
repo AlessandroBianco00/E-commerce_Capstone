@@ -74,9 +74,19 @@ namespace ApiBookStore.Controllers
             { // risposta di login a buon fine
                 // questo è il token da restituire al client
                 Token = new JwtSecurityTokenHandler().WriteToken(token), // writetoken lo scrive come stringa
-                Email = user.Email,
                 TokenExpiration = expiration,
-                UserId = user.UserId,
+                User = new User
+                {
+                    UserId = user.UserId,
+                    Name = user.Name,
+                    Surname = user.Surname,
+                    Email = user.Email,
+                    Roles = user.Roles.Select(role => new Role
+                    {
+                        RoleId = role.RoleId,
+                        RoleName = role.RoleName
+                    }).ToList()
+                }
             });
         }
 
