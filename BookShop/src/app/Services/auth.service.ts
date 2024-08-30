@@ -41,6 +41,7 @@ export class AuthService {
   login(credentials:iAuthData) {
     return this.http.post<iAuthResponse>(this.loginUrl, credentials).pipe(tap(data => {
       this.authSubject.next(data.user)
+      console.log(data)
       localStorage.setItem('currentUser', JSON.stringify(data))
 
       this.autoLogout()
@@ -70,9 +71,13 @@ export class AuthService {
 
     const expDate = this.jwtHelper.getTokenExpirationDate(accessData.token) as Date
 
+    console.log("date", expDate)
+
     const expMs = expDate.getTime() - new Date().getTime()
 
-    setTimeout(this.logout,expMs)
+    console.log("ms",expMs)
+
+    setTimeout(() => this.logout(), expMs);
   }
 
   restoreUser():void {
