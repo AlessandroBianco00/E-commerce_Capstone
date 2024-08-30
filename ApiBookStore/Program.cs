@@ -41,6 +41,18 @@ builder.Services
     });
 builder.Services.AddAuthorization();
 
+// Configure CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins",
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+        });
+});
+
 // DataContext
 builder.Services
     .AddDbContext<DataContext>(opt => opt.UseSqlServer(conn));
@@ -62,6 +74,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("AllowAllOrigins"); // Apply the CORS policy here
 
 app.UseAuthorization();
 
