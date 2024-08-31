@@ -35,10 +35,12 @@ export class AuthService {
   registerUrl:string = 'https://localhost:7059/api/authentication/register'
 
   register(newUser:Partial<iUser>) {
+    console.log("Registrazione") // Debug
     return this.http.post<iAuthResponse>(this.registerUrl, newUser)
   }
 
   login(credentials:iAuthData) {
+    console.log("Login") // Debug
     return this.http.post<iAuthResponse>(this.loginUrl, credentials).pipe(tap(data => {
       this.authSubject.next(data.user)
       console.log(data)
@@ -49,6 +51,7 @@ export class AuthService {
   }
 
   logout():void {
+    console.log("Logout") // Debug
     this.authSubject.next(null)
     localStorage.removeItem('currentUser')
 
@@ -60,32 +63,55 @@ export class AuthService {
 
     if(!jsonData) return null
 
+    console.log("User non nullo") // Debug
     const accessData:iAuthResponse = JSON.parse(jsonData)
     return accessData
   }
 
-  autoLogout():void {
-    const accessData = this.getAccessData()
+  autoLogout(): void {
+    const accessData = this.getAccessData();
 
-    if(!accessData) return
+    if (!accessData) return;
 
-    const expDate = this.jwtHelper.getTokenExpirationDate(accessData.token) as Date
+    const expDate = this.jwtHelper.getTokenExpirationDate(accessData.token) as Date;
 
-    console.log("date", expDate)
+    console.log("date", expDate); // Debug
 
-    const expMs = expDate.getTime() - new Date().getTime()
+    let expMs = expDate.getTime() - new Date().getTime();
+    if (expMs > 2147483647) expMs = 2147483647;
 
-    console.log("ms",expMs)
+    console.log("ms", expMs); // Debug
 
+    console.log("Timer Logout"); // Debug
     setTimeout(() => this.logout(), expMs);
   }
 
+  /* Ricorsiva
+  autoLogout(): void {
+    const accessData = this.getAccessData();
+
+    if (!accessData) return;
+
+    const expDate = this.jwtHelper.getTokenExpirationDate(accessData.token) as Date;
+    const expMs = expDate.getTime() - new Date().getTime();
+
+    if (expMs > 2147483647) {
+      setTimeout(() => {
+        this.autoLogout(); // Recheck after a safe interval
+      }, 2147483647);
+    } else {
+      setTimeout(() => this.logout(), expMs); // Set the final logout
+    }
+  }*/
+
   restoreUser():void {
+    console.log("Restore user") // Debug
     const accessData = this.getAccessData()
 
     if(!accessData) return
     if(this.jwtHelper.isTokenExpired(accessData.token)) return
 
+    console.log("Token valido") // Debug
     this.authSubject.next(accessData.user)
 
     this.autoLogout()
