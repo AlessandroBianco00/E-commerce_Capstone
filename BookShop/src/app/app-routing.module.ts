@@ -16,6 +16,11 @@ const routes: Routes = [
     path: 'author/:id',
     loadChildren: () => import('./Pages/author/author.module').then(m => m.AuthorModule),
     title: "Author"
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('./Pages/profile/profile.module').then(m => m.ProfileModule),
+    title: "Profile"
   }
 ];
 
