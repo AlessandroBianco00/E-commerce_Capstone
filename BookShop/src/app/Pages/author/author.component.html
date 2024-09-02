@@ -1,0 +1,36 @@
+<div class="container" *ngIf="currentAuthor">
+  <div class="card mb-3" style="max-width: 540px">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img
+          [src]="'data:image/jpeg;base64,' + currentAuthor.image"
+          [alt]="currentAuthor.authorName + 'image'"
+        />
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{ currentAuthor.authorName }}</h5>
+          <p class="card-text">
+            {{ currentAuthor.description }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="currentAuthor.books">
+    <div class="col-12 col-md-4" *ngFor="let book of currentAuthor.books">
+      <div class="card">
+        <img
+          [src]="'data:image/jpeg;base64,' + book.image"
+          class="card-img-top"
+          [alt]="book.title + 'image'"
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{ book.title }}</h5>
+          <p class="card-text">{{ book.description }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

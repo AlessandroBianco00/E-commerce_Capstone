@@ -18,12 +18,14 @@ namespace ApiBookStore.Controllers
     public class AuthorController : ControllerBase
     {
         private readonly DataContext _context;
+        private readonly IAuthorService _authorService;
         private readonly IImageService _imageService;
 
-        public AuthorController(DataContext context, IImageService imageService)
+        public AuthorController(DataContext context, IImageService imageService, IAuthorService authorService)
         {
             _context = context;
             _imageService = imageService;
+            _authorService = authorService;
         }
 
         // GET: api/Author
@@ -31,10 +33,7 @@ namespace ApiBookStore.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Author>>> GetAuthors()
         {
-            var authors = await _context.Authors
-                .AsNoTracking()
-                .Include(a => a.Books)
-                .ToListAsync();
+            var authors = await _authorService.GetAll();
 
             return Ok(authors);
         }
@@ -43,10 +42,7 @@ namespace ApiBookStore.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Author>> GetAuthor([FromRoute] int id)
         {
-            var author = await _context.Authors
-                .AsNoTracking()
-                .Include(a => a.Books)
-                .SingleOrDefaultAsync(a => a.AuthorId == id);
+            var author = await _authorService.GetById(id);
 
             if (author == null)
             {

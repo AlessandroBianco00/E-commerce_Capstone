@@ -61,6 +61,7 @@ builder.Services
     .AddScoped<IAuthService, AuthService>()
     .AddScoped<IPasswordEncoder, PasswordEncoder>()
     .AddScoped<IImageService, ImageService>()
+    .AddScoped<IAuthorService, AuthorService>()
     .AddScoped<IBookService, BookService>()
     ;
 

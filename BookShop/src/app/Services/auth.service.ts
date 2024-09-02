@@ -74,25 +74,6 @@ export class AuthService {
     if (!accessData) return;
 
     const expDate = this.jwtHelper.getTokenExpirationDate(accessData.token) as Date;
-
-    console.log("date", expDate); // Debug
-
-    let expMs = expDate.getTime() - new Date().getTime();
-    if (expMs > 2147483647) expMs = 2147483647;
-
-    console.log("ms", expMs); // Debug
-
-    console.log("Timer Logout"); // Debug
-    setTimeout(() => this.logout(), expMs);
-  }
-
-  /* Ricorsiva
-  autoLogout(): void {
-    const accessData = this.getAccessData();
-
-    if (!accessData) return;
-
-    const expDate = this.jwtHelper.getTokenExpirationDate(accessData.token) as Date;
     const expMs = expDate.getTime() - new Date().getTime();
 
     if (expMs > 2147483647) {
@@ -102,7 +83,7 @@ export class AuthService {
     } else {
       setTimeout(() => this.logout(), expMs); // Set the final logout
     }
-  }*/
+  }
 
   restoreUser():void {
     console.log("Restore user") // Debug
