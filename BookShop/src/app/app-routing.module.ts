@@ -21,6 +21,15 @@ const routes: Routes = [
     path: 'profile',
     loadChildren: () => import('./Pages/profile/profile.module').then(m => m.ProfileModule),
     title: "Profile"
+  },
+  {
+    path: 'payment',
+    loadChildren: () => import('./Pages/payment/payment.module').then(m => m.PaymentModule),
+    title: "MyPayments"
+  },
+  {
+    path: 'address', loadChildren: () => import('./Pages/address/address.module').then(m => m.AddressModule),
+    title: "MyAddresses"
   }
 ];
 

@@ -21,10 +21,13 @@ namespace ApiBookStore.Controllers
             _context = context;
         }
 
+        // CRUD che l'utente può effettuare sui propri indirizzi di spedizione
+
         // GET: api/ShippingAddress
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ShippingAddress>>> GetShippingAddresses()
         {
+            var userId = User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
             var addresses = await _context.ShippingAddresses.ToListAsync();
             return Ok(addresses);
         }
@@ -33,6 +36,7 @@ namespace ApiBookStore.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<ShippingAddress>> GetShippingAddress(int id)
         {
+            var userId = User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
             var shippingAddress = await _context.ShippingAddresses.FindAsync(id);
 
             if (shippingAddress == null)
@@ -48,6 +52,7 @@ namespace ApiBookStore.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutShippingAddress(int id, ShippingAddress shippingAddress)
         {
+            var userId = User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
             if (id != shippingAddress.ShippingAddressId)
             {
                 return BadRequest();
@@ -79,6 +84,7 @@ namespace ApiBookStore.Controllers
         [HttpPost]
         public async Task<ActionResult<ShippingAddress>> PostShippingAddress(ShippingAddress shippingAddress)
         {
+            var userId = User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
             _context.ShippingAddresses.Add(shippingAddress);
             await _context.SaveChangesAsync();
 
@@ -89,6 +95,7 @@ namespace ApiBookStore.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteShippingAddress(int id)
         {
+            var userId = User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
             var shippingAddress = await _context.ShippingAddresses.FindAsync(id);
             if (shippingAddress == null)
             {
