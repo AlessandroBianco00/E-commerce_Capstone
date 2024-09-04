@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Net;
 
-namespace ApiBookStore.Models.Entities
+namespace ApiBookStore.Entities
 {
     public class User
     {

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace ApiBookStore.Models.Entities
+namespace ApiBookStore.Entities
 {
     //Placeholder Class. In seguito potranno essere aggiunti altri campi per rendere funzionante anche questa feature
     public class Payment

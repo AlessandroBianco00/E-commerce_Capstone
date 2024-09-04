@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Net;
 
-namespace ApiBookStore.Models.Entities
+namespace ApiBookStore.Entities
 {
     // Nullable asssegnati per risolvere errore di cancellazione a cascata
     public class Order
