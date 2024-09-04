@@ -7,5 +7,5 @@ export interface iShippingAddress {
     zipCode: number;
     country: string;
     userId: number;
-    user: iUser;
+    user: iUser | null;
 }

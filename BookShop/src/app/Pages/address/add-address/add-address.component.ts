@@ -31,7 +31,7 @@ export class AddAddressComponent {
     console.log(this.currentUser.userId);
 
     this.newAddress.userId = this.currentUser.userId
-    this.newAddress.user = undefined
+    this.newAddress.user = null
     this.AddressSvc.createNewAddress(this.newAddress)
     .subscribe(()=>{
       setTimeout(() => {this.router.navigate(['/address'])}, 1000)
