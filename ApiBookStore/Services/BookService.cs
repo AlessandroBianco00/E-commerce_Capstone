@@ -2,7 +2,6 @@
 using ApiBookStore.Entities;
 using ApiBookStore.Interfaces;
 using ApiBookStore.Models;
-using ApiBookStore.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace ApiBookStore.Services

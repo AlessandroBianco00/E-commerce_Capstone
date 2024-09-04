@@ -1,1 +1,28 @@
-<p>address works!</p>
+<div class="container">
+  <h1>I miei indirizzi</h1>
+  <div class="row" *ngIf="myAddressesArray">
+    <div class="col-6 col-md-4" *ngFor="let address of myAddressesArray">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ address.streetAddress }}</h5>
+          <p class="card-text">
+            {{ address.city }}, {{ address.country }}, CAP
+            {{ address.zipCode.toString().padStart(5, "0") }}
+          </p>
+          <div class="d-flex justify-content-around">
+            <a
+              [routerLink]="'update/' + address.shippingAddressId"
+              class="btn btn-primary"
+              >Modifica</a
+            >
+            <a
+              class="btn btn-danger"
+              (click)="delete(address.shippingAddressId)"
+              >Elimina</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

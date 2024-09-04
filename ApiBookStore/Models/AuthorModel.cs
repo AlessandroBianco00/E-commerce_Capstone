@@ -1,4 +1,4 @@
-﻿using ApiBookStore.Models.Entities;
+﻿using ApiBookStore.Entities;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
