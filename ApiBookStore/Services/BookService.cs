@@ -1,4 +1,5 @@
 ﻿using ApiBookStore.Context;
+using ApiBookStore.Entities;
 using ApiBookStore.Interfaces;
 using ApiBookStore.Models;
 using ApiBookStore.Models.Entities;

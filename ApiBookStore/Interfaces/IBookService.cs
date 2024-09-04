@@ -1,5 +1,5 @@
-﻿using ApiBookStore.Models;
-using ApiBookStore.Models.Entities;
+﻿using ApiBookStore.Entities;
+using ApiBookStore.Models;
 
 namespace ApiBookStore.Interfaces
 {

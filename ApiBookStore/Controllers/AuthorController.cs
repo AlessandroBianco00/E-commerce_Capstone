@@ -6,10 +6,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ApiBookStore.Context;
-using ApiBookStore.Models.Entities;
 using Microsoft.AspNetCore.Authorization;
 using ApiBookStore.Interfaces;
 using ApiBookStore.Models;
+using ApiBookStore.Entities;
 
 namespace ApiBookStore.Controllers
 {

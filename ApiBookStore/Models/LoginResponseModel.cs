@@ -1,4 +1,4 @@
-﻿using ApiBookStore.Models.Entities;
+﻿using ApiBookStore.Entities;
 
 namespace ApiBookStore.Models
 {

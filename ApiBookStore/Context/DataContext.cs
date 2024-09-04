@@ -1,4 +1,4 @@
-﻿using ApiBookStore.Models.Entities;
+﻿using ApiBookStore.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace ApiBookStore.Context
