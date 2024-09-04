@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { iUser } from '../../Models/user';
+import { AuthService } from '../../Services/auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -7,4 +9,20 @@ import { Component } from '@angular/core';
 })
 export class ProfileComponent {
 
+  currentUser!:iUser
+
+  constructor(
+    private AuthSvc: AuthService
+  ) {}
+
+  ngOnInit() {
+    const accessData = this.AuthSvc.getAccessData()
+    if(!accessData) return
+    this.currentUser = accessData.user
+
+  }
+
+  redirect(pageName:string) {
+
+  }
 }

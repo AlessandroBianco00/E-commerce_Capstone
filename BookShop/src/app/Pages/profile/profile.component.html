@@ -1,1 +1,43 @@
-<p>profile works!</p>
+<div class="container">
+  <h1 *ngIf="currentUser">
+    Benvenuto {{ currentUser.name }} {{ currentUser.surname }}
+  </h1>
+  <div class="row">
+    <div class="card" [routerLink]="['#']">
+      <div class="card-body">
+        <h5 class="card-title">I miei ordini</h5>
+        <p class="card-text">
+          Traccia, restituisci o acquista nuovamente degli articoli
+        </p>
+      </div>
+    </div>
+
+    <div class="card" [routerLink]="['#']">
+      <div class="card-body">
+        <h5 class="card-title">Accesso e impostazioni di sicurezza</h5>
+        <p class="card-text">
+          Modifica il login, il nome e il numero di cellulare
+        </p>
+      </div>
+    </div>
+
+    <div class="card" [routerLink]="['/address']">
+      <div class="card-body">
+        <h5 class="card-title">Indirizzi</h5>
+        <p class="card-text">
+          Modifica indirizzi e preferenze di consegna per gli ordini e i regali
+        </p>
+      </div>
+    </div>
+
+    <div class="card" [routerLink]="['/payment']">
+      <div class="card-body">
+        <h5 class="card-title">I miei pagamenti</h5>
+        <p class="card-text">
+          Visualizza tutte le transazioni, gestisci le impostazioni e i metodi
+          di pagamento
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
