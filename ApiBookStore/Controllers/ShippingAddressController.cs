@@ -77,7 +77,7 @@ namespace ApiBookStore.Controllers
 
         // PUT: api/ShippingAddress/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutShippingAddress([FromRoute] int id, [FromForm] ShippingAddress shippingAddress)
+        public async Task<IActionResult> PutShippingAddress([FromRoute] int id, [FromBody] ShippingAddress shippingAddress)
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
 
@@ -109,7 +109,7 @@ namespace ApiBookStore.Controllers
 
         // POST: api/ShippingAddress
         [HttpPost]
-        public async Task<ActionResult<ShippingAddress>> PostShippingAddress([FromForm] ShippingAddress shippingAddress)
+        public async Task<ActionResult<ShippingAddress>> PostShippingAddress([FromBody] ShippingAddress shippingAddress)
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
 
