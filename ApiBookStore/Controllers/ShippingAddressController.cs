@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ApiBookStore.Context;
 using ApiBookStore.Entities;
+using ApiBookStore.DTO;
 
 namespace ApiBookStore.Controllers
 {
@@ -25,19 +26,46 @@ namespace ApiBookStore.Controllers
 
         // GET: api/ShippingAddress
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ShippingAddress>>> GetShippingAddresses()
+        public async Task<ActionResult<IEnumerable<ShippingAddressDto>>> GetShippingAddresses()
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
-            var addresses = await _context.ShippingAddresses.ToListAsync();
+
+            var addresses = await _context.ShippingAddresses
+                .AsNoTracking()
+                .Where(sa => sa.UserId.ToString() == userId)
+                .Select(sa => new ShippingAddressDto
+                {
+                    ShippingAddressId = sa.ShippingAddressId,
+                    StreetAddress = sa.StreetAddress,
+                    City = sa.City,
+                    ZipCode = sa.ZipCode,
+                    Country = sa.Country,
+                    UserId = sa.UserId
+                })
+                .ToListAsync();
+
             return Ok(addresses);
         }
 
         // GET: api/ShippingAddress/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<ShippingAddress>> GetShippingAddress(int id)
+        public async Task<ActionResult<ShippingAddressDto>> GetShippingAddress(int id)
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
-            var shippingAddress = await _context.ShippingAddresses.FindAsync(id);
+
+            var shippingAddress = await _context.ShippingAddresses
+                .AsNoTracking()
+                .Where(sa => sa.UserId.ToString() == userId)
+                .Select(sa => new ShippingAddressDto
+                {
+                    ShippingAddressId = sa.ShippingAddressId,
+                    StreetAddress = sa.StreetAddress,
+                    City = sa.City,
+                    ZipCode = sa.ZipCode,
+                    Country = sa.Country,
+                    UserId = sa.UserId
+                })
+                .SingleOrDefaultAsync(sa => sa.ShippingAddressId == id);
 
             if (shippingAddress == null)
             {
@@ -50,10 +78,11 @@ namespace ApiBookStore.Controllers
         // PUT: api/ShippingAddress/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutShippingAddress(int id, ShippingAddress shippingAddress)
+        public async Task<IActionResult> PutShippingAddress([FromRoute] int id, [FromForm] ShippingAddress shippingAddress)
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
-            if (id != shippingAddress.ShippingAddressId)
+
+            if (id != shippingAddress.ShippingAddressId || userId != shippingAddress.UserId.ToString() )
             {
                 return BadRequest();
             }
@@ -80,11 +109,17 @@ namespace ApiBookStore.Controllers
         }
 
         // POST: api/ShippingAddress
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<ShippingAddress>> PostShippingAddress(ShippingAddress shippingAddress)
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
+
+            // L'utente può creare solo indirizzi per il suo profilo
+            if (userId != shippingAddress.UserId.ToString())
+            {
+                return BadRequest();
+            }
+
             _context.ShippingAddresses.Add(shippingAddress);
             await _context.SaveChangesAsync();
 
@@ -96,10 +131,16 @@ namespace ApiBookStore.Controllers
         public async Task<IActionResult> DeleteShippingAddress(int id)
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
+
             var shippingAddress = await _context.ShippingAddresses.FindAsync(id);
             if (shippingAddress == null)
             {
                 return NotFound();
+            }
+
+            if (userId != shippingAddress.UserId.ToString())
+            {
+                return BadRequest();
             }
 
             _context.ShippingAddresses.Remove(shippingAddress);
