@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ApiBookStore.Context;
 using ApiBookStore.Entities;
+using ApiBookStore.DTO;
 
 namespace ApiBookStore.Controllers
 {
@@ -78,14 +79,23 @@ namespace ApiBookStore.Controllers
 
         // Patch: api/User/5
         [HttpPatch("{id}")]
-        public async Task<IActionResult> PatchUser(int id, [FromForm] User user)
+        public async Task<IActionResult> PatchUser(int id, [FromBody] UserDto userDto)
         {
-            if (id != user.UserId)
+            if (id != userDto.UserId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(user).State = EntityState.Modified;
+            var userEntity = await _context.Users.FindAsync(id);
+
+            if (userEntity == null)
+            {
+                return NotFound();
+            }
+            
+            userEntity.Name = userDto.Name ?? userEntity.Name;
+            userEntity.Surname = userDto.Surname ?? userEntity.Surname;
+            userEntity.PhoneNumber = userDto.PhoneNumber ?? userEntity.PhoneNumber;
 
             try
             {
@@ -103,7 +113,7 @@ namespace ApiBookStore.Controllers
                 }
             }
 
-            return NoContent();
+            return Ok(userDto);
         }
 
         // Cancellazione dati dell'utente loggato

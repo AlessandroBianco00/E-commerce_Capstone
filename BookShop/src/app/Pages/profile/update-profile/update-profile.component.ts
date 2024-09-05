@@ -25,10 +25,22 @@ export class UpdateProfileComponent {
     this.currentUser = accessData.user
   }
 
-  update(id:number){
+  update(id: number) {
     this.UserSvc.updateProfile(this.currentUser, id)
-    .subscribe(()=>{
-      setTimeout(() => {this.router.navigate(['/profile'])}, 1000)
-    })
+      .subscribe({
+        next: updatedUser => {
+          const authResponse = JSON.parse(localStorage.getItem('currentUser') || '{}');
+          authResponse.user = updatedUser;
+          localStorage.setItem('currentUser', JSON.stringify(authResponse));
+
+          setTimeout(() => {
+            this.router.navigate(['/profile']);
+          }, 1000);
+        },
+        error: err => {
+          console.error("Update failed", err);
+        }
+      });
   }
+
 }

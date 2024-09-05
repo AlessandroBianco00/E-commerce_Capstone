@@ -81,6 +81,7 @@ namespace ApiBookStore.Controllers
                     UserId = user.UserId,
                     Name = user.Name,
                     Surname = user.Surname,
+                    PhoneNumber = user.PhoneNumber,
                     Email = user.Email
                 }
             });
