@@ -3,7 +3,7 @@
     Benvenuto {{ currentUser.name }} {{ currentUser.surname }}
   </h1>
   <div class="row">
-    <div class="card" [routerLink]="['#']">
+    <div class="card hover-card" [routerLink]="['#']">
       <div class="card-body">
         <h5 class="card-title">I miei ordini</h5>
         <p class="card-text">
@@ -12,7 +12,7 @@
       </div>
     </div>
 
-    <div class="card" [routerLink]="['#']">
+    <div class="card hover-card" [routerLink]="['update-profile']">
       <div class="card-body">
         <h5 class="card-title">Accesso e impostazioni di sicurezza</h5>
         <p class="card-text">
@@ -21,7 +21,7 @@
       </div>
     </div>
 
-    <div class="card" [routerLink]="['/address']">
+    <div class="card hover-card" [routerLink]="['/address']">
       <div class="card-body">
         <h5 class="card-title">Indirizzi</h5>
         <p class="card-text">
@@ -30,7 +30,7 @@
       </div>
     </div>
 
-    <div class="card" [routerLink]="['/payment']">
+    <div class="card hover-card" [routerLink]="['/payment']">
       <div class="card-body">
         <h5 class="card-title">I miei pagamenti</h5>
         <p class="card-text">

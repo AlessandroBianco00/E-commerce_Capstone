@@ -2,8 +2,8 @@ import { iShippingAddress } from './../../Models/shipping-address';
 import { Component } from '@angular/core';
 import { AuthService } from '../../Services/auth.service';
 import { ShippingAddressService } from '../../Services/shipping-address.service';
-import { iUser } from '../../Models/user';
 import { Router } from '@angular/router';
+import { iUserDto } from '../../Dto/user-dto';
 
 @Component({
   selector: 'app-address',
@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 export class AddressComponent {
 
   myAddressesArray:iShippingAddress[] = []
-  currentUser!:iUser
+  currentUser!:iUserDto
 
   constructor(
     private AddressSvc: ShippingAddressService,

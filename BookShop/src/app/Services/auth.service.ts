@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { iAuthResponse } from '../Models/auth-response';
 import { iAuthData } from '../Models/auth-data';
+import { iUserDto } from '../Dto/user-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class AuthService {
 
   jwtHelper:JwtHelperService = new JwtHelperService()
 
-  authSubject = new BehaviorSubject<null|iUser>(null)
+  authSubject = new BehaviorSubject<null|iUserDto>(null)
   user$ = this.authSubject.asObservable()
 
   syncIsLoggedIn:boolean = false;

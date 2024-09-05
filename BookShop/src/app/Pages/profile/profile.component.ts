@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { iUser } from '../../Models/user';
 import { AuthService } from '../../Services/auth.service';
+import { iUserDto } from '../../Dto/user-dto';
 
 @Component({
   selector: 'app-profile',
@@ -9,7 +9,7 @@ import { AuthService } from '../../Services/auth.service';
 })
 export class ProfileComponent {
 
-  currentUser!:iUser
+  currentUser!:iUserDto
 
   constructor(
     private AuthSvc: AuthService

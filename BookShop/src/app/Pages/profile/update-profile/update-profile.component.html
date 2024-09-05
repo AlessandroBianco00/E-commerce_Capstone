@@ -1,1 +1,38 @@
-<p>update-profile works!</p>
+<div class="row justify-content-center text-start">
+  <div class="col-md-6">
+    <h2>Modifica indirizzo</h2>
+    <form *ngIf="currentUser">
+      <input
+        type="hidden"
+        name="id"
+        [(ngModel)]="currentUser.userId"
+        class="form-control"
+      />
+      <input
+        type="text"
+        name="address"
+        [(ngModel)]="currentUser.name"
+        placeholder="il tuo indirizzo e n° civico"
+        class="form-control mt-3"
+      />
+      <input
+        type="text"
+        name="city"
+        [(ngModel)]="currentUser.surname"
+        placeholder="Città"
+        class="form-control mt-3"
+      />
+      <input
+        type="number"
+        name="zipcode"
+        [(ngModel)]="currentUser.phoneNumber"
+        placeholder="CAP"
+        class="form-control mt-3"
+      />
+
+      <button (click)="update(currentUser.userId)" class="btn btn-primary mt-3">
+        Modifica
+      </button>
+    </form>
+  </div>
+</div>

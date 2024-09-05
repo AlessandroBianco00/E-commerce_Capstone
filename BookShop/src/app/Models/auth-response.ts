@@ -1,7 +1,7 @@
-import { iUser } from "./user"
+import { iUserDto } from "../Dto/user-dto"
 
 export interface iAuthResponse {
-  user: iUser
+  user: iUserDto
   token: string
   tokenExpiration: string
 }

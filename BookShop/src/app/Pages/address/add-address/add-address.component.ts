@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { iShippingAddress } from '../../../Models/shipping-address';
 import { ShippingAddressService } from '../../../Services/shipping-address.service';
 import { Router } from '@angular/router';
-import { iUser } from '../../../Models/user';
 import { AuthService } from '../../../Services/auth.service';
+import { iUserDto } from '../../../Dto/user-dto';
 
 @Component({
   selector: 'app-add-address',
@@ -12,7 +12,7 @@ import { AuthService } from '../../../Services/auth.service';
 })
 export class AddAddressComponent {
 
-  currentUser!:iUser
+  currentUser!:iUserDto
   newAddress:Partial<iShippingAddress> = {}
 
   constructor(
@@ -37,4 +37,5 @@ export class AddAddressComponent {
       setTimeout(() => {this.router.navigate(['/address'])}, 1000)
     })
   }
+
 }
