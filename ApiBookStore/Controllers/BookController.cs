@@ -108,5 +108,36 @@ namespace ApiBookStore.Controllers
         {
             return _context.Books.Any(e => e.BookId == id);
         }
+
+        // GET ricerca libri
+        [HttpGet("books")]
+        public async Task<IActionResult> GetBooks(
+            [FromQuery] string? categoryName,
+            [FromQuery] string? authorName,
+            [FromQuery] string? title,
+            [FromQuery] string? editor) 
+        {
+            var query = _context.Books.AsQueryable();
+
+            if (!string.IsNullOrEmpty(categoryName))
+            {
+                query = query.Where(b => b.Categories.Any(c => c.CategoryName == categoryName));
+            }
+            if (!string.IsNullOrEmpty(authorName))
+            {
+                query = query.Where(b => b.Author.AuthorName.Contains(authorName));
+            }
+            if (!string.IsNullOrEmpty(title))
+            {
+                query = query.Where(b => b.Title.Contains(title));
+            }
+            if (!string.IsNullOrEmpty(editor))
+            {
+                query = query.Where(b => b.Editor.Contains(editor));
+            }
+
+            var books = await query.ToListAsync();
+            return Ok(books);
+        }
     }
 }
