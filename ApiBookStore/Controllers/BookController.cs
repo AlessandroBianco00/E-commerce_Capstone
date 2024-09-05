@@ -10,6 +10,7 @@ using ApiBookStore.Models;
 using ApiBookStore.Interfaces;
 using static System.Reflection.Metadata.BlobBuilder;
 using ApiBookStore.Entities;
+using ApiBookStore.DTO;
 
 namespace ApiBookStore.Controllers
 {
@@ -110,8 +111,8 @@ namespace ApiBookStore.Controllers
         }
 
         // GET ricerca libri
-        [HttpGet("books")]
-        public async Task<IActionResult> GetBooks(
+        [HttpGet("search")]
+        public async Task<ActionResult<IEnumerable<BookSearchDto>>> GetBooks(
             [FromQuery] string? categoryName,
             [FromQuery] string? authorName,
             [FromQuery] string? title,
@@ -136,7 +137,39 @@ namespace ApiBookStore.Controllers
                 query = query.Where(b => b.Editor.Contains(editor));
             }
 
-            var books = await query.ToListAsync();
+            var books = await query
+               .AsNoTracking()
+               .Select(b => new BookSearchDto
+               {
+                   BookId = b.BookId,
+                   Title = b.Title,
+                   Description = b.Description,
+                   Image = b.Image,
+                   Price = b.Price,
+                   Editor = b.Editor,
+                   Language = b.Language,
+                   QuantityAvailable = b.QuantityAvailable,
+                   AuthorId = b.AuthorId,
+                   TranslatorId = b.TranslatorId,
+                   DiscountId= b.DiscountId,
+                   Discount = b.Discount,
+                   Author = new AuthorSearchDto
+                   {
+                       AuthorId = b.Author.AuthorId,
+                       AuthorName = b.Author.AuthorName,
+                   },
+                   Translator = new TranslatorSearchDto
+                   {
+                       TranslatorId = b.Translator.TranslatorId,
+                       TranslatorName = b.Translator.TranslatorName
+                   },
+                   Categories = b.Categories.Select(c => new CategoryDto
+                   {
+                       CategoryId = c.CategoryId,
+                       CategoryName = c.CategoryName
+                   }).ToList(),
+               }).ToListAsync();
+
             return Ok(books);
         }
     }
