@@ -34,14 +34,15 @@ const routes: Routes = [
   },
   {
     path: 'search',
-    loadChildren: () => import('./search/search.module').then(m => m.SearchModule),
+    loadChildren: () => import('./Pages/search/search.module').then(m => m.SearchModule),
     title: "Search"
   },
   {
-    path: 'book-detail',
-    loadChildren: () => import('./book-detail/book-detail.module').then(m => m.BookDetailModule),
+    path: 'book-detail/:id',
+    loadChildren: () => import('./Pages/book-detail/book-detail.module').then(m => m.BookDetailModule),
     title: "BookDetail"
-  }
+  },
+  { path: '**', loadChildren: () => import('./Pages/page404/page404.module').then(m => m.Page404Module) }
 ];
 
 @NgModule({

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BookService } from '../Services/book.service';
-import { iBookSearchDto } from '../Dto/book-search-dto';
+import { BookService } from '../../Services/book.service';
+import { iBookSearchDto } from '../../Dto/book-search-dto';
 
 @Component({
   selector: 'app-search',

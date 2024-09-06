@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { iBook } from '../../Models/book';
 
 @Component({
   selector: 'app-book-detail',
@@ -7,4 +8,5 @@ import { Component } from '@angular/core';
 })
 export class BookDetailComponent {
 
+  bookDetail!:iBook
 }
