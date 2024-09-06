@@ -6,9 +6,8 @@
     >
       <div
         class="card h-100"
-        [routerLink]="[
-          'search?category=' + category.categoryName.toLocaleLowerCase()
-        ]"
+        [routerLink]="['/search']"
+        [queryParams]="{ category: category.categoryName.toLocaleLowerCase() }"
       >
         <div class="card-body">
           <h5 class="card-title">{{ category.categoryName }}</h5>

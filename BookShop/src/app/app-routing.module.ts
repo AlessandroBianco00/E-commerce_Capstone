@@ -28,8 +28,14 @@ const routes: Routes = [
     title: "MyPayments"
   },
   {
-    path: 'address', loadChildren: () => import('./Pages/address/address.module').then(m => m.AddressModule),
+    path: 'address',
+    loadChildren: () => import('./Pages/address/address.module').then(m => m.AddressModule),
     title: "MyAddresses"
+  },
+  {
+    path: 'search',
+    loadChildren: () => import('./search/search.module').then(m => m.SearchModule),
+    title: "Search"
   }
 ];
 

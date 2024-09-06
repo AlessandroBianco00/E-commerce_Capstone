@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { iBook } from '../Models/book';
+import { iBookSearchDto } from '../Dto/book-search-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -23,13 +24,13 @@ export class BookService {
 
   //Metodi per la ricerca
 
-  getBooksSearched(filters: { categoryName?: string, authorName?: string, title?: string, editor?: string }) {
+  getBooksSearched(filters: { category?: string, author?: string, title?: string, editor?: string }) {
     let params = new HttpParams();
-    if (filters.categoryName) {
-      params = params.set('categoryName', filters.categoryName);
+    if (filters.category) {
+      params = params.set('category', filters.category);
     }
-    if (filters.authorName) {
-      params = params.set('authorName', filters.authorName);
+    if (filters.author) {
+      params = params.set('author', filters.author);
     }
     if (filters.title) {
       params = params.set('title', filters.title);
@@ -38,7 +39,7 @@ export class BookService {
       params = params.set('editor', filters.editor);
     }
 
-    return this.http.get<iBook[]>(`${this.booksUrl}/search`, { params });
+    return this.http.get<iBookSearchDto[]>(`${this.booksUrl}/search`, { params });
   }
 
 }

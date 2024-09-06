@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row" *ngIf="bookSearchedArray">
+    <div class="col" *ngFor="let book of bookSearchedArray">
+      <div class="card">
+        <img
+          [src]="'data:image/jpeg;base64,' + book.image"
+          class="card-img-top"
+          [alt]="book.title"
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{ book.title }}</h5>
+          <p class="card-text">
+            {{ book.author.authorName }} (Autore),
+            {{ book.translator.translatorName }} (Traduttore) | Edizione
+            {{ book.language }}
+          </p>
+          <p class="card-text">
+            Prezzo
+            {{ book.price * (100 - book.discount.discountPercentage) }} &euro; |
+            <span
+              ><del>{{ book.price }} &euro;</del></span
+            >
+          </p>
+          <a routerLink="#" class="btn btn-primary">Dettaglio</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="!bookSearchedArray">
+    <p>Non è stato trovato nessun prodotto inerente alla ricerca</p>
+  </div>
+</div>

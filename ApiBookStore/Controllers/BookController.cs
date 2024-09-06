@@ -113,20 +113,20 @@ namespace ApiBookStore.Controllers
         // GET ricerca libri
         [HttpGet("search")]
         public async Task<ActionResult<IEnumerable<BookSearchDto>>> GetBooks(
-            [FromQuery] string? categoryName,
-            [FromQuery] string? authorName,
+            [FromQuery] string? category,
+            [FromQuery] string? author,
             [FromQuery] string? title,
             [FromQuery] string? editor) 
         {
             var query = _context.Books.AsQueryable();
 
-            if (!string.IsNullOrEmpty(categoryName))
+            if (!string.IsNullOrEmpty(category))
             {
-                query = query.Where(b => b.Categories.Any(c => c.CategoryName == categoryName));
+                query = query.Where(b => b.Categories.Any(c => c.CategoryName == category));
             }
-            if (!string.IsNullOrEmpty(authorName))
+            if (!string.IsNullOrEmpty(author))
             {
-                query = query.Where(b => b.Author.AuthorName.Contains(authorName));
+                query = query.Where(b => b.Author.AuthorName.Contains(author));
             }
             if (!string.IsNullOrEmpty(title))
             {
