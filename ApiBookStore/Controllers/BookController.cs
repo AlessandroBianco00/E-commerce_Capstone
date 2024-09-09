@@ -227,7 +227,7 @@ namespace ApiBookStore.Controllers
                            Email = r.User.Email,
                        }
                    }).ToList(),
-               }).ToListAsync();
+               }).SingleOrDefaultAsync(b => b.BookId == id);
 
             if (book == null)
             {

@@ -1,18 +1,24 @@
-<div class="container">
+<div class="container" *ngIf="bookDetail">
   <div class="row">
     <div class="col">
       <div class="card mb-3">
         <div class="row g-0">
           <div class="col-md-4">
-            <img src="..." class="img-fluid rounded-start" alt="..." />
+            <img
+              [src]="'data:image/jpeg;base64,' + bookDetail.image"
+              class="img-fluid rounded-start"
+              [alt]="bookDetail.title + 'image'"
+            />
           </div>
           <div class="col-md-8">
             <div class="card-body">
-              <h5 class="card-title">Card title</h5>
+              <h5 class="card-title">{{ bookDetail.title }}</h5>
               <p class="card-text">
-                This is a wider card with supporting text below as a natural
-                lead-in to additional content. This content is a little bit
-                longer.
+                {{ bookDetail.author.authorName }} (Autore),
+                {{ bookDetail.translator.translatorName }} (Traduttore)
+              </p>
+              <p class="card-text">
+                {{ bookDetail.description }}
               </p>
               <p class="card-text">
                 <small class="text-body-secondary"
@@ -21,6 +27,32 @@
               </p>
             </div>
           </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-2">
+          <p>ISBN</p>
+          <p>{{ bookDetail.isbn }}</p>
+        </div>
+        <div class="col-2">
+          <p>{{ bookDetail.pages }} pagine</p>
+        </div>
+        <div class="col-2">
+          <p>Editore</p>
+          <p>{{ bookDetail.editor }}</p>
+        </div>
+        <div class="col-2">
+          <p>Lingua</p>
+          <p>{{ bookDetail.language }}</p>
+        </div>
+        <div class="col-2">
+          <p>Data di pubblicazione</p>
+          <p>{{ bookDetail.publicationDate }}</p>
+        </div>
+        <div class="col-2">
+          <p>Altro</p>
+          <p>altro</p>
         </div>
       </div>
     </div>

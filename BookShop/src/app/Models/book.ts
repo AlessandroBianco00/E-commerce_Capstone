@@ -15,7 +15,7 @@ export interface iBook {
     price: number;
     editor: string;
     pages: number;
-    iSBN: string;
+    isbn: string;
     language: string;
     publicationDate: Date;
     quantityAvailable: number;

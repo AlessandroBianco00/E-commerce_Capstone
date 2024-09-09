@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { iBook } from '../Models/book';
 import { iBookSearchDto } from '../Dto/book-search-dto';
+import { iBookDetailDto } from '../Dto/book-detail-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -40,6 +41,10 @@ export class BookService {
     }
 
     return this.http.get<iBookSearchDto[]>(`${this.booksUrl}/search`, { params });
+  }
+
+  getBookDetail(id:number) {
+    return this.http.get<iBookDetailDto>(`${this.booksUrl}/detail/${id}`)
   }
 
 }

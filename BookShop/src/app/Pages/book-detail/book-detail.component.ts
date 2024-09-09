@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { iBook } from '../../Models/book';
+import { BookService } from '../../Services/book.service';
+import { ActivatedRoute } from '@angular/router';
+import { iBookDetailDto } from '../../Dto/book-detail-dto';
 
 @Component({
   selector: 'app-book-detail',
@@ -8,5 +10,25 @@ import { iBook } from '../../Models/book';
 })
 export class BookDetailComponent {
 
-  bookDetail!:iBook
+  bookDetail!:iBookDetailDto
+
+  constructor(
+    private route:ActivatedRoute,
+    private BookSvc:BookService
+  )
+  {}
+
+  ngOnInit() {
+    this.route.params.subscribe((params:any) => {
+
+      this.BookSvc.getBookDetail(params.id).subscribe(book => {
+        if (book) {
+          console.log(book);
+
+          this.bookDetail = book;
+          console.log(this.bookDetail);
+        }
+      });
+    })
+  }
 }

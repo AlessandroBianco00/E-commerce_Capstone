@@ -16,15 +16,17 @@
           </p>
           <p class="card-text">
             Prezzo
-            {{
-              (book.price * (100 - book.discount.discountPercentage)) / 100
-            }}
+            {{ (book.price * (100 - book.discount.discountPercentage)) / 100 }}
             &euro; |
             <span
               ><del>{{ book.price }} &euro;</del></span
             >
           </p>
-          <a routerLink="#" class="btn btn-primary">Dettaglio</a>
+          <a
+            [routerLink]="'/book-detail/' + book.bookId"
+            class="btn btn-primary"
+            >Dettaglio</a
+          >
         </div>
       </div>
     </div>
