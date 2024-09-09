@@ -167,6 +167,10 @@ namespace ApiBookStore.Controllers
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
+            _context.Carts.Add(new Cart { UserId = user.UserId });
+            _context.Wishlists.Add(new Wishlist { UserId = user.UserId });
+            await _context.SaveChangesAsync();
+
             return CreatedAtAction("GetUser", new { id = user.UserId }, user);
         }
 

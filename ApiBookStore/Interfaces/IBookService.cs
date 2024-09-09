@@ -1,4 +1,5 @@
-﻿using ApiBookStore.Entities;
+﻿using ApiBookStore.DTO;
+using ApiBookStore.Entities;
 using ApiBookStore.Models;
 
 namespace ApiBookStore.Interfaces
@@ -8,5 +9,6 @@ namespace ApiBookStore.Interfaces
         public Task<Book> Create(BookModel boookModel);
         public Task<IEnumerable<Book>> GetAll();
         public Task<Book?> GetById(int id);
+        public Task<BookDetailDto?> GetBookDetail(int id);
     }
 }

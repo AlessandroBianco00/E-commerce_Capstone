@@ -178,56 +178,7 @@ namespace ApiBookStore.Controllers
         [HttpGet("detail/{id}")]
         public async Task<ActionResult<Book>> GetBookDetail(int id)
         {
-            var book = await _context.Books
-               .AsNoTracking()
-               .Select(b => new BookDetailDto
-               {
-                   BookId = b.BookId,
-                   Title = b.Title,
-                   Description = b.Description,
-                   Image = b.Image,
-                   Price = b.Price,
-                   Editor = b.Editor,
-                   Pages = b.Pages,
-                   ISBN = b.ISBN,
-                   Language = b.Language,
-                   PublicationDate = b.PublicationDate,
-                   QuantityAvailable = b.QuantityAvailable,
-                   AuthorId = b.AuthorId,
-                   TranslatorId = b.TranslatorId,
-                   DiscountId = b.DiscountId,
-                   Discount = b.Discount,
-                   Author = new AuthorSearchDto
-                   {
-                       AuthorId = b.Author.AuthorId,
-                       AuthorName = b.Author.AuthorName,
-                   },
-                   Translator = new TranslatorSearchDto
-                   {
-                       TranslatorId = b.Translator.TranslatorId,
-                       TranslatorName = b.Translator.TranslatorName
-                   },
-                   Categories = b.Categories.Select(c => new CategoryDto
-                   {
-                       CategoryId = c.CategoryId,
-                       CategoryName = c.CategoryName
-                   }).ToList(),
-                   Reviews = b.Reviews.Select(r => new ReviewDto
-                   {
-                       ReviewId = r.ReviewId,
-                       Score = r.Score,
-                       Description = r.Description,
-                       BookId = r.BookId,
-                       UserId = r.UserId,
-                       User = new UserDto
-                       {
-                           UserId = r.UserId,
-                           Name = r.User.Name,
-                           Surname = r.User.Surname,
-                           Email = r.User.Email,
-                       }
-                   }).ToList(),
-               }).SingleOrDefaultAsync(b => b.BookId == id);
+            var book = await _bookService.GetBookDetail(id);
 
             if (book == null)
             {
