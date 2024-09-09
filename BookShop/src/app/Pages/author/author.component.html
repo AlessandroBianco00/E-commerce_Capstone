@@ -19,16 +19,33 @@
   </div>
 
   <div class="row" *ngIf="currentAuthor.books">
-    <div class="col-12 col-md-4" *ngFor="let book of currentAuthor.books">
+    <div class="col" *ngFor="let book of currentAuthor.books">
       <div class="card">
         <img
           [src]="'data:image/jpeg;base64,' + book.image"
           class="card-img-top"
-          [alt]="book.title + 'image'"
+          [alt]="book.title"
         />
         <div class="card-body">
           <h5 class="card-title">{{ book.title }}</h5>
-          <p class="card-text">{{ book.description }}</p>
+          <p class="card-text">
+            {{ book.author.authorName }} (Autore),
+            {{ book.translator.translatorName }} (Traduttore) | Edizione
+            {{ book.language }}
+          </p>
+          <p class="card-text">
+            Prezzo
+            {{ (book.price * (100 - book.discount.discountPercentage)) / 100 }}
+            &euro; |
+            <span
+              ><del>{{ book.price }} &euro;</del></span
+            >
+          </p>
+          <a
+            [routerLink]="'/book-detail/' + book.bookId"
+            class="btn btn-primary"
+            >Dettaglio</a
+          >
         </div>
       </div>
     </div>

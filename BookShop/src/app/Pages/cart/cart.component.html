@@ -1,1 +1,36 @@
-<p>cart works!</p>
+<div class="container">
+  <div class="row">
+    <p *ngIf="!myCart">Il tuo carrello è vuoto</p>
+
+    <div class="col-8" *ngIf="myCart">
+      <div class="row" *ngFor="let cartItem of myCart.books">
+        <div class="col">
+          <div class="card mb-3">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img
+                  [src]="'data:image/jpeg;base64,' + cartItem.book.image"
+                  class="img-fluid rounded-start"
+                  alt="..."
+                />
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">{{ cartItem.book.title }}</h5>
+                  <p class="card-text">{{ cartItem.book.author.authorName }}</p>
+                  <p class="card-text">qt. {{ cartItem.quantity }}</p>
+                  <p>
+                    Prezzo: {{ cartItem.book.price * cartItem.quantity }} ({{
+                      cartItem.book.price
+                    }}
+                    l'uno)
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

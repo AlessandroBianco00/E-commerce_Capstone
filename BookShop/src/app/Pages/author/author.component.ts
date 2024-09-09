@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { iAuthor } from '../../Models/author';
 import { ActivatedRoute } from '@angular/router';
 import { AuthorService } from '../../Services/author.service';
+import { iAuthorDetailDto } from '../../Dto/author-detail-dto';
 
 @Component({
   selector: 'app-author',
@@ -10,7 +10,7 @@ import { AuthorService } from '../../Services/author.service';
 })
 export class AuthorComponent {
 
-  currentAuthor:iAuthor | null = null
+  currentAuthor!:iAuthorDetailDto
 
   constructor(
     private route:ActivatedRoute,
@@ -20,9 +20,8 @@ export class AuthorComponent {
   ngOnInit() {
     this.route.params.subscribe((params: any) => {
       const authorId = params['id'];
+
       this.AuthorSvc.getAuthorById(authorId).subscribe(author => this.currentAuthor = author);
     });
-
-    this.AuthorSvc.getAllAuthors().subscribe(authors => {console.log(authors)})
   }
 }
