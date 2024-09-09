@@ -42,7 +42,16 @@ const routes: Routes = [
     loadChildren: () => import('./Pages/book-detail/book-detail.module').then(m => m.BookDetailModule),
     title: "BookDetail"
   },
-  { path: '**', loadChildren: () => import('./Pages/page404/page404.module').then(m => m.Page404Module) }
+  {
+    path: 'cart',
+    loadChildren: () => import('./Pages/cart/cart.module').then(m => m.CartModule),
+    title: "MyCart"
+  },
+  {
+    path: '**',
+    loadChildren: () => import('./Pages/page404/page404.module').then(m => m.Page404Module),
+    title: "404 - Not Found"
+  }
 ];
 
 @NgModule({
