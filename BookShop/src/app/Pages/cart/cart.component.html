@@ -20,10 +20,9 @@
                   <p class="card-text">{{ cartItem.book.author.authorName }}</p>
                   <p class="card-text">qt. {{ cartItem.quantity }}</p>
                   <p>
-                    Prezzo: {{ cartItem.book.price * cartItem.quantity }} ({{
-                      cartItem.book.price
-                    }}
-                    l'uno)
+                    Prezzo: {{ cartItem.book.price * cartItem.quantity }} &euro;
+                    ({{ cartItem.book.price }}
+                    &euro; l'uno)
                   </p>
                 </div>
               </div>

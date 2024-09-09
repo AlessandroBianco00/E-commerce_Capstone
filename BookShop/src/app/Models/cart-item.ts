@@ -6,6 +6,6 @@ export interface iCartItem {
     quantity: number;
     cartId: number;
     bookId: number;
-    cart: iCart;
-    book: iBook;
+    cart: iCart | null;
+    book: iBook | null;
 }

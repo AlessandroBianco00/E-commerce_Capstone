@@ -17,9 +17,9 @@ namespace ApiBookStore.Entities
         public int BookId { get; set; }
 
         [ForeignKey("CartId")]
-        public Cart Cart { get; set; }
+        public Cart? Cart { get; set; }
 
         [ForeignKey("BookId")]
-        public Book Book { get; set; }
+        public Book? Book { get; set; }
     }
 }

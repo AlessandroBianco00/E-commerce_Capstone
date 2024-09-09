@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ApiBookStore.Context;
 using ApiBookStore.Entities;
 using ApiBookStore.DTO;
+using ApiBookStore.Models;
 
 namespace ApiBookStore.Controllers
 {
@@ -118,7 +119,15 @@ namespace ApiBookStore.Controllers
 
         // PUT: api/Cart/5
 
-        // POST: api/Cart
+        // POST: api/Cart/addToCart
+        [HttpPost("addToCart")]
+        public async Task<ActionResult<CartItem>> AddToCart([FromBody] CartItem cartItem)
+        {
+            _context.CartItems.Add(cartItem);
+            await _context.SaveChangesAsync();
+
+            return Ok(cartItem);
+        }
 
         // DELETE: api/Cart/5
 
