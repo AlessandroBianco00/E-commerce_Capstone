@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { iShippingAddress } from '../Models/shipping-address';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +10,14 @@ export class ShippingAddressService {
 
   addressUrl:string = 'https://localhost:7059/api/ShippingAddress'
 
+  myAddressesSubject = new BehaviorSubject<iShippingAddress[]>([])
+  myAddresses$ = this.myAddressesSubject.asObservable()
+
   constructor(
     private http:HttpClient
-  ) { }
+  ) {
+    this.getMyAddresses().subscribe((addresses) => this.myAddressesSubject.next(addresses))
+  }
 
   //CRUD riservate a indirizzi dell'utente attuale
 
