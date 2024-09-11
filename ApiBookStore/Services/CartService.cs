@@ -62,7 +62,7 @@ namespace ApiBookStore.Services
 
                     }).ToList()
                 })
-                .SingleOrDefaultAsync(w => w.UserId.ToString() == userId);
+                .SingleOrDefaultAsync(c => c.UserId.ToString() == userId);
 
             return cart;
         }
