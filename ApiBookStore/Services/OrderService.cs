@@ -22,7 +22,7 @@ namespace ApiBookStore.Services
                 .AsNoTracking()
                 .Select(o => new OrderDto
                 {
-                    OrderId = orderId,
+                    OrderId = o.OrderId,
                     UserId = o.UserId,
                     ShippingAddressId = o.ShippingAddressId,
                     OrderDate = o.OrderDate,

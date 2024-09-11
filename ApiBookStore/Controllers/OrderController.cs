@@ -95,6 +95,7 @@ namespace ApiBookStore.Controllers
                 return BadRequest();
             }
 
+            order.OrderDate = DateOnly.FromDateTime(DateTime.Now).AddDays(3);
             _context.Orders.Add(order);
             await _context.SaveChangesAsync();
 
@@ -123,7 +124,7 @@ namespace ApiBookStore.Controllers
             _context.CartItems.RemoveRange(cartItemsToRemove);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetOrder", new { id = order.OrderId }, order);
+            return CreatedAtAction("GetMyOrder", new { id = order.OrderId }, order);
         }
 
         // PUT: api/Order/5

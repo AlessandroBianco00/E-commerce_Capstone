@@ -41,7 +41,9 @@
 
     <div class="col-4" *ngIf="myCart">
       <p>Totale provvisorio: {{ getProvisionalTotal() }} &euro;</p>
-      <button class="btn btn-warning">Procedi all'ordine</button>
+      <a class="btn btn-warning" routerLink="/order-preview"
+        >Procedi all'ordine</a
+      >
     </div>
   </div>
 </div>
