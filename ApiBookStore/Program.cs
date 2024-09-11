@@ -63,6 +63,7 @@ builder.Services
     .AddScoped<IImageService, ImageService>()
     .AddScoped<IAuthorService, AuthorService>()
     .AddScoped<IBookService, BookService>()
+    .AddScoped<ICartService, CartService>()
     ;
 
 var app = builder.Build();

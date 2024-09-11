@@ -90,10 +90,22 @@ namespace ApiBookStore.Controllers
 
         // POST: api/Order
         [HttpPost]
-        public async Task<ActionResult<Order>> PostOrder(Order order)
+        public async Task<ActionResult<Order>> PostOrder([FromBody] Order order)
         {
+            var userId = User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
+
+            // Solo ordini per il proprio profilo
+            if (userId != order.UserId.ToString())
+            {
+                return BadRequest();
+            }
+
             _context.Orders.Add(order);
             await _context.SaveChangesAsync();
+
+            //recupero OrderId
+
+
 
             return CreatedAtAction("GetOrder", new { id = order.OrderId }, order);
         }

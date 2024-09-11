@@ -9,6 +9,7 @@ using ApiBookStore.Context;
 using ApiBookStore.Entities;
 using ApiBookStore.DTO;
 using ApiBookStore.Models;
+using ApiBookStore.Interfaces;
 
 namespace ApiBookStore.Controllers
 {
@@ -17,12 +18,14 @@ namespace ApiBookStore.Controllers
     public class CartController : ControllerBase
     {
         private readonly DataContext _context;
+        private readonly ICartService _cartService;
 
         // Il carrello viene creato insieme alla creazione Utente è unico e non può essere cancellato o modificato. L'utente può interagirci solo aggiungendo e rimuovendo libri dal carrello.
 
-        public CartController(DataContext context)
+        public CartController(DataContext context, ICartService cartService)
         {
             _context = context;
+            _cartService = cartService;
         }
 
         // GET: api/Cart
@@ -62,52 +65,7 @@ namespace ApiBookStore.Controllers
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
 
-            var cart = await _context.Carts
-                .AsNoTracking()
-                .Select(c => new CartDto
-                {
-                    CartId = c.CartId,
-                    UserId = c.UserId,
-                    Books = c.Books.Select(ci =>  new CartItemDto
-                    {
-                        CartItemId = ci.CartItemId,
-                        Quantity = ci.Quantity,
-                        CartId = ci.CartId,
-                        BookId = ci.BookId,
-                        Book = new BookSearchDto
-                        {
-                            BookId = ci.Book.BookId,
-                            Title = ci.Book.Title,
-                            Description = ci.Book.Description,
-                            Image = ci.Book.Image,
-                            Price = ci.Book.Price,
-                            Editor = ci.Book.Editor,
-                            Language = ci.Book.Language,
-                            QuantityAvailable = ci.Book.QuantityAvailable,
-                            AuthorId = ci.Book.AuthorId,
-                            TranslatorId = ci.Book.TranslatorId,
-                            DiscountId = ci.Book.DiscountId,
-                            Discount = ci.Book.Discount,
-                            Author = new AuthorSearchDto
-                            {
-                                AuthorId = ci.Book.Author.AuthorId,
-                                AuthorName = ci.Book.Author.AuthorName,
-                            },
-                            Translator = new TranslatorSearchDto
-                            {
-                                TranslatorId = ci.Book.Translator.TranslatorId,
-                                TranslatorName = ci.Book.Translator.TranslatorName
-                            },
-                            Categories = ci.Book.Categories.Select(c => new CategoryDto
-                            {
-                                CategoryId = c.CategoryId,
-                                CategoryName = c.CategoryName
-                            }).ToList()
-                        }
-
-                    }).ToList()
-                })
-                .SingleOrDefaultAsync(w => w.UserId.ToString() == userId);
+            var cart = await _cartService.GetMyCart(userId);
 
             if (cart == null)
             {
