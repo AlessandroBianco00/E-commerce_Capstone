@@ -123,9 +123,23 @@ namespace ApiBookStore.Controllers
         [HttpPost("addToCart")]
         public async Task<ActionResult<CartItem>> AddToCart([FromBody] CartItem cartItem)
         {
-            _context.CartItems.Add(cartItem);
-            await _context.SaveChangesAsync();
+            // Controllo se l'oggetto è già presente nel carrello
+            var existingItem = _context.CartItems
+                .FirstOrDefault(c => c.CartId == cartItem.CartId && c.BookId == cartItem.BookId);
 
+            // Se presente aggiorno la quantità
+            if (existingItem != null)
+            {
+                existingItem.Quantity += cartItem.Quantity;
+                _context.CartItems.Update(existingItem);
+            }
+            // Altrimenti lo aggiungo al carrello
+            else
+            {
+                _context.CartItems.Add(cartItem);
+            }
+
+            await _context.SaveChangesAsync();
             return Ok(cartItem);
         }
 
