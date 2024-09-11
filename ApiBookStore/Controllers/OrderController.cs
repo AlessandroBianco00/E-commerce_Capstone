@@ -18,11 +18,13 @@ namespace ApiBookStore.Controllers
     {
         private readonly DataContext _context;
         private readonly ICartService _cartService;
+        private readonly IOrderService _orderService;
 
-        public OrderController(DataContext context, ICartService cartService)
+        public OrderController(DataContext context, ICartService cartService, IOrderService orderService)
         {
             _context = context;
             _cartService = cartService;
+            _orderService = orderService;
         }
 
         // GET: api/Order
@@ -61,12 +63,7 @@ namespace ApiBookStore.Controllers
         public async Task<ActionResult<IEnumerable<Order>>> GetMyOrders()
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
-            var myOrders = await _context.Orders
-                .AsNoTracking()
-                .Where(o => o.UserId.ToString() == userId)
-                .Include(o => o.Books)
-                .ThenInclude(oi => oi.Book)
-                .ToListAsync();
+            var myOrders = await _orderService.GetMyOrders(userId);
 
             return Ok(myOrders);
         }
@@ -77,55 +74,7 @@ namespace ApiBookStore.Controllers
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
 
-            var myOrder = await _context.Orders
-                .AsNoTracking()
-                .Select(o => new OrderDto
-                {
-                    OrderId = id,
-                    UserId = o.UserId,
-                    ShippingAddressId = o.ShippingAddressId,
-                    OrderDate = o.OrderDate,
-                    Status = o.Status,
-                    Books = o.Books.Select(oi => new OrderItemDto
-                    {
-                        OrderItemId = oi.OrderItemId,
-                        Quantity = oi.Quantity,
-                        Price = oi.Price,
-                        OrderId = oi.OrderId,
-                        BookId = oi.BookId,
-                        Book = new BookSearchDto
-                        {
-                            BookId = oi.Book.BookId,
-                            Title = oi.Book.Title,
-                            Description = oi.Book.Description,
-                            Image = oi.Book.Image,
-                            Price = oi.Book.Price,
-                            Editor = oi.Book.Editor,
-                            Language = oi.Book.Language,
-                            QuantityAvailable = oi.Book.QuantityAvailable,
-                            AuthorId = oi.Book.AuthorId,
-                            TranslatorId = oi.Book.TranslatorId,
-                            DiscountId = oi.Book.DiscountId,
-                            Discount = oi.Book.Discount,
-                            Author = new AuthorSearchDto
-                            {
-                                AuthorId = oi.Book.Author.AuthorId,
-                                AuthorName = oi.Book.Author.AuthorName,
-                            },
-                            Translator = new TranslatorSearchDto
-                            {
-                                TranslatorId = oi.Book.Translator.TranslatorId,
-                                TranslatorName = oi.Book.Translator.TranslatorName
-                            },
-                            Categories = oi.Book.Categories.Select(c => new CategoryDto
-                            {
-                                CategoryId = c.CategoryId,
-                                CategoryName = c.CategoryName
-                            }).ToList()
-                        }
-                    }).ToList()
-                })
-                .SingleOrDefaultAsync(o => o.OrderId == id && o.UserId.ToString() == userId);
+            var myOrder = await _orderService.GetMyOrderById(id, userId);
 
             if (myOrder == null)
             {

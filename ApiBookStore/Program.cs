@@ -64,6 +64,7 @@ builder.Services
     .AddScoped<IAuthorService, AuthorService>()
     .AddScoped<IBookService, BookService>()
     .AddScoped<ICartService, CartService>()
+    .AddScoped<IOrderService, OrderService>()
     ;
 
 var app = builder.Build();

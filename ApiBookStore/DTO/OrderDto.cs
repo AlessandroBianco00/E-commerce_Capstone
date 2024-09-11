@@ -11,6 +11,7 @@ namespace ApiBookStore.DTO
         public int? ShippingAddressId { get; set; }
         public DateOnly OrderDate { get; set; }
         public int Status { get; set; }
+        public ShippingAddressDto? ShippingAddress { get; set; }
         public List<OrderItemDto> Books { get; set; } = new List<OrderItemDto>();
     }
 }
