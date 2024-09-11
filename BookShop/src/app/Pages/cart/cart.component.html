@@ -1,17 +1,16 @@
 <div class="container">
   <div class="row">
-    <p *ngIf="!myCart">Il tuo carrello è vuoto</p>
-
-    <div class="col-8" *ngIf="myCart">
-      <div class="row" *ngFor="let cartItem of myCart.books">
-        <div class="col">
+    <div class="col-8">
+      <p *ngIf="!myCart">Il tuo carrello è vuoto</p>
+      <div class="row" *ngIf="myCart">
+        <div class="col-12" *ngFor="let cartItem of myCart.books">
           <div class="card mb-3">
             <div class="row g-0">
               <div class="col-md-4">
                 <img
                   [src]="'data:image/jpeg;base64,' + cartItem.book.image"
                   class="img-fluid rounded-start"
-                  alt="..."
+                  [alt]="cartItem.book.title"
                 />
               </div>
               <div class="col-md-8">
@@ -25,11 +24,24 @@
                     &euro; l'uno)
                   </p>
                 </div>
+                <div>
+                  <button
+                    class="btn btn-danger"
+                    (click)="rimuoviDalCarrello(cartItem.cartItemId)"
+                  >
+                    Rimuovi
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
+
+    <div class="col-4" *ngIf="myCart">
+      <p>Totale provvisorio: {{ getProvisionalTotal() }} &euro;</p>
+      <button class="btn btn-warning">Procedi all'ordine</button>
     </div>
   </div>
 </div>

@@ -21,4 +21,19 @@ export class CartComponent {
     this.CartSvc.getMyCart().subscribe(cart => this.myCart = cart)
   }
 
+  rimuoviDalCarrello(cartItemId:number) {
+    this.CartSvc.removeFromCart(cartItemId).subscribe(() => {
+      setTimeout(() => {
+        this.router.navigate(['']);
+    }, 1000);
+    })
+  }
+
+  getProvisionalTotal():number{
+    let provisionalTotal = 0
+    this.myCart.books.forEach(cartItem => {
+      provisionalTotal += cartItem.quantity*cartItem.book.price
+    })
+    return provisionalTotal
+  }
 }

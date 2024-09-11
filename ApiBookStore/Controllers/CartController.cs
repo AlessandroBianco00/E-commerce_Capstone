@@ -143,7 +143,21 @@ namespace ApiBookStore.Controllers
             return Ok(cartItem);
         }
 
-        // DELETE: api/Cart/5
+        // DELETE: api/Cart/removeFromCart/5
+        [HttpDelete("removeFromCart/{cartItemId}")]
+        public async Task<ActionResult<CartItem>> RemoveFromCart(int cartItemId)
+        {
+            var cartItem = await _context.CartItems.FindAsync(cartItemId);
+            if (cartItem == null)
+            {
+                return NotFound();
+            }
+
+            _context.CartItems.Remove(cartItem);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
 
     }
 }

@@ -22,4 +22,8 @@ export class CartService {
   addToCart(cartItem:Partial<iCartItem>){
     return this.http.post<iCartItemDto>(`${this.cartUrl}/addToCart`, cartItem)
   }
+
+  removeFromCart(cartItemId:number){
+    return this.http.delete<iCartItemDto>(`${this.cartUrl}/removeFromCart/${cartItemId}`)
+  }
 }
