@@ -46,9 +46,9 @@
         <li class="nav-item" *ngIf="isLoggedIn">
           <a
             class="nav-link"
-            routerLink="/profile"
+            routerLink="/order"
             routerLinkActive="custom-active"
-            >Profilo</a
+            >Ordini</a
           >
         </li>
         <li class="nav-item" *ngIf="!isLoggedIn">
@@ -67,25 +67,4 @@
       </ul>
     </div>
   </div>
-  <!--
-  <div class="d-flex px-3 mb-3">
-    <input
-      class="form-control me-2 border-bluscuro"
-      type="text"
-      [(ngModel)]="searchTerm"
-    />
-    <button
-      class="btn btn-outline-success me-2"
-      (click)="searchAuthor(searchTerm)"
-    >
-      Search
-    </button>
-    <button
-      class="btn btn-outline-bluscuro border-bluscuro"
-      (click)="completeArray()"
-    >
-      Restore
-    </button>
-  </div>
-  -->
 </nav>

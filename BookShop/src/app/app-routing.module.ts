@@ -53,6 +53,11 @@ const routes: Routes = [
     title: "OrderPreview"
   },
   {
+    path: 'order',
+    loadChildren: () => import('./Pages/order/order.module').then(m => m.OrderModule) ,
+    title: "Order"
+  },
+  {
     path: '**',
     loadChildren: () => import('./Pages/page404/page404.module').then(m => m.Page404Module),
     title: "404 - Not Found"
