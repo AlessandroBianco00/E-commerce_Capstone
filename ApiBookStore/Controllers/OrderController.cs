@@ -95,14 +95,20 @@ namespace ApiBookStore.Controllers
                 return BadRequest();
             }
 
+            var cart = await _cartService.GetMyCart(userId);
+
+            if (cart == null) return NotFound();
+
+            if (cart.Books == null || !cart.Books.Any())
+            {
+                return BadRequest("Cart is empty, cannot create an order.");
+            }
+
             order.OrderDate = DateOnly.FromDateTime(DateTime.Now);
             _context.Orders.Add(order);
             await _context.SaveChangesAsync();
 
             var orderId = order.OrderId;
-            var cart = await _cartService.GetMyCart(userId);
-
-            if (cart == null) return NotFound();
 
             var orderItems = new List<OrderItem>();
             var cartItemsToRemove = new List<CartItem>();
