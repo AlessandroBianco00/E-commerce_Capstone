@@ -95,7 +95,7 @@ namespace ApiBookStore.Controllers
                 return BadRequest();
             }
 
-            order.OrderDate = DateOnly.FromDateTime(DateTime.Now).AddDays(3);
+            order.OrderDate = DateOnly.FromDateTime(DateTime.Now);
             _context.Orders.Add(order);
             await _context.SaveChangesAsync();
 
