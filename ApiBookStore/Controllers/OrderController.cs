@@ -60,7 +60,7 @@ namespace ApiBookStore.Controllers
 
         // GET: api/Order/MyOrders
         [HttpGet("MyOrders")]
-        public async Task<ActionResult<IEnumerable<Order>>> GetMyOrders()
+        public async Task<ActionResult<IEnumerable<OrderDto>>> GetMyOrders()
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
             var myOrders = await _orderService.GetMyOrders(userId);
@@ -70,7 +70,7 @@ namespace ApiBookStore.Controllers
 
         // GET: api/Order/myOrder/5
         [HttpGet("myOrder/{id}")]
-        public async Task<ActionResult<Order>> GetMyOrder(int id)
+        public async Task<ActionResult<OrderDto>> GetMyOrder(int id)
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
 
@@ -86,7 +86,7 @@ namespace ApiBookStore.Controllers
 
         // POST: api/Order
         [HttpPost]
-        public async Task<ActionResult<Order>> PostOrder([FromBody] Order order)
+        public async Task<ActionResult<OrderDto>> PostOrder([FromBody] Order order)
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
 
@@ -124,7 +124,10 @@ namespace ApiBookStore.Controllers
             _context.CartItems.RemoveRange(cartItemsToRemove);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetMyOrder", new { id = order.OrderId }, order);
+            return CreatedAtAction("GetMyOrder", new { id = order.OrderId }, new OrderDto
+            {
+                OrderId = order.OrderId,
+            });
         }
 
         // PUT: api/Order/5
