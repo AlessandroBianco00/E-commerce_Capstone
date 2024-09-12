@@ -65,7 +65,7 @@ namespace ApiBookStore.Context
             modelBuilder.Entity<Order>()
                 .HasOne(o => o.ShippingAddress)
                 .WithOne()
-                .HasForeignKey<Order>(o => o.UserId)
+                .HasForeignKey<Order>(o => o.ShippingAddressId)
                 .OnDelete(DeleteBehavior.Restrict); //Previene l'emliminazione a cascata degli indirizzi quando elimino un ordine
 
         }
