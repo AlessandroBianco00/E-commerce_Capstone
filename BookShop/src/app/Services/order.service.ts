@@ -15,7 +15,7 @@ export class OrderService {
   ) { }
 
   getMyOrders(){
-    return this.http.get<iOrderDto>(`${this.orderUrl}/MyOrders`)
+    return this.http.get<iOrderDto[]>(`${this.orderUrl}/MyOrders`)
   }
 
   getMyOrderById(id:number){

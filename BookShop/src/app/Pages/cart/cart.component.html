@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-8">
-      <p *ngIf="!myCart">Il tuo carrello è vuoto</p>
+      <p *ngIf="!myCart">Recupero carrello...</p>
       <p *ngIf="!myCart.books.length">Il tuo carrello è vuoto</p>
       <div class="row" *ngIf="myCart">
         <div class="col-12" *ngFor="let cartItem of myCart.books">

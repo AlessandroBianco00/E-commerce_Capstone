@@ -1,1 +1,35 @@
-<p>order works!</p>
+<div class="container">
+  <div class="row" *ngIf="orderArray">
+    <div class="col-8" *ngFor="let order of orderArray">
+      <div class="card">
+        <div class="card-header d-flex justify-content-around">
+          <div>Data ordine: {{ order.orderDate }}</div>
+          <div>Totale: {{ getOrderTotal(order) }} &euro;</div>
+          <div>
+            Indirizzo: {{ order.shippingAddress?.streetAddress }},
+            {{ order.shippingAddress?.city }}
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card mb-3" *ngFor="let orderItem of order.books">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img
+                  [src]="'data:image/jpeg;base64,' + orderItem.book.image"
+                  class="img-fluid rounded-start"
+                  [alt]="orderItem.book.title"
+                />
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">{{ orderItem.book.title }}</h5>
+                  <p class="card-text">Placeholder + review</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
