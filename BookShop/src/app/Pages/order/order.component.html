@@ -13,7 +13,13 @@
         <div class="card-body">
           <div class="card mb-3" *ngFor="let orderItem of order.books">
             <div class="row g-0">
-              <div class="col-md-4">
+              <div class="col-md-4 position-relative">
+                <span
+                  class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary"
+                >
+                  {{ orderItem.quantity }}
+                  <span class="visually-hidden">quantity ordered</span>
+                </span>
                 <img
                   [src]="'data:image/jpeg;base64,' + orderItem.book.image"
                   class="img-fluid rounded-start"

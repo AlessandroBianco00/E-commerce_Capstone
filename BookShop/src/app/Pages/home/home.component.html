@@ -22,23 +22,7 @@
     </div>
   </div>
 
-  <div class="row p-3 g-2" *ngIf="bookArray">
-    <div
-      class="col-12 col-md-6 col-lg-4 col-xl-3"
-      *ngFor="let book of bookArray"
-    >
-      <div class="card text-bg-dark h-100">
-        <img
-          [src]="'data:image/jpeg;base64,' + book.image"
-          class="card-img-top"
-          [alt]="book.title + 'thumbnail'"
-        />
-        <div class="card-body">
-          <h5 class="card-title fw-bold">{{ book.title }}</h5>
-          <p class="card-text">Release: {{ book.publicationDate }}</p>
-          <p class="card-text">Description: {{ book.description }}</p>
-        </div>
-      </div>
-    </div>
-  </div>
+  <div></div>
+
+  <!-- Array libri consigliati/ di una particolare categoria -->
 </div>

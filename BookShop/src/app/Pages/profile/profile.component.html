@@ -3,7 +3,7 @@
     Benvenuto {{ currentUser.name }} {{ currentUser.surname }}
   </h1>
   <div class="row">
-    <div class="card hover-card" [routerLink]="['#']">
+    <div class="card hover-card" [routerLink]="['/order']">
       <div class="card-body">
         <h5 class="card-title">I miei ordini</h5>
         <p class="card-text">
@@ -46,13 +46,6 @@
         <p class="card-text">
           Aggiungi o rimuovi prodotti dal carrello. Completa il tuo nuovo ordine
         </p>
-      </div>
-    </div>
-
-    <div class="card hover-card" [routerLink]="['/order']">
-      <div class="card-body">
-        <h5 class="card-title">I miei ordini</h5>
-        <p class="card-text">Visualizza i tuoi ordini.</p>
       </div>
     </div>
   </div>

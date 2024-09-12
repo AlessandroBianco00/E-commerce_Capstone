@@ -95,7 +95,7 @@ namespace ApiBookStore.Controllers
                 return BadRequest();
             }
 
-            var cart = await _cartService.GetMyCart(userId);
+            var cart = await _cartService.GetMyCart(userId);    
 
             if (cart == null) return NotFound();
 
@@ -115,10 +115,14 @@ namespace ApiBookStore.Controllers
 
             foreach (var ci in cart.Books)
             {
+                var discountPercentage = (ci.Book.Discount != null && ci.Book.Discount.EndingDate > DateOnly.FromDateTime(DateTime.Now))
+                    ? ci.Book.Discount.DiscountPercentage
+                    : 5;
+
                 orderItems.Add(new OrderItem
                 {
                     Quantity = ci.Quantity,
-                    Price = ci.Book.Price,
+                    Price = ci.Book.Price * (100 - discountPercentage) / 100,
                     OrderId = orderId,
                     BookId = ci.BookId
                 });
