@@ -1,4 +1,21 @@
-/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/bootstrap/scss/functions"; //necessario per l'import "variables"
+@import "../node_modules/bootstrap/scss/variables"; // variabili da modificare
+
+// Aggiungo 2 colori a Bootstrap
+$new-theme-colors: (
+  "grigioblu": #232f3e,
+  "bluscuro": #131921,
+  "chiaro": #dfefda,
+);
+
+$theme-colors: map-merge($theme-colors, $new-theme-colors);
 
 /* Importing Bootstrap SCSS file. */
-@import 'bootstrap/scss/bootstrap';
+@import "bootstrap/scss/bootstrap";
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;700&display=swap");
+
+body {
+  font-family: "Poppins", sans-serif !important;
+  font-size: 1.2rem;
+}

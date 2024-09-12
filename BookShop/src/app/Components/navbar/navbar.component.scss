@@ -1,0 +1,16 @@
+nav {
+  .logo-img {
+    border-radius: 100%;
+    width: 5em;
+    height: 5em;
+    margin: 0.5em 1.5em;
+  }
+  .nav-link {
+    color: white;
+  }
+}
+
+.custom-active {
+  color: #dbbe30 !important;
+  font-weight: bold;
+}
