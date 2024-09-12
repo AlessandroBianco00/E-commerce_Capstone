@@ -1,0 +1,27 @@
+.container {
+  .category-card {
+    width: 15rem;
+    background-color: #eee;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-align: center;
+    padding: 0.5em 0.2em;
+    img {
+      margin: auto;
+      width: 90%;
+      border-radius: 100%;
+    }
+    p {
+      font-weight: bold;
+      margin: 1em 0;
+    }
+    .category-description {
+      display: none;
+      font-weight: 400;
+    }
+  }
+
+  .category-card:hover .category-description {
+    display: block;
+  }
+}
