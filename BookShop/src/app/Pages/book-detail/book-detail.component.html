@@ -65,11 +65,11 @@
                 <h5 class="card-title">
                   Recensione di {{ review.user.name }} {{ review.user.name }}
                 </h5>
-                <p>Valutazione: {{ review.score }}</p>
+                <p [innerHTML]="printStars(review.score)"></p>
                 <p class="card-text">
                   {{ review.description }}
                 </p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                <a routerLink="#" class="btn btn-primary">Visualizza utente</a>
               </div>
             </div>
           </div>

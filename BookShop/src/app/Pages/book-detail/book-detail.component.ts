@@ -61,5 +61,23 @@ export class BookDetailComponent {
             }, 1000);
         });
     });
-}
+  }
+
+  printStars(score: number): string {
+    const fullStars = Math.floor(score / 2);
+    const halfStars = score % 2 ? 1 : 0;
+    const emptyStars = 5 - fullStars - halfStars;
+
+    let starsHtml = '';
+    for (let i = 0; i < fullStars; i++) {
+      starsHtml += '<i class="bi bi-star-fill text-ocra"></i>';
+    }
+    if (halfStars) {
+      starsHtml += '<i class="bi bi-star-half text-ocra"></i>';
+    }
+    for (let i = 0; i < emptyStars; i++) {
+      starsHtml += '<i class="bi bi-star text-ocra"></i>';
+    }
+    return starsHtml;
+  }
 }
