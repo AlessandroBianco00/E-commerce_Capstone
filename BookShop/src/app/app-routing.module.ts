@@ -58,6 +58,11 @@ const routes: Routes = [
     title: "Order"
   },
   {
+    path: 'review/:id',
+    loadChildren: () => import('./Pages/review/review.module').then(m => m.ReviewModule),
+    title:"Review"
+  },
+  {
     path: '**',
     loadChildren: () => import('./Pages/page404/page404.module').then(m => m.Page404Module),
     title: "404 - Not Found"

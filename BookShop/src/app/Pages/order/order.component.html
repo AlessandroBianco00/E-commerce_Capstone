@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="row" *ngIf="orderArray">
+  <div class="row g-2" *ngIf="orderArray">
     <div class="col-8" *ngFor="let order of orderArray">
       <div class="card">
         <div class="card-header d-flex justify-content-around">
@@ -34,6 +34,11 @@
               </div>
             </div>
           </div>
+          <a
+            class="btn btn-warning"
+            [routerLink]="'order-detail/' + order.orderId"
+            >Dettaglio ordine</a
+          >
         </div>
       </div>
     </div>

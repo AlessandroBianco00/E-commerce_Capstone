@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ApiBookStore.Context;
 using ApiBookStore.Entities;
+using ApiBookStore.DTO;
 
 namespace ApiBookStore.Controllers
 {
@@ -21,11 +22,59 @@ namespace ApiBookStore.Controllers
             _context = context;
         }
 
-        // GET: api/Review
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Review>>> GetReviews()
+        // GET: api/Review/bookId/5
+        [HttpGet("bookId/{bookId}")]
+        public async Task<ActionResult<IEnumerable<ReviewDto>>> GetReviewsByBookId(int bookId)
         {
-            var reviews = await _context.Reviews.ToListAsync();
+            var reviews = await _context.Reviews
+                .AsNoTracking()
+                .Where(r => r.BookId == bookId)
+                .Select(r => new ReviewDto
+                {
+                    ReviewId = r.ReviewId,
+                    Score = r.Score,
+                    Description = r.Description,
+                    BookId = r.BookId,
+                    UserId = r.UserId,
+                    User = new UserDto
+                    {
+                        UserId = r.User.UserId,
+                        Name = r.User.Name,
+                        Surname = r.User.Surname,
+                        Email = r.User.Email,
+                        PhoneNumber = r.User.PhoneNumber
+                    }
+                })
+                .ToListAsync();
+
+            return Ok(reviews);
+        }
+
+        // GET: api/Review/userId/5
+        [HttpGet("userId/{userId}")]
+        public async Task<ActionResult<IEnumerable<ReviewDto>>> GetReviewsByUserId(int userId)
+        {
+            var reviews = await _context.Reviews
+                .AsNoTracking()
+                .Where(r => r.UserId == userId)
+                .Select(r => new ReviewDto
+                {
+                    ReviewId = r.ReviewId,
+                    Score = r.Score,
+                    Description = r.Description,
+                    BookId = r.BookId,
+                    UserId = r.UserId,
+                    User = new UserDto
+                    {
+                        UserId = r.User.UserId,
+                        Name = r.User.Name,
+                        Surname = r.User.Surname,
+                        Email = r.User.Email,
+                        PhoneNumber = r.User.PhoneNumber
+                    }
+                })
+                .ToListAsync();
+
             return Ok(reviews);
         }
 
@@ -33,7 +82,24 @@ namespace ApiBookStore.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Review>> GetReview(int id)
         {
-            var review = await _context.Reviews.FindAsync(id);
+            var review = await _context.Reviews
+                .AsNoTracking()
+                .Select(r => new ReviewDto
+                {
+                    ReviewId = r.ReviewId,
+                    Score = r.Score,
+                    Description = r.Description,
+                    BookId = r.BookId,
+                    UserId = r.UserId,
+                    User = new UserDto
+                    {
+                        UserId = r.User.UserId,
+                        Name = r.User.Name,
+                        Surname = r.User.Surname,
+                        Email = r.User.Email,
+                        PhoneNumber = r.User.PhoneNumber
+                    }
+                }).SingleOrDefaultAsync(r => r.ReviewId == id);
 
             if (review == null)
             {
@@ -75,8 +141,16 @@ namespace ApiBookStore.Controllers
 
         // POST: api/Review
         [HttpPost]
-        public async Task<ActionResult<Review>> PostReview(Review review)
+        public async Task<ActionResult<Review>> PostReview([FromBody] Review review)
         {
+            var userId = User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
+
+            // Verifico che l'utente loggato crei un suo commento
+            if (userId != review.UserId.ToString())
+            {
+                return BadRequest();
+            }
+
             _context.Reviews.Add(review);
             await _context.SaveChangesAsync();
 

@@ -6,6 +6,7 @@ $new-theme-colors: (
   "grigioblu": #232f3e,
   "bluscuro": #131921,
   "chiaro": #dfefda,
+  "ocra": #d89640,
 );
 
 $theme-colors: map-merge($theme-colors, $new-theme-colors);
@@ -19,4 +20,5 @@ $theme-colors: map-merge($theme-colors, $new-theme-colors);
 body {
   font-family: "Poppins", sans-serif !important;
   font-size: 1.2rem;
+  background-color: #fff6eb;
 }

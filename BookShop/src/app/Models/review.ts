@@ -7,6 +7,6 @@ export interface iReview {
     description: string;
     bookId: number;
     userId: number;
-    book: iBook;
-    user: iUser;
+    book: iBook | null;
+    user: iUser | null;
 }

@@ -58,6 +58,21 @@
               <p>altro</p>
             </div>
           </div>
+
+          <div class="row">
+            <div class="card mb-3" *ngFor="let review of bookDetail.reviews">
+              <div class="card-body">
+                <h5 class="card-title">
+                  Recensione di {{ review.user.name }} {{ review.user.name }}
+                </h5>
+                <p>Valutazione: {{ review.score }}</p>
+                <p class="card-text">
+                  {{ review.description }}
+                </p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

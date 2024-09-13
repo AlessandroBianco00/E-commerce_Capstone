@@ -28,7 +28,6 @@ export class AddAddressComponent {
   }
 
   create(){
-    console.log(this.currentUser.userId);
 
     this.newAddress.userId = this.currentUser.userId
     this.newAddress.user = null
