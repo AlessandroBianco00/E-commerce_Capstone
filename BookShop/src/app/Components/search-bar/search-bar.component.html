@@ -1,22 +1,18 @@
-<form [formGroup]="searchForm" class="d-flex" role="search">
-  <select formControlName="filter" class="form-select">
-    <option value="category">Categoria</option>
+<form [formGroup]="searchForm" class="d-flex" role="search" class="search-bar">
+  <select formControlName="filter" class="">
+    <option value="title">Titolo</option>
     <option value="author">Autore</option>
     <option value="editor">Editore</option>
-    <option value="title">Titolo</option>
+    <option value="category">Categoria</option>
   </select>
   <input
-    class="form-control me-2"
+    class=""
     type="search"
     formControlName="search"
     placeholder="Search"
     aria-label="Search"
   />
-  <button
-    class="btn btn-outline-success"
-    type="button"
-    (click)="searchParameter()"
-  >
-    Search
+  <button class="btn" type="button" (click)="searchParameter()">
+    <i class="bi bi-search"></i>
   </button>
 </form>

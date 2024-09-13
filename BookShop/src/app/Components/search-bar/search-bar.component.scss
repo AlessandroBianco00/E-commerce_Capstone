@@ -1,0 +1,18 @@
+.search-bar {
+  border-radius: 10px;
+  select {
+    border-radius: 10px 0 0 10px;
+    height: 100%;
+  }
+  input {
+    height: 100%;
+  }
+  button {
+    border-radius: 0 10px 10px 0;
+    background-color: #d89630;
+    padding: 0.1em 0.5em;
+    .bi-search {
+      font-size: x-large;
+    }
+  }
+}

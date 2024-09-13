@@ -8,7 +8,7 @@ import { AuthService } from '../../Services/auth.service';
 })
 export class NavbarComponent {
   show:boolean = false
-  //isLogged:boolean = false
+  isCollapsed:boolean = true
 
   constructor(private AuthSvc:AuthService) {}
 
