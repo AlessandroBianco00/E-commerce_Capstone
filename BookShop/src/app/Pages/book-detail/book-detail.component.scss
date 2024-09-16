@@ -1,0 +1,28 @@
+.container {
+  background-color: white;
+  padding: 1em;
+  .book-img {
+    width: 15em;
+  }
+  .edition-author {
+    font-size: 0.9em;
+  }
+  .book-info {
+    p {
+      font-size: 0.8em;
+    }
+    p:first-of-type {
+      font-weight: bold;
+    }
+  }
+  h6 {
+    font-weight: bold;
+    font-size: 1.2em;
+  }
+  .property {
+    font-size: 0.9em;
+  }
+  .property span {
+    font-weight: bold;
+  }
+}
