@@ -1,7 +1,5 @@
 <div class="container">
-  <h1 *ngIf="currentUser">
-    Benvenuto {{ currentUser.name }} {{ currentUser.surname }}
-  </h1>
+  <h1 *ngIf="currentUser">Benvenuto {{ currentUser.name }}</h1>
   <div class="row g-3">
     <div class="col-12 col-lg-6 col-xl-4">
       <div class="card hover-card h-100" [routerLink]="['/order']">
