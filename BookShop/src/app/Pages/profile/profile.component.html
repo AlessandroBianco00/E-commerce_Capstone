@@ -2,67 +2,117 @@
   <h1 *ngIf="currentUser">
     Benvenuto {{ currentUser.name }} {{ currentUser.surname }}
   </h1>
-  <div class="row">
-    <div class="card hover-card" [routerLink]="['/order']">
-      <img src="assets/img/profile/order.png" class="section-img" alt="order" />
-      <div class="card-body">
-        <h5 class="card-title">I miei ordini</h5>
-        <p class="card-text">
-          Traccia, restituisci o acquista nuovamente degli articoli
-        </p>
+  <div class="row g-3">
+    <div class="col-12 col-lg-6 col-xl-4">
+      <div class="card hover-card h-100" [routerLink]="['/order']">
+        <div class="row">
+          <div class="col-3 d-flex justify-content-center align-items-center">
+            <img
+              src="assets/img/profile/order.png"
+              class="section-img"
+              alt="order"
+            />
+          </div>
+          <div class="col-9">
+            <div class="card-body">
+              <h5 class="card-title">I miei ordini</h5>
+              <p class="card-text text-secondary">
+                Traccia, restituisci o acquista nuovamente degli articoli
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="card hover-card" [routerLink]="['update-profile']">
-      <img
-        src="assets/img/profile/profile.png"
-        class="section-img"
-        alt="profile"
-      />
-      <div class="card-body">
-        <h5 class="card-title">Accesso e impostazioni di sicurezza</h5>
-        <p class="card-text">
-          Modifica il login, il nome e il numero di cellulare
-        </p>
+    <div class="col-12 col-lg-6 col-xl-4">
+      <div class="card hover-card h-100" [routerLink]="['/order']">
+        <div class="row">
+          <div class="col-3 d-flex justify-content-center align-items-center">
+            <img
+              src="assets/img/profile/profile.png"
+              class="section-img"
+              alt="profile"
+            />
+          </div>
+          <div class="col-9">
+            <div class="card-body">
+              <h5 class="card-title">Accesso e impostazioni di sicurezza</h5>
+              <p class="card-text text-secondary">
+                Modifica il login, il nome e il numero di cellulare
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="card hover-card" [routerLink]="['/address']">
-      <img
-        src="assets/img/profile/address.png"
-        class="section-img"
-        alt="address"
-      />
-      <div class="card-body">
-        <h5 class="card-title">Indirizzi</h5>
-        <p class="card-text">
-          Modifica indirizzi e preferenze di consegna per gli ordini e i regali
-        </p>
+    <div class="col-12 col-lg-6 col-xl-4">
+      <div class="card hover-card h-100" [routerLink]="['/order']">
+        <div class="row">
+          <div class="col-3 d-flex justify-content-center align-items-center">
+            <img
+              src="assets/img/profile/address.png"
+              class="section-img"
+              alt="address"
+            />
+          </div>
+          <div class="col-9">
+            <div class="card-body">
+              <h5 class="card-title">Indirizzi</h5>
+              <p class="card-text text-secondary">
+                Modifica indirizzi e preferenze di consegna per gli ordini e i
+                regali
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="card hover-card" [routerLink]="['/payment']">
-      <img
-        src="assets/img/profile/payment.png"
-        class="section-img"
-        alt="payment"
-      />
-      <div class="card-body">
-        <h5 class="card-title">I miei pagamenti</h5>
-        <p class="card-text">
-          Visualizza tutte le transazioni, gestisci le impostazioni e i metodi
-          di pagamento
-        </p>
+    <div class="col-12 col-lg-6 col-xl-4">
+      <div class="card hover-card h-100" [routerLink]="['/order']">
+        <div class="row">
+          <div class="col-3 d-flex justify-content-center align-items-center">
+            <img
+              src="assets/img/profile/payment.png"
+              class="section-img"
+              alt="payment"
+            />
+          </div>
+          <div class="col-9">
+            <div class="card-body">
+              <h5 class="card-title">I miei pagamenti</h5>
+              <p class="card-text text-secondary">
+                Visualizza tutte le transazioni, gestisci le impostazioni e i
+                metodi di pagamento
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="card hover-card" [routerLink]="['/cart']">
-      <img src="assets/img/profile/cart.png" class="section-img" alt="cart" />
-      <div class="card-body">
-        <h5 class="card-title">Il mio carrello</h5>
-        <p class="card-text">
-          Aggiungi o rimuovi prodotti dal carrello. Completa il tuo nuovo ordine
-        </p>
+    <div class="col col-lg-6 col-xl-4">
+      <div class="card hover-card h-100" [routerLink]="['/order']">
+        <div class="row">
+          <div class="col-3 d-flex justify-content-center align-items-center">
+            <img
+              src="assets/img/profile/cart.png"
+              class="section-img"
+              alt="cart"
+            />
+          </div>
+          <div class="col-9">
+            <div class="card-body">
+              <h5 class="card-title">Il mio carrello</h5>
+              <p class="card-text text-secondary">
+                Aggiungi o rimuovi prodotti dal carrello. Completa il tuo nuovo
+                ordine
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
