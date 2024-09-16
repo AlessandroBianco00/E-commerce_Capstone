@@ -1,22 +1,30 @@
 <div class="container">
-  <h1>Login</h1>
+  <div class="row justify-content-center">
+    <form class="form-auth">
+      <p class="form-auth-title">Accedi al tuo account</p>
+      <div class="input-container">
+        <input
+          type="email"
+          placeholder="Inserisci email"
+          name="email"
+          [(ngModel)]="authData.email"
+        />
+        <span> </span>
+      </div>
+      <div class="input-container">
+        <input
+          type="password"
+          placeholder="Inserisci password"
+          [(ngModel)]="authData.password"
+          name="password"
+        />
+      </div>
+      <button type="button" class="submit" (click)="login()">Accedi</button>
 
-  <form>
-    <input
-      type="email"
-      name="email"
-      [(ngModel)]="authData.email"
-      placeholder="email"
-      class="form-control"
-    />
-    <input
-      type="password"
-      name="password"
-      [(ngModel)]="authData.password"
-      placeholder="password"
-      class="form-control mt-3"
-    />
-
-    <button (click)="login()" class="btn btn-primary mt-3">Accedi</button>
-  </form>
+      <p class="signup-link">
+        Non hai un account
+        <a routerLink="/auth/register">Registrati</a>
+      </p>
+    </form>
+  </div>
 </div>

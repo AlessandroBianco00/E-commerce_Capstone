@@ -1,45 +1,59 @@
 <div class="container">
-  <h1>Registrati</h1>
+  <div class="row justify-content-center">
+    <form class="form-auth">
+      <p class="form-auth-title">Registrati</p>
+      <div class="input-container">
+        <input
+          type="text"
+          name="name"
+          [(ngModel)]="newUser.name"
+          placeholder="Il tuo nome"
+        />
+        <span> </span>
+      </div>
+      <div class="input-container">
+        <input
+          type="text"
+          name="surname"
+          [(ngModel)]="newUser.surname"
+          placeholder="Il tuo cognome"
+        />
+        <span> </span>
+      </div>
+      <div class="input-container">
+        <input
+          type="email"
+          name="email"
+          [(ngModel)]="newUser.email"
+          placeholder="Email"
+        />
+        <span> </span>
+      </div>
+      <div class="input-container">
+        <input
+          type="text"
+          name="phoneNumber"
+          [(ngModel)]="newUser.phoneNumber"
+          placeholder="Numero di telefono"
+        />
+        <span> </span>
+      </div>
+      <div class="input-container">
+        <input
+          type="password"
+          name="password"
+          [(ngModel)]="newUser.password"
+          placeholder="Password"
+        />
+      </div>
+      <button type="button" class="submit" (click)="register()">
+        Registrati
+      </button>
 
-  <form>
-    <input
-      type="text"
-      name="name"
-      [(ngModel)]="newUser.name"
-      placeholder="Il tuo nome"
-      class="form-control"
-    />
-    <input
-      type="text"
-      name="surname"
-      [(ngModel)]="newUser.surname"
-      placeholder="Scegli uno username"
-      class="form-control mt-3"
-    />
-    <input
-      type="email"
-      name="email"
-      [(ngModel)]="newUser.email"
-      placeholder="Email"
-      class="form-control mt-3"
-    />
-    <input
-      type="text"
-      name="phoneNumber"
-      [(ngModel)]="newUser.phoneNumber"
-      placeholder="Numero di telefono"
-      class="form-control mt-3"
-    />
-    <input
-      type="password"
-      name="password"
-      [(ngModel)]="newUser.password"
-      placeholder="Password"
-      class="form-control mt-3"
-    />
-
-    <button (click)="register()" class="btn btn-primary mt-3">
-      Registrati
-    </button>
-  </form>
+      <p class="signup-link">
+        Hai già un account
+        <a routerLink="/auth/login">Accedi</a>
+      </p>
+    </form>
+  </div>
 </div>
