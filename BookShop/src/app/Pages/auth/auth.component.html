@@ -1,15 +1,17 @@
 <div class="container py-4">
   <div class="row justify-content-center">
     <div class="col-12 col-md-6">
-      <div class="card">
+      <div class="card text-center">
         <div class="card-body">
-          <h5 class="card-title">Accedi al sito</h5>
-          <p class="card-text">Hai già un account?</p>
-          <button class="btn btn-dark my-2" routerLink="login">Accedi</button>
-          <p class="card-text">Se non sei già iscritto registrati</p>
-          <button class="btn btn-primary my-2" routerLink="register">
-            Registrati
+          <h5 class="card-title">Accedi</h5>
+          <p class="card-text text-secondary mb-0">Accedi al tuo account</p>
+          <button class="btn btn-ocra text-light my-3" routerLink="login">
+            Accedi
           </button>
+          <p class="signup-link">
+            Hai già un account
+            <a routerLink="/auth/login">Accedi</a>
+          </p>
         </div>
       </div>
     </div>
