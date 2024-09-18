@@ -52,7 +52,9 @@
         <div class="card-body">
           <h5 class="fw-bold">Aggiungi al carello</h5>
           <p class="card-title">
-            -{{ bookDetail.discount.discountPercentage }}%
+            <span class="discount"
+              >-{{ bookDetail.discount.discountPercentage }}%</span
+            >
             {{
               (
                 (bookDetail.price *
