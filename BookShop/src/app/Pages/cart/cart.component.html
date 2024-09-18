@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-8">
       <p *ngIf="!myCart">Recupero carrello...</p>
-      <p *ngIf="!myCart.books.length">Il tuo carrello è vuoto</p>
+      <p *ngIf="myCart && !myCart.books.length">Il tuo carrello è vuoto</p>
       <div class="row" *ngIf="myCart">
         <div class="col-12" *ngFor="let cartItem of myCart.books">
           <div class="card mb-3">
@@ -40,7 +40,7 @@
       </div>
     </div>
 
-    <div class="col-4" *ngIf="myCart.books.length">
+    <div class="col-4" *ngIf="myCart && myCart.books.length">
       <p>Totale provvisorio: {{ getProvisionalTotal() }} &euro;</p>
       <a class="btn btn-warning" routerLink="/order-preview"
         >Procedi all'ordine</a
