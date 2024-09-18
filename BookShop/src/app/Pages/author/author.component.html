@@ -1,13 +1,13 @@
 <div class="container" *ngIf="currentAuthor">
-  <div class="card mb-3" style="max-width: 540px">
+  <div class="card mb-3">
     <div class="row g-0">
-      <div class="col-md-4">
+      <div class="col-12 col-md-4">
         <img
           [src]="'data:image/jpeg;base64,' + currentAuthor.image"
           [alt]="currentAuthor.authorName + 'image'"
         />
       </div>
-      <div class="col-md-8">
+      <div class="col-12 col-md-8 p-3">
         <div class="card-body">
           <h5 class="card-title">{{ currentAuthor.authorName }}</h5>
           <p class="card-text">
@@ -19,8 +19,11 @@
   </div>
 
   <div class="row" *ngIf="currentAuthor.books">
-    <div class="col" *ngFor="let book of currentAuthor.books">
-      <div class="card">
+    <div
+      class="col-12 col-md-6 col-lg-3 d-flex justify-content-center"
+      *ngFor="let book of currentAuthor.books"
+    >
+      <div class="card book-card">
         <img
           [src]="'data:image/jpeg;base64,' + book.image"
           class="card-img-top"
@@ -28,14 +31,19 @@
         />
         <div class="card-body">
           <h5 class="card-title">{{ book.title }}</h5>
-          <p class="card-text">
+          <p class="card-text text-secondary personnel-p">
             {{ book.author.authorName }} (Autore),
             {{ book.translator.translatorName }} (Traduttore) | Edizione
             {{ book.language }}
           </p>
           <p class="card-text">
             Prezzo
-            {{ (book.price * (100 - book.discount.discountPercentage)) / 100 }}
+            {{
+              (
+                (book.price * (100 - book.discount.discountPercentage)) /
+                100
+              ).toFixed(2)
+            }}
             &euro; |
             <span
               ><del>{{ book.price }} &euro;</del></span

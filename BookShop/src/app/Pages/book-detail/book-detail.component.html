@@ -50,15 +50,18 @@
     <div class="col-12 col-md-2 col-lg-3">
       <div class="card" *ngIf="newCartItem">
         <div class="card-body">
-          <h5 class="card-title">
+          <h5 class="fw-bold">Aggiungi al carello</h5>
+          <p class="card-title">
             -{{ bookDetail.discount.discountPercentage }}%
             {{
-              (bookDetail.price *
-                (100 - bookDetail.discount.discountPercentage)) /
+              (
+                (bookDetail.price *
+                  (100 - bookDetail.discount.discountPercentage)) /
                 100
+              ).toFixed(2)
             }}
             &euro;
-          </h5>
+          </p>
 
           <form>
             <input
