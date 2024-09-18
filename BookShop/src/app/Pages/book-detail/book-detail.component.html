@@ -1,6 +1,6 @@
 <div class="container" *ngIf="bookDetail">
   <div class="row">
-    <div class="col-12 col-md-3">
+    <div class="col-12 col-lg-4 col-xxl-3 text-center">
       <img
         [src]="'data:image/jpeg;base64,' + bookDetail.image"
         class="book-img"
@@ -8,13 +8,15 @@
       />
       <hr />
     </div>
-    <div class="col-12 col-md-7 col-lg-6">
+    <div class="col-12 col-lg-8 col-xl-6">
       <h5 class="fw-bold">{{ bookDetail.title }}</h5>
       <p class="edition-author">
         Edizione {{ bookDetail.language }} |
-        <a [routerLink]="'/author/' + bookDetail.author.authorId">{{
-          bookDetail.author.authorName
-        }}</a>
+        <a
+          class="author-a"
+          [routerLink]="'/author/' + bookDetail.author.authorId"
+          >{{ bookDetail.author.authorName }}</a
+        >
         (Autore), {{ bookDetail.translator.translatorName }} (Traduttore)
       </p>
       <hr />
@@ -24,30 +26,30 @@
       <hr />
 
       <div class="row">
-        <div class="col-2 book-info">
+        <div class="col-4 col-sm-3 col-md-2 book-info">
           <p>ISBN</p>
           <p>{{ bookDetail.isbn }}</p>
         </div>
-        <div class="col-2 book-info">
+        <div class="col-4 col-sm-3 col-md-2 book-info d-none d-sm-block">
           <p>Lunghezza stampa</p>
           <p>{{ bookDetail.pages }} pagine</p>
         </div>
-        <div class="col-2 book-info">
+        <div class="col-4 col-sm-3 col-md-2 book-info">
           <p>Editore</p>
           <p>{{ bookDetail.editor }}</p>
         </div>
-        <div class="col-2 book-info">
+        <div class="col-4 col-sm-3 col-md-2 book-info">
           <p>Lingua</p>
           <p>{{ bookDetail.language }}</p>
         </div>
-        <div class="col-2 book-info">
+        <div class="col-3 col-md-2 book-info d-none d-md-block">
           <p>Data di pubblicazione</p>
           <p>{{ bookDetail.publicationDate }}</p>
         </div>
       </div>
     </div>
 
-    <div class="col-12 col-md-2 col-lg-3">
+    <div class="col-12 col-xl-2 col-xxl-3">
       <div class="card" *ngIf="newCartItem">
         <div class="card-body">
           <h5 class="fw-bold">Aggiungi al carello</h5>
@@ -76,7 +78,7 @@
 
             <button
               (click)="addToCart(bookDetail.bookId)"
-              class="btn btn-primary mt-3"
+              class="btn btn-teal text-light mt-3"
             >
               Aggiungi
             </button>

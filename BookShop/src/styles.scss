@@ -7,6 +7,7 @@ $new-theme-colors: (
   "bluscuro": #131921,
   "chiaro": #dfefda,
   "ocra": #d89640,
+  "teal": #008b8b,
 );
 
 $theme-colors: map-merge($theme-colors, $new-theme-colors);

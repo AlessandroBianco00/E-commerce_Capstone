@@ -36,12 +36,10 @@ export class AuthService {
   registerUrl:string = 'https://localhost:7059/api/authentication/register'
 
   register(newUser:Partial<iUser>) {
-    console.log("Registrazione") // Debug
     return this.http.post<iAuthResponse>(this.registerUrl, newUser)
   }
 
   login(credentials:iAuthData) {
-    console.log("Login") // Debug
     return this.http.post<iAuthResponse>(this.loginUrl, credentials).pipe(tap(data => {
       this.authSubject.next(data.user)
       console.log(data)
@@ -52,7 +50,6 @@ export class AuthService {
   }
 
   logout():void {
-    console.log("Logout") // Debug
     this.authSubject.next(null)
     localStorage.removeItem('currentUser')
 
@@ -64,7 +61,6 @@ export class AuthService {
 
     if(!jsonData) return null
 
-    console.log("User non nullo") // Debug
     const accessData:iAuthResponse = JSON.parse(jsonData)
     return accessData
   }
@@ -77,23 +73,22 @@ export class AuthService {
     const expDate = this.jwtHelper.getTokenExpirationDate(accessData.token) as Date;
     const expMs = expDate.getTime() - new Date().getTime();
 
-    if (expMs > 2147483647) {
+    if (expMs > 2147483647) { // Node.js ha un limite di millisecondi di circa 28 giorni
+      // Se il limite è superato la funzione parametro è immeditamente lanciata
       setTimeout(() => {
-        this.autoLogout(); // Recheck after a safe interval
+        this.autoLogout(); // Faccio ripartire il timeout per il controllo della scadenza
       }, 2147483647);
     } else {
-      setTimeout(() => this.logout(), expMs); // Set the final logout
+      setTimeout(() => this.logout(), expMs); // Timeout finale
     }
   }
 
   restoreUser():void {
-    console.log("Restore user") // Debug
     const accessData = this.getAccessData()
 
     if(!accessData) return
     if(this.jwtHelper.isTokenExpired(accessData.token)) return
 
-    console.log("Token valido") // Debug
     this.authSubject.next(accessData.user)
 
     this.autoLogout()

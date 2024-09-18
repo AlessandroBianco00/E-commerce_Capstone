@@ -1,38 +1,43 @@
-<div class="row justify-content-center text-start">
-  <div class="col-md-6">
-    <h2>Modifica indirizzo</h2>
-    <form *ngIf="currentUser">
-      <input
-        type="hidden"
-        name="id"
-        [(ngModel)]="currentUser.userId"
-        class="form-control"
-      />
-      <input
-        type="text"
-        name="name"
-        [(ngModel)]="currentUser.name"
-        placeholder="Nome"
-        class="form-control mt-3"
-      />
-      <input
-        type="text"
-        name="surname"
-        [(ngModel)]="currentUser.surname"
-        placeholder="Cognome"
-        class="form-control mt-3"
-      />
-      <input
-        type="text"
-        name="phoneNumber"
-        [(ngModel)]="currentUser.phoneNumber"
-        placeholder="Numero di telefono"
-        class="form-control mt-3"
-      />
+<div class="container">
+  <div class="row justify-content-center text-start">
+    <div class="col-md-6">
+      <h2 class="my-2">Modifica indirizzo</h2>
+      <form *ngIf="currentUser">
+        <input
+          type="hidden"
+          name="id"
+          [(ngModel)]="currentUser.userId"
+          class="form-style"
+        />
+        <input
+          type="text"
+          name="name"
+          [(ngModel)]="currentUser.name"
+          placeholder="Nome"
+          class="form-style mt-3"
+        />
+        <input
+          type="text"
+          name="surname"
+          [(ngModel)]="currentUser.surname"
+          placeholder="Cognome"
+          class="form-style mt-3"
+        />
+        <input
+          type="text"
+          name="phoneNumber"
+          [(ngModel)]="currentUser.phoneNumber"
+          placeholder="Numero di telefono"
+          class="form-style mt-3"
+        />
 
-      <button (click)="update(currentUser.userId)" class="btn btn-primary mt-3">
-        Modifica
-      </button>
-    </form>
+        <button
+          (click)="update(currentUser.userId)"
+          class="btn update-button mt-3"
+        >
+          Modifica
+        </button>
+      </form>
+    </div>
   </div>
 </div>

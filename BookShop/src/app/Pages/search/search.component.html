@@ -13,7 +13,10 @@
         <div class="card-body">
           <h5 class="card-title">{{ book.title }}</h5>
           <p class="card-text text-secondary personnel-p">
-            {{ book.author.authorName }} (Autore),
+            <a class="author-a" [routerLink]="'/author/' + book.authorId"
+              >{{ book.author.authorName }}
+            </a>
+            (Autore),
             {{ book.translator.translatorName }} (Traduttore) | Edizione
             {{ book.language }}
           </p>
