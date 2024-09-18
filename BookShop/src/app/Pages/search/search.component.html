@@ -1,7 +1,10 @@
 <div class="container">
-  <div class="row" *ngIf="bookSearchedArray">
-    <div class="col" *ngFor="let book of bookSearchedArray">
-      <div class="card">
+  <div class="row g-3" *ngIf="bookSearchedArray">
+    <div
+      class="col-12 col-md-6 col-lg-3"
+      *ngFor="let book of bookSearchedArray"
+    >
+      <div class="card h-100">
         <img
           [src]="'data:image/jpeg;base64,' + book.image"
           class="card-img-top"
@@ -9,14 +12,19 @@
         />
         <div class="card-body">
           <h5 class="card-title">{{ book.title }}</h5>
-          <p class="card-text">
+          <p class="card-text text-secondary personnel-p">
             {{ book.author.authorName }} (Autore),
             {{ book.translator.translatorName }} (Traduttore) | Edizione
             {{ book.language }}
           </p>
           <p class="card-text">
             Prezzo
-            {{ (book.price * (100 - book.discount.discountPercentage)) / 100 }}
+            {{
+              (
+                (book.price * (100 - book.discount.discountPercentage)) /
+                100
+              ).toFixed(2)
+            }}
             &euro; |
             <span class="text-secondary"
               ><del>{{ book.price }} &euro;</del></span
