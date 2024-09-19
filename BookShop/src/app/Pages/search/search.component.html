@@ -43,34 +43,34 @@
     </div>
   </div>
 
-  <div *ngIf="arrayOfPages && page" class="text-center my-2">
+  <div *ngIf="page && arrayOfPages" class="text-center my-2">
     <button
-      class="btn btn-teal text-white d me-2"
-      *ngIf="page !== arrayOfPages[0]"
-      (click)="navigateToPage(arrayOfPages[0])"
+      class="btn btn-teal text-white me-2"
+      *ngIf="page != 1"
+      (click)="navigateToPage(1)"
     >
-      {{ arrayOfPages[0] }}
+      {{ 1 }}
     </button>
 
     <button
-      class="btn btn-teal text-white me-2 a"
-      *ngIf="page > 2"
+      class="btn btn-teal text-white me-2"
+      *ngIf="page > 2 && arrayOfPages.length > 3"
       (click)="navigateToPage(arrayOfPages[page - 2])"
     >
       {{ arrayOfPages[page - 2] }}
     </button>
 
     <button
-      class="btn btn-teal text-white me-2 b"
-      *ngIf="page < arrayOfPages.length && page > 1"
+      class="btn btn-teal text-white me-2"
+      *ngIf="page < arrayOfPages.length - 1 && arrayOfPages.length > 3"
       (click)="navigateToPage(arrayOfPages[page])"
     >
       {{ arrayOfPages[page] }}
     </button>
 
     <button
-      class="btn btn-teal text-white me-2 c"
-      *ngIf="page !== arrayOfPages[arrayOfPages.length - 1]"
+      class="btn btn-teal text-white me-2"
+      *ngIf="page != arrayOfPages[arrayOfPages.length - 1]"
       (click)="navigateToPage(arrayOfPages[arrayOfPages.length - 1])"
     >
       {{ arrayOfPages[arrayOfPages.length - 1] }}
