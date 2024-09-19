@@ -10,5 +10,6 @@ namespace ApiBookStore.Interfaces
         public Task<IEnumerable<Book>> GetAll();
         public Task<Book?> GetById(int id);
         public Task<BookDetailDto?> GetBookDetail(int id);
+        public Task<IEnumerable<BookSearchDto>> GetBooksByCategoryId(int categoryId);
     }
 }

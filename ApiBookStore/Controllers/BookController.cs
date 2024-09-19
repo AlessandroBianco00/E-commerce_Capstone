@@ -12,6 +12,7 @@ using static System.Reflection.Metadata.BlobBuilder;
 using ApiBookStore.Entities;
 using ApiBookStore.DTO;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using System.Drawing.Printing;
 
 namespace ApiBookStore.Controllers
 {
@@ -194,6 +195,24 @@ namespace ApiBookStore.Controllers
             }
 
             return Ok(book);
+        }
+
+        // GET Dettaglio libro
+        [HttpGet("recommended")]
+        public async Task<ActionResult<IEnumerable<BookSearchDto>>> GetRecommendedBooks()
+        {
+            var userId = User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
+
+            var lastCategoryId = await _context.Orders
+                .Where(o => o.UserId.ToString() == userId)  // or other condition
+                .OrderByDescending(o => o.OrderDate)  // get the most recent order
+                .SelectMany(o => o.Books)
+                .Select(oi => oi.Book.Categories.Select(c => c.CategoryId).FirstOrDefault())  // get first category ID
+                .FirstOrDefaultAsync();
+
+            var books = await _bookService.GetBooksByCategoryId(lastCategoryId);
+                
+            return Ok(books);
         }
     }
 }

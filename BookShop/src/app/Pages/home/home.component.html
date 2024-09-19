@@ -25,5 +25,47 @@
 
   <div *ngIf="categoryArray"></div>
 
-  <!-- Array libri consigliati/ di una particolare categoria -->
+  <div class="row" *ngIf="bookArray">
+    <h4 class="fw-bold mt-5 mb-2" *ngIf="bookArray[0]">
+      Libri consigliati di {{ bookArray[0].categories[0].categoryName }}
+    </h4>
+    <div class="col-12 col-md-6 col-lg-3" *ngFor="let book of bookArray">
+      <div class="card h-100">
+        <img
+          [src]="'data:image/jpeg;base64,' + book.image"
+          class="card-img-top"
+          [alt]="book.title"
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{ book.title }}</h5>
+          <p class="card-text text-secondary personnel-p">
+            <a class="author-a" [routerLink]="'/author/' + book.authorId"
+              >{{ book.author.authorName }}
+            </a>
+            (Autore),
+            {{ book.translator.translatorName }} (Traduttore) | Edizione
+            {{ book.language }}
+          </p>
+          <p class="card-text">
+            Prezzo
+            {{
+              (
+                (book.price * (100 - book.discount.discountPercentage)) /
+                100
+              ).toFixed(2)
+            }}
+            &euro; |
+            <span class="text-secondary"
+              ><del>{{ book.price }} &euro;</del></span
+            >
+          </p>
+          <a
+            [routerLink]="'/book-detail/' + book.bookId"
+            class="btn btn-teal text-white"
+            >Dettaglio</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

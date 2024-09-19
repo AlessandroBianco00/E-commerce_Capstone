@@ -3,6 +3,7 @@ import { BookService } from '../../Services/book.service';
 import { iBook } from '../../Models/book';
 import { iCategoryDto } from '../../Dto/category-dto';
 import { CategoryService } from '../../Services/category.service';
+import { iBookSearchDto } from '../../Dto/book-search-dto';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +12,7 @@ import { CategoryService } from '../../Services/category.service';
 })
 export class HomeComponent {
 
-  bookArray:iBook[] = []
+  bookArray:iBookSearchDto[] = []
   categoryArray:iCategoryDto[] = []
 
   constructor(
@@ -24,8 +25,7 @@ export class HomeComponent {
       this.categoryArray = categories
     })
 
-    this.BookSvc.getAllBooks().subscribe(books => {
-      console.log(books)
+    this.BookSvc.getRecommendedBooks().subscribe(books => {
       this.bookArray = books
     })
   }

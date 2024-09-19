@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { iBook } from '../Models/book';
 import { iBookDetailDto } from '../Dto/book-detail-dto';
 import { iSearchDto } from '../Dto/search-dto';
+import { iBookSearchDto } from '../Dto/book-search-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -48,6 +49,10 @@ export class BookService {
 
   getBookDetail(id:number) {
     return this.http.get<iBookDetailDto>(`${this.booksUrl}/detail/${id}`)
+  }
+
+  getRecommendedBooks(){
+    return this.http.get<iBookSearchDto[]>(`${this.booksUrl}/recommended`)
   }
 
 }

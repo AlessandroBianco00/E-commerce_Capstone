@@ -44,14 +44,14 @@
                 100
               ).toFixed(2)
             }}
-            &euro; |
-            <span
-              ><del>{{ book.price }} &euro;</del></span
+            &euro;
+            <span class="text-secondary">
+              | <del>{{ book.price }} &euro;</del></span
             >
           </p>
           <a
             [routerLink]="'/book-detail/' + book.bookId"
-            class="btn btn-primary"
+            class="btn btn-teal text-white"
             >Dettaglio</a
           >
         </div>

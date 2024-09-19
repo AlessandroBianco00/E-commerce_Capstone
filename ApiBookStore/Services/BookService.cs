@@ -200,5 +200,45 @@ namespace ApiBookStore.Services
 
             return book;
         }
+
+        public async Task<IEnumerable<BookSearchDto>> GetBooksByCategoryId(int categoryId)
+        {
+            var books = await _context.Books
+                .AsNoTracking()
+                .Where(b => b.Categories[0].CategoryId == categoryId)
+                .Take(4)
+                .Select(b => new BookSearchDto
+                {
+                    BookId = b.BookId,
+                    Title = b.Title,
+                    Description = b.Description,
+                    Image = b.Image,
+                    Price = b.Price,
+                    Editor = b.Editor,
+                    Language = b.Language,
+                    QuantityAvailable = b.QuantityAvailable,
+                    AuthorId = b.AuthorId,
+                    TranslatorId = b.TranslatorId,
+                    DiscountId = b.DiscountId,
+                    Discount = b.Discount,
+                    Author = new AuthorSearchDto
+                    {
+                        AuthorId = b.Author.AuthorId,
+                        AuthorName = b.Author.AuthorName,
+                    },
+                    Translator = new TranslatorSearchDto
+                    {
+                        TranslatorId = b.Translator.TranslatorId,
+                        TranslatorName = b.Translator.TranslatorName
+                    },
+                    Categories = b.Categories.Select(c => new CategoryDto
+                    {
+                        CategoryId = c.CategoryId,
+                        CategoryName = c.CategoryName
+                    }).ToList(),
+                }).ToListAsync();
+
+            return books;
+        }
     }
 }
