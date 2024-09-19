@@ -35,13 +35,48 @@
           </p>
           <a
             [routerLink]="'/book-detail/' + book.bookId"
-            class="btn btn-primary"
+            class="btn btn-teal text-white"
             >Dettaglio</a
           >
         </div>
       </div>
     </div>
   </div>
+
+  <div *ngIf="arrayOfPages && page" class="text-center my-2">
+    <button
+      class="btn btn-teal text-white d me-2"
+      *ngIf="page !== arrayOfPages[0]"
+      (click)="navigateToPage(arrayOfPages[0])"
+    >
+      {{ arrayOfPages[0] }}
+    </button>
+
+    <button
+      class="btn btn-teal text-white me-2 a"
+      *ngIf="page > 2"
+      (click)="navigateToPage(arrayOfPages[page - 2])"
+    >
+      {{ arrayOfPages[page - 2] }}
+    </button>
+
+    <button
+      class="btn btn-teal text-white me-2 b"
+      *ngIf="page < arrayOfPages.length && page > 1"
+      (click)="navigateToPage(arrayOfPages[page])"
+    >
+      {{ arrayOfPages[page] }}
+    </button>
+
+    <button
+      class="btn btn-teal text-white me-2 c"
+      *ngIf="page !== arrayOfPages[arrayOfPages.length - 1]"
+      (click)="navigateToPage(arrayOfPages[arrayOfPages.length - 1])"
+    >
+      {{ arrayOfPages[arrayOfPages.length - 1] }}
+    </button>
+  </div>
+
   <div class="row" *ngIf="!bookSearchedArray">
     <p>Non è stato trovato nessun prodotto inerente alla ricerca</p>
   </div>

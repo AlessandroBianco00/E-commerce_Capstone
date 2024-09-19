@@ -113,11 +113,13 @@ namespace ApiBookStore.Controllers
 
         // GET ricerca libri
         [HttpGet("search")]
-        public async Task<ActionResult<IEnumerable<BookSearchDto>>> GetBooks(
+        public async Task<ActionResult<SearchDto>> GetBooks(
             [FromQuery] string? category,
             [FromQuery] string? author,
             [FromQuery] string? title,
-            [FromQuery] string? editor) 
+            [FromQuery] string? editor,
+            [FromQuery] int page = 1, 
+            [FromQuery] int pageSize = 6) 
         {
             var query = _context.Books.AsQueryable();
 
@@ -138,7 +140,11 @@ namespace ApiBookStore.Controllers
                 query = query.Where(b => b.Editor.Contains(editor));
             }
 
+            var totalBooks = await query.CountAsync();
+
             var books = await query
+               .Skip((page - 1) * pageSize)
+               .Take(pageSize)
                .AsNoTracking()
                .Select(b => new BookSearchDto
                {
@@ -171,7 +177,9 @@ namespace ApiBookStore.Controllers
                    }).ToList(),
                }).ToListAsync();
 
-            return Ok(books);
+            var search = new SearchDto { Pages = (int)Math.Ceiling((double)totalBooks / pageSize), Books = books };
+
+            return Ok(search);
         }
 
         // GET Dettaglio libro
