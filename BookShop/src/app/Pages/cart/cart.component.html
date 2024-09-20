@@ -60,10 +60,17 @@
     </div>
 
     <div class="col-12 col-md-4" *ngIf="myCart && myCart.books.length">
-      <p>Totale provvisorio: {{ getProvisionalTotal().toFixed(2) }} &euro;</p>
-      <a class="btn btn-warning" routerLink="/order-preview"
-        >Procedi all'ordine</a
-      >
+      <div class="card p-3">
+        <p>
+          Totale provvisorio:
+          <span class="fw-bold"
+            >{{ getProvisionalTotal().toFixed(2) }} &euro;</span
+          >
+        </p>
+        <a class="custom-btn yellow-btn text-center" routerLink="/order-preview"
+          >Procedi all'ordine</a
+        >
+      </div>
     </div>
   </div>
 </div>
