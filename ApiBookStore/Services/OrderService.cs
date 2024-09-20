@@ -85,6 +85,7 @@ namespace ApiBookStore.Services
             var myOrders = await _context.Orders
                 .AsNoTracking()
                 .Where(o => o.UserId.ToString() == userId)
+                .OrderByDescending(o => o.OrderDate)
                 .Select(o => new OrderDto
                 {
                     OrderId = o.OrderId,

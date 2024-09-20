@@ -1,4 +1,4 @@
-<div class="row justify-content-center text-start">
+<div class="row justify-content-center text-start" *ngIf="myCart">
   <div class="col-md-6" *ngIf="myCart.books.length">
     <h2>Modifica indirizzo</h2>
     <form *ngIf="addressArray">

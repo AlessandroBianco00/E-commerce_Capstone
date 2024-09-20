@@ -1,0 +1,16 @@
+.container {
+  background-color: white;
+  padding: 1em;
+  border-radius: 10px;
+
+  .single-obj-price {
+    color: gray;
+    font-size: 0.8em;
+  }
+
+  @media screen and (max-width: 768px) {
+    .cart-item-img {
+      width: 15rem;
+    }
+  }
+}

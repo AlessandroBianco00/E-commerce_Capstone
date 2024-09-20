@@ -32,7 +32,8 @@ export class CartComponent {
   getProvisionalTotal():number{
     let provisionalTotal = 0
     this.myCart.books.forEach(cartItem => {
-      provisionalTotal += cartItem.quantity*cartItem.book.price
+      provisionalTotal += cartItem.quantity*cartItem.book.price*((100 - cartItem.book.discount.discountPercentage) /
+      100)
     })
     return provisionalTotal
   }

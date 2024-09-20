@@ -1,37 +1,56 @@
 <div class="container">
   <div class="row">
-    <div class="col-8">
+    <div class="col-12 col-md-8 order-1 order-md-0">
       <p *ngIf="!myCart">Recupero carrello...</p>
       <p *ngIf="myCart && !myCart.books.length">Il tuo carrello è vuoto</p>
       <div class="row" *ngIf="myCart">
         <div class="col-12" *ngFor="let cartItem of myCart.books">
           <div class="card mb-3">
             <div class="row g-0">
-              <div class="col-md-4">
+              <div class="col-md-4 text-center">
                 <img
                   [src]="'data:image/jpeg;base64,' + cartItem.book.image"
-                  class="img-fluid rounded-start"
+                  class="img-fluid rounded-start cart-item-img"
                   [alt]="cartItem.book.title"
                 />
               </div>
               <div class="col-md-8">
                 <div class="card-body">
-                  <h5 class="card-title">{{ cartItem.book.title }}</h5>
-                  <p class="card-text">{{ cartItem.book.author.authorName }}</p>
-                  <p class="card-text">qt. {{ cartItem.quantity }}</p>
-                  <p>
-                    Prezzo: {{ cartItem.book.price * cartItem.quantity }} &euro;
-                    ({{ cartItem.book.price }}
-                    &euro; l'uno)
+                  <p class="card-title fw-bold">{{ cartItem.book.title }}</p>
+                  <p class="card-text">
+                    di {{ cartItem.book.author.authorName }}
                   </p>
-                </div>
-                <div>
-                  <button
-                    class="btn btn-danger"
-                    (click)="rimuoviDalCarrello(cartItem.cartItemId)"
-                  >
-                    Rimuovi
-                  </button>
+                  <p class="card-text">Qt : {{ cartItem.quantity }}</p>
+                  <p>
+                    Prezzo:
+                    {{
+                      (
+                        ((cartItem.book.price *
+                          (100 - cartItem.book.discount.discountPercentage)) /
+                          100) *
+                        cartItem.quantity
+                      ).toFixed(2)
+                    }}
+                    &euro;
+                    <span class="single-obj-price">
+                      ({{
+                        (
+                          (cartItem.book.price *
+                            (100 - cartItem.book.discount.discountPercentage)) /
+                          100
+                        ).toFixed(2)
+                      }}
+                      &euro; l'uno)
+                    </span>
+                  </p>
+                  <div>
+                    <button
+                      class="btn btn-danger"
+                      (click)="rimuoviDalCarrello(cartItem.cartItemId)"
+                    >
+                      Rimuovi
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -40,8 +59,8 @@
       </div>
     </div>
 
-    <div class="col-4" *ngIf="myCart && myCart.books.length">
-      <p>Totale provvisorio: {{ getProvisionalTotal() }} &euro;</p>
+    <div class="col-12 col-md-4" *ngIf="myCart && myCart.books.length">
+      <p>Totale provvisorio: {{ getProvisionalTotal().toFixed(2) }} &euro;</p>
       <a class="btn btn-warning" routerLink="/order-preview"
         >Procedi all'ordine</a
       >

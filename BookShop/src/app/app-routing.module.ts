@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './Guards/auth.guard';
+import { GuestGuard } from './Guards/guest.guard';
 
 const routes: Routes = [
   {
@@ -10,6 +12,8 @@ const routes: Routes = [
   {
     path: 'auth',
     loadChildren: () => import('./Pages/auth/auth.module').then(m => m.AuthModule),
+    canActivate:[GuestGuard],
+    canActivateChild: [GuestGuard],
     title: "Auth"
   },
   {
@@ -20,16 +24,22 @@ const routes: Routes = [
   {
     path: 'profile',
     loadChildren: () => import('./Pages/profile/profile.module').then(m => m.ProfileModule),
+    canActivate:[AuthGuard],
+    canActivateChild: [AuthGuard],
     title: "Profile"
   },
   {
     path: 'payment',
     loadChildren: () => import('./Pages/payment/payment.module').then(m => m.PaymentModule),
+    canActivate:[AuthGuard],
+    canActivateChild: [AuthGuard],
     title: "MyPayments"
   },
   {
     path: 'address',
     loadChildren: () => import('./Pages/address/address.module').then(m => m.AddressModule),
+    canActivate:[AuthGuard],
+    canActivateChild: [AuthGuard],
     title: "MyAddresses"
   },
   {
@@ -45,21 +55,29 @@ const routes: Routes = [
   {
     path: 'cart',
     loadChildren: () => import('./Pages/cart/cart.module').then(m => m.CartModule),
+    canActivate:[AuthGuard],
+    canActivateChild: [AuthGuard],
     title: "MyCart"
   },
   {
     path: 'order-preview',
     loadChildren: () => import('./Pages/order-preview/order-preview.module').then(m => m.OrderPreviewModule),
+    canActivate:[AuthGuard],
+    canActivateChild: [AuthGuard],
     title: "OrderPreview"
   },
   {
     path: 'order',
     loadChildren: () => import('./Pages/order/order.module').then(m => m.OrderModule) ,
+    canActivate:[AuthGuard],
+    canActivateChild: [AuthGuard],
     title: "Order"
   },
   {
     path: 'review/:id',
     loadChildren: () => import('./Pages/review/review.module').then(m => m.ReviewModule),
+    canActivate:[AuthGuard],
+    canActivateChild: [AuthGuard],
     title:"Review"
   },
   {

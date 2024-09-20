@@ -29,7 +29,6 @@ namespace ApiBookStore.Controllers
         }
 
         // GET: api/Author
-        [Authorize] // Authorize di prova
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Author>>> GetAuthors()
         {

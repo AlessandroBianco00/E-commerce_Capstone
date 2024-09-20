@@ -25,4 +25,12 @@
   .category-card:hover .category-description {
     display: block;
   }
+
+  .author-a {
+    color: #008b8b;
+    text-decoration: none;
+  }
+  .author-a:hover {
+    text-decoration: underline;
+  }
 }
