@@ -50,7 +50,7 @@
     </div>
 
     <div class="col-12 col-xl-2 col-xxl-3">
-      <div class="card" *ngIf="newCartItem">
+      <div class="card bg-light-gray" *ngIf="newCartItem">
         <div class="card-body">
           <h5 class="fw-bold">Aggiungi al carello</h5>
           <p class="card-title">
@@ -78,7 +78,7 @@
 
             <button
               (click)="addToCart(bookDetail.bookId)"
-              class="btn btn-teal text-light mt-3"
+              class="custom-cart-btn yellow-btn text-center mt-3"
             >
               Aggiungi
             </button>

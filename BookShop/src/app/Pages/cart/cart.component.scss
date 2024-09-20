@@ -8,41 +8,20 @@
     font-size: 0.8em;
   }
 
-  // Bottone
-
-  .custom-btn {
-    border-radius: 10em;
-    font-size: 17px;
-    font-weight: 600;
-    padding: 0.5em 2em;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    box-shadow: 0 0 0 0 black;
+  .red-btn {
+    border: 2px solid #a80000;
+    background-color: #ca0000dc;
   }
 
-  .custom-btn:hover {
-    transform: translateY(-4px) translateX(-2px);
-    box-shadow: 2px 5px 0 0 black;
-    background-color: #ffc107;
+  .red-btn:hover {
+    background-color: #d52e2e;
   }
+}
 
-  .custom-btn:active {
-    transform: translateY(2px) translateX(1px);
-    box-shadow: 0 0 0 0 black;
-  }
+// Media queries
 
-  .yellow-btn {
-    background-color: #ffd814;
-    color: black;
-    border: 1px solid #d0b000;
-    text-decoration: none;
-  }
-
-  // Media queries
-
-  @media screen and (max-width: 768px) {
-    .cart-item-img {
-      width: 15rem;
-    }
+@media screen and (max-width: 768px) {
+  .cart-item-img {
+    width: 15rem;
   }
 }

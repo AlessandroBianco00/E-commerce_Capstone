@@ -9,3 +9,17 @@
 .author-a:hover {
   text-decoration: underline;
 }
+
+.page-number {
+  background-color: #393939;
+  color: white;
+  border: solid 2px #aaaaaa;
+  border-radius: 30%;
+  padding: 0.5em 1em;
+  transition: all 0.5s ease-in;
+}
+
+.page-number:hover {
+  background-color: #4d4d4d;
+  border: solid 2px #3f3f3f;
+}

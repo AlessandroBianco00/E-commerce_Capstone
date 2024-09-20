@@ -33,9 +33,7 @@
               ><del>{{ book.price }} &euro;</del></span
             >
           </p>
-          <a
-            [routerLink]="'/book-detail/' + book.bookId"
-            class="btn btn-teal text-white"
+          <a [routerLink]="'/book-detail/' + book.bookId" class="book-btn-teal"
             >Dettaglio</a
           >
         </div>
@@ -45,7 +43,7 @@
 
   <div *ngIf="page && arrayOfPages" class="text-center my-2">
     <button
-      class="btn btn-teal text-white me-2"
+      class="page-number text-white me-2"
       *ngIf="page != 1"
       (click)="navigateToPage(1)"
     >
@@ -53,7 +51,7 @@
     </button>
 
     <button
-      class="btn btn-teal text-white me-2"
+      class="page-number text-white me-2"
       *ngIf="page > 2 && arrayOfPages.length > 3"
       (click)="navigateToPage(arrayOfPages[page - 2])"
     >
@@ -61,7 +59,7 @@
     </button>
 
     <button
-      class="btn btn-teal text-white me-2"
+      class="page-number text-white me-2"
       *ngIf="page < arrayOfPages.length - 1 && arrayOfPages.length > 3"
       (click)="navigateToPage(arrayOfPages[page])"
     >
@@ -69,7 +67,7 @@
     </button>
 
     <button
-      class="btn btn-teal text-white me-2"
+      class="page-number text-white me-2"
       *ngIf="page != arrayOfPages[arrayOfPages.length - 1]"
       (click)="navigateToPage(arrayOfPages[arrayOfPages.length - 1])"
     >

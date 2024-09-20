@@ -16,14 +16,25 @@
       font-weight: bold;
       margin: 1em 0;
     }
+    .category-name {
+      transition: color 0.5s ease;
+    }
     .category-description {
-      display: none;
+      opacity: 0;
+      font-size: 0.8em;
       font-weight: 400;
+      transition: all 1s ease;
     }
   }
 
-  .category-card:hover .category-description {
-    display: block;
+  .category-card:hover {
+    .category-name {
+      color: #008b8b;
+    }
+
+    .category-description {
+      opacity: 1;
+    }
   }
 
   .author-a {

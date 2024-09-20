@@ -7,14 +7,14 @@
         <div class="col-12" *ngFor="let cartItem of myCart.books">
           <div class="card mb-3">
             <div class="row g-0">
-              <div class="col-md-4 text-center">
+              <div class="col-md-4 bg-light-gray text-center">
                 <img
                   [src]="'data:image/jpeg;base64,' + cartItem.book.image"
                   class="img-fluid rounded-start cart-item-img"
                   [alt]="cartItem.book.title"
                 />
               </div>
-              <div class="col-md-8">
+              <div class="col-md-8 bg-light-gray">
                 <div class="card-body">
                   <p class="card-title fw-bold">{{ cartItem.book.title }}</p>
                   <p class="card-text">
@@ -45,7 +45,7 @@
                   </p>
                   <div>
                     <button
-                      class="btn btn-danger"
+                      class="book-btn-teal red-btn"
                       (click)="rimuoviDalCarrello(cartItem.cartItemId)"
                     >
                       Rimuovi
@@ -60,14 +60,16 @@
     </div>
 
     <div class="col-12 col-md-4" *ngIf="myCart && myCart.books.length">
-      <div class="card p-3">
+      <div class="card p-3 mb-4 bg-light-gray">
         <p>
           Totale provvisorio:
           <span class="fw-bold"
             >{{ getProvisionalTotal().toFixed(2) }} &euro;</span
           >
         </p>
-        <a class="custom-btn yellow-btn text-center" routerLink="/order-preview"
+        <a
+          class="custom-cart-btn yellow-btn text-center"
+          routerLink="/order-preview"
           >Procedi all'ordine</a
         >
       </div>

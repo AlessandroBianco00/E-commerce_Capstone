@@ -8,6 +8,7 @@ $new-theme-colors: (
   "chiaro": #dfefda,
   "ocra": #d89640,
   "teal": #008b8b,
+  "light-gray": #fbfbfb,
 );
 
 $theme-colors: map-merge($theme-colors, $new-theme-colors);
@@ -22,4 +23,51 @@ body {
   font-family: "Poppins", sans-serif !important;
   font-size: 1.2rem;
   background-color: #fff6eb;
+}
+
+// Bottoni card libro
+.book-btn-teal {
+  border: 2px solid #007171;
+  border-radius: 45px;
+  transition: all 0.3s;
+  padding: 0.3em 0.7em;
+  cursor: pointer;
+  background-color: #008b8b;
+  color: white;
+  font-size: 1em;
+  text-decoration: none;
+}
+
+.book-btn-teal:hover {
+  background-color: #009999;
+}
+
+// Bottone Carrello
+
+.custom-cart-btn {
+  border-radius: 10em;
+  font-size: 17px;
+  font-weight: 600;
+  padding: 0.5em 2em;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 0 0 0 black;
+}
+
+.custom-cart-btn:hover {
+  transform: translateY(-4px) translateX(-2px);
+  box-shadow: 2px 5px 0 0 black;
+  background-color: #ffc107;
+}
+
+.custom-cart-btn:active {
+  transform: translateY(2px) translateX(1px);
+  box-shadow: 0 0 0 0 black;
+}
+
+.yellow-btn {
+  background-color: #ffd814;
+  color: black;
+  border: 1px solid #d0b000;
+  text-decoration: none;
 }
