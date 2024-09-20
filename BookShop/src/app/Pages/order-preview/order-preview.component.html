@@ -1,50 +1,73 @@
-<div class="row justify-content-center text-start" *ngIf="myCart">
-  <div class="col-md-6" *ngIf="myCart.books.length">
-    <h2>Modifica indirizzo</h2>
-    <form *ngIf="addressArray">
-      <select
-        [(ngModel)]="newOrder.shippingAddressId"
-        name="shippingAddressId"
-        class="form-control"
-      >
-        <option
-          [value]="address.shippingAddressId"
-          *ngFor="let address of addressArray"
-        >
-          {{ address.streetAddress }}, {{ address.city }}
-        </option>
-      </select>
+<div class="container">
+  <div class="row justify-content-center text-start" *ngIf="myCart">
+    <div class="col-md-6" *ngIf="myCart.books.length">
+      <div class="card bg-light-gray p-3 mb-4">
+        <h2 class="fw-bold">Seleziona indirizzo</h2>
+        <form *ngIf="addressArray">
+          <select
+            [(ngModel)]="newOrder.shippingAddressId"
+            name="shippingAddressId"
+            class="form-control"
+          >
+            <option
+              [value]="address.shippingAddressId"
+              *ngFor="let address of addressArray"
+            >
+              {{ address.streetAddress }}, {{ address.city }}
+            </option>
+          </select>
 
-      <button (click)="completeOrder()" class="btn btn-primary mt-3">
-        Ordina
-      </button>
-    </form>
+          <button
+            (click)="completeOrder()"
+            class="custom-cart-btn yellow-btn text-center mt-3"
+          >
+            Ordina
+          </button>
+        </form>
+      </div>
+    </div>
   </div>
-</div>
-<div class="row" *ngIf="myCart">
-  <div class="col-12" *ngFor="let cartItem of myCart.books">
-    <div class="card mb-3">
-      <div class="row g-0">
-        <div class="col-md-4">
-          <img
-            [src]="'data:image/jpeg;base64,' + cartItem.book.image"
-            class="img-fluid rounded-start"
-            [alt]="cartItem.book.title"
-          />
-        </div>
-        <div class="col-md-8">
-          <div class="card-body">
-            <h5 class="card-title">{{ cartItem.book.title }}</h5>
-            <p class="card-text">{{ cartItem.book.author.authorName }}</p>
-            <p class="card-text">qt. {{ cartItem.quantity }}</p>
-            <p>
-              Prezzo: {{ cartItem.book.price * cartItem.quantity }} &euro; ({{
-                cartItem.book.price
-              }}
-              &euro; l'uno)
-            </p>
+  <div class="row" *ngIf="myCart">
+    <div class="col-12" *ngFor="let cartItem of myCart.books">
+      <div class="card mb-3">
+        <div class="row g-0">
+          <div class="col-md-4 text-center py-3">
+            <img
+              [src]="'data:image/jpeg;base64,' + cartItem.book.image"
+              class="item-img img-fluid rounded-start"
+              [alt]="cartItem.book.title"
+            />
           </div>
-          <div></div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title fw-bold">{{ cartItem.book.title }}</h5>
+              <p class="card-text">{{ cartItem.book.author.authorName }}</p>
+              <p class="card-text">qt. {{ cartItem.quantity }}</p>
+              <p>
+                Prezzo:
+                {{
+                  (
+                    ((cartItem.book.price *
+                      (100 - cartItem.book.discount.discountPercentage)) /
+                      100) *
+                    cartItem.quantity
+                  ).toFixed(2)
+                }}
+                &euro;
+                <span class="text-secondary single-price">
+                  ({{
+                    (
+                      (cartItem.book.price *
+                        (100 - cartItem.book.discount.discountPercentage)) /
+                      100
+                    ).toFixed(2)
+                  }}
+                  &euro; l'uno)</span
+                >
+              </p>
+            </div>
+            <div></div>
+          </div>
         </div>
       </div>
     </div>

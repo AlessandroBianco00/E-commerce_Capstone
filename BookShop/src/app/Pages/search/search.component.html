@@ -58,6 +58,10 @@
       {{ arrayOfPages[page - 2] }}
     </button>
 
+    <button disabled class="page-number current text-white me-2" *ngIf="page">
+      {{ arrayOfPages[page - 1] }}
+    </button>
+
     <button
       class="page-number text-white me-2"
       *ngIf="page < arrayOfPages.length - 1 && arrayOfPages.length > 3"
