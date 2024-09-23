@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ApiBookStore.Context;
 using ApiBookStore.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ApiBookStore.Controllers
 {
@@ -52,6 +53,7 @@ namespace ApiBookStore.Controllers
 
         // PUT: api/Translator/5
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> PutTranslator(int id, [FromForm] Translator translator)
         {
             if (id != translator.TranslatorId)
@@ -82,6 +84,7 @@ namespace ApiBookStore.Controllers
 
         // POST: api/Translator
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<Translator>> PostTranslator([FromForm] Translator translator)
         {
             _context.Translators.Add(translator);
@@ -92,6 +95,7 @@ namespace ApiBookStore.Controllers
 
         // DELETE: api/Translator/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteTranslator(int id)
         {
             var translator = await _context.Translators.FindAsync(id);

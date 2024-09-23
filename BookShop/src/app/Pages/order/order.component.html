@@ -8,6 +8,10 @@
             {{ order.orderDate }}
           </div>
           <div>
+            Status: <br />
+            {{ statusOrdine(order.status) }}
+          </div>
+          <div>
             Totale: <br />
             {{ getOrderTotal(order).toFixed(2) }} &euro;
           </div>

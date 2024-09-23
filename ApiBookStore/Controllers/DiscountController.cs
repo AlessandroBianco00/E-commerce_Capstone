@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ApiBookStore.Context;
 using ApiBookStore.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ApiBookStore.Controllers
 {
@@ -45,6 +46,7 @@ namespace ApiBookStore.Controllers
 
         // PUT: api/Discount/5
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> PutDiscount(int id, [FromForm] Discount discount)
         {
             if (id != discount.DiscountId)
@@ -75,6 +77,7 @@ namespace ApiBookStore.Controllers
 
         // POST: api/Discount
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<Discount>> PostDiscount([FromForm] Discount discount)
         {
             _context.Discounts.Add(discount);
@@ -85,6 +88,7 @@ namespace ApiBookStore.Controllers
 
         // DELETE: api/Discount/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteDiscount(int id)
         {
             var discount = await _context.Discounts.FindAsync(id);

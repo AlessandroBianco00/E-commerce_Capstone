@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ApiBookStore.Context;
 using System.Security.Claims;
 using ApiBookStore.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ApiBookStore.Controllers
 {
@@ -26,6 +27,7 @@ namespace ApiBookStore.Controllers
 
         // GET: api/Wishlist
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<IEnumerable<Wishlist>>> GetWishlists()
         {
             var lists = await _context.Wishlists.AsNoTracking().Include(w => w.Books).ToListAsync();
@@ -34,6 +36,7 @@ namespace ApiBookStore.Controllers
 
         // GET: api/Wishlist/5
         [HttpGet("{userId}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<Wishlist>> GetWishlist(int userId)
         {
             var wishlist = await _context.Wishlists.AsNoTracking().Include(w => w.Books).SingleOrDefaultAsync(w => w.UserId == userId);
@@ -48,6 +51,7 @@ namespace ApiBookStore.Controllers
 
         // GET: api/Wishlist/myList
         [HttpGet("myList")]
+        [Authorize]
         public async Task<ActionResult<Wishlist>> GetMyWishlist()
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;

@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ApiBookStore.Context;
 using ApiBookStore.Entities;
 using ApiBookStore.DTO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ApiBookStore.Controllers
 {
@@ -26,6 +27,7 @@ namespace ApiBookStore.Controllers
 
         // GET: api/ShippingAddress
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<ShippingAddressDto>>> GetShippingAddresses()
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
@@ -49,6 +51,7 @@ namespace ApiBookStore.Controllers
 
         // GET: api/ShippingAddress/5
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<ShippingAddressDto>> GetShippingAddress(int id)
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
@@ -77,6 +80,7 @@ namespace ApiBookStore.Controllers
 
         // PUT: api/ShippingAddress/5
         [HttpPut("{id}")]
+        [Authorize]
         public async Task<IActionResult> PutShippingAddress([FromRoute] int id, [FromBody] ShippingAddress shippingAddress)
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
@@ -109,6 +113,7 @@ namespace ApiBookStore.Controllers
 
         // POST: api/ShippingAddress
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<ShippingAddress>> PostShippingAddress([FromBody] ShippingAddress shippingAddress)
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
@@ -127,6 +132,7 @@ namespace ApiBookStore.Controllers
 
         // DELETE: api/ShippingAddress/5
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<IActionResult> DeleteShippingAddress(int id)
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;

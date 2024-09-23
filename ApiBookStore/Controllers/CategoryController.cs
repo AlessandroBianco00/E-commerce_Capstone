@@ -25,6 +25,7 @@ namespace ApiBookStore.Controllers
 
         // GET: api/Category
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<IEnumerable<Category>>> GetCategory()
         {
             return await _context.Category.ToListAsync();
@@ -32,6 +33,7 @@ namespace ApiBookStore.Controllers
 
         // GET: api/Category/5
         [HttpGet("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<Category>> GetCategory(int id)
         {
             var category = await _context.Category.FindAsync(id);
@@ -46,6 +48,7 @@ namespace ApiBookStore.Controllers
 
         // PUT: api/Category/5
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> PutCategory(int id, Category category)
         {
             if (id != category.CategoryId)
@@ -76,6 +79,7 @@ namespace ApiBookStore.Controllers
 
         // POST: api/Category
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<Category>> PostCategory(Category category)
         {
             _context.Category.Add(category);
@@ -86,6 +90,7 @@ namespace ApiBookStore.Controllers
 
         // DELETE: api/Category/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteCategory(int id)
         {
             var category = await _context.Category.FindAsync(id);

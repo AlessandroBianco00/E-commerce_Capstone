@@ -25,4 +25,19 @@ export class OrderComponent {
     })
     return orderTotal
   }
+
+  statusOrdine(statusId:number) {
+    switch(statusId){
+      case 1:
+        return "Preso in carico";
+      case 2:
+        return "Spedito";
+      case 3:
+        return "In consegna";
+      case 4:
+        return "Consegnato";
+      default:
+          return "Imprevisto"
+    }
+  }
 }

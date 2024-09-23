@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ApiBookStore.Context;
 using ApiBookStore.Entities;
 using ApiBookStore.DTO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ApiBookStore.Controllers
 {
@@ -24,6 +25,7 @@ namespace ApiBookStore.Controllers
 
         // GET: api/User
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
             var users = await _context.Users
@@ -59,6 +61,7 @@ namespace ApiBookStore.Controllers
 
         // GET: api/User/myUser/5
         [HttpGet("myUser/{id}")]
+        [Authorize]
         public async Task<ActionResult<User>> GetMyUser(int id)
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
@@ -79,6 +82,7 @@ namespace ApiBookStore.Controllers
 
         // Patch: api/User/5
         [HttpPatch("{id}")]
+        [Authorize]
         public async Task<IActionResult> PatchUser(int id, [FromBody] UserDto userDto)
         {
             if (id != userDto.UserId)
@@ -122,6 +126,7 @@ namespace ApiBookStore.Controllers
 
         // DeleteUser: api/User/deleteUser/5
         [HttpPatch("deleteUser/{id}")]
+        [Authorize]
         public async Task<IActionResult> DeleteUser([FromRoute] int id)
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
@@ -162,6 +167,7 @@ namespace ApiBookStore.Controllers
 
         // POST: api/User
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<User>> PostUser(User user)
         {
             _context.Users.Add(user);

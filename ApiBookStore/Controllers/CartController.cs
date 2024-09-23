@@ -10,6 +10,7 @@ using ApiBookStore.Entities;
 using ApiBookStore.DTO;
 using ApiBookStore.Models;
 using ApiBookStore.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ApiBookStore.Controllers
 {
@@ -30,6 +31,7 @@ namespace ApiBookStore.Controllers
 
         // GET: api/Cart
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<IEnumerable<Cart>>> GetCarts()
         {
             var carts = await _context.Carts
@@ -43,6 +45,7 @@ namespace ApiBookStore.Controllers
 
         // GET: api/Cart/5
         [HttpGet("{userId}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<Cart>> GetCart(int userId)
         {
             var cart = await _context.Carts
@@ -61,6 +64,7 @@ namespace ApiBookStore.Controllers
 
         // GET: api/Cart/myCart
         [HttpGet("myCart")]
+        [Authorize]
         public async Task<ActionResult<CartDto>> GetMyCart()
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
@@ -79,6 +83,7 @@ namespace ApiBookStore.Controllers
 
         // POST: api/Cart/addToCart
         [HttpPost("addToCart")]
+        [Authorize]
         public async Task<ActionResult<CartItem>> AddToCart([FromBody] CartItem cartItem)
         {
             // Controllo se l'oggetto è già presente nel carrello
@@ -103,6 +108,7 @@ namespace ApiBookStore.Controllers
 
         // DELETE: api/Cart/removeFromCart/5
         [HttpDelete("removeFromCart/{cartItemId}")]
+        [Authorize]
         public async Task<ActionResult<CartItem>> RemoveFromCart(int cartItemId)
         {
             var cartItem = await _context.CartItems.FindAsync(cartItemId);

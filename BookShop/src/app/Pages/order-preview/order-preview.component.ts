@@ -45,7 +45,7 @@ export class OrderPreviewComponent {
   completeOrder(){
     let addressChosen = this.addressArray.find(a => a.shippingAddressId == this.newOrder.shippingAddressId)
     this.newOrder.userId = addressChosen?.userId
-    this.newOrder.status = 1
+    this.newOrder.status = 1 // Status 1:Preso in carico 2:Spedito 3:In consegna 4:Consegnato 5:Imprevisto
 
     this.OrderSvc.makeAnOrder(this.newOrder).subscribe(() => {
       setTimeout(() => {

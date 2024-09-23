@@ -25,6 +25,7 @@ export class HomeComponent {
       this.categoryArray = categories
     })
 
+    // I libri consigliati sono visibili solo se si è loggati
     this.BookSvc.getRecommendedBooks().subscribe(books => {
       this.bookArray = books
     })

@@ -52,7 +52,7 @@
 
     <button
       class="page-number text-white me-2"
-      *ngIf="page > 2 && arrayOfPages.length > 3"
+      *ngIf="page > 2 && arrayOfPages.length >= 3"
       (click)="navigateToPage(arrayOfPages[page - 2])"
     >
       {{ arrayOfPages[page - 2] }}
@@ -64,7 +64,7 @@
 
     <button
       class="page-number text-white me-2"
-      *ngIf="page < arrayOfPages.length - 1 && arrayOfPages.length > 3"
+      *ngIf="page < arrayOfPages.length - 1 && arrayOfPages.length >= 3"
       (click)="navigateToPage(arrayOfPages[page])"
     >
       {{ arrayOfPages[page] }}

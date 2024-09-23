@@ -13,6 +13,7 @@ using ApiBookStore.Entities;
 using ApiBookStore.DTO;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using System.Drawing.Printing;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ApiBookStore.Controllers
 {
@@ -54,6 +55,7 @@ namespace ApiBookStore.Controllers
 
         // PUT: api/Book/5
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> PutBook(int id, [FromForm] Book book)
         {
             if (id != book.BookId)
@@ -84,6 +86,7 @@ namespace ApiBookStore.Controllers
 
         // POST: api/Book
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<Book>> PostBook([FromForm] BookModel bookModel)
         {
             var book = await _bookService.Create(bookModel);
@@ -93,6 +96,7 @@ namespace ApiBookStore.Controllers
 
         // DELETE: api/Book/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteBook(int id)
         {
             var book = await _context.Books.FindAsync(id);
@@ -211,7 +215,8 @@ namespace ApiBookStore.Controllers
                 .FirstOrDefaultAsync();
 
             var books = await _bookService.GetBooksByCategoryId(lastCategoryId);
-                
+            
+            // Restituisce una lista vuota se non si è loggati (o se l'id utente non coincide)
             return Ok(books);
         }
     }

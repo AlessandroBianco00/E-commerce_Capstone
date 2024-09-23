@@ -30,6 +30,7 @@ namespace ApiBookStore.Controllers
 
         // GET: api/Author
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<IEnumerable<Author>>> GetAuthors()
         {
             var authors = await _authorService.GetAll();
@@ -53,6 +54,7 @@ namespace ApiBookStore.Controllers
 
         // PUT: api/Author/5
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> PutAuthor([FromRoute] int id, [FromForm] AuthorModel authorModel)
         {
             var imgBase64 = _imageService.ConvertImage(authorModel.Image);
@@ -93,6 +95,7 @@ namespace ApiBookStore.Controllers
 
         // POST: api/Author
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<Author>> PostAuthor([FromForm] AuthorModel authorModel)
         {
             var imgBase64 = _imageService.ConvertImage(authorModel.Image);
@@ -112,6 +115,7 @@ namespace ApiBookStore.Controllers
 
         // DELETE: api/Author/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteAuthor([FromRoute] int id)
         {
             var author = await _context.Authors.FindAsync(id);

@@ -9,6 +9,7 @@ using ApiBookStore.Context;
 using ApiBookStore.Entities;
 using ApiBookStore.Interfaces;
 using ApiBookStore.DTO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ApiBookStore.Controllers
 {
@@ -29,6 +30,7 @@ namespace ApiBookStore.Controllers
 
         // GET: api/Order
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<IEnumerable<Order>>> GetOrders()
         {
             var orders = await _context.Orders
@@ -42,6 +44,7 @@ namespace ApiBookStore.Controllers
 
         // GET: api/Order/5
         [HttpGet("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<Order>> GetOrder(int id)
         {
             var order = await _context.Orders
@@ -60,6 +63,7 @@ namespace ApiBookStore.Controllers
 
         // GET: api/Order/MyOrders
         [HttpGet("MyOrders")]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<OrderDto>>> GetMyOrders()
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
@@ -70,6 +74,7 @@ namespace ApiBookStore.Controllers
 
         // GET: api/Order/myOrder/5
         [HttpGet("myOrder/{id}")]
+        [Authorize]
         public async Task<ActionResult<OrderDto>> GetMyOrder(int id)
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
@@ -86,6 +91,7 @@ namespace ApiBookStore.Controllers
 
         // POST: api/Order
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<OrderDto>> PostOrder([FromBody] Order order)
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
@@ -142,7 +148,6 @@ namespace ApiBookStore.Controllers
 
         // PUT: api/Order/5
 
-        // DELETE: api/Order/5
-
+        // Delete non necessaria. Il database deve mantenere i dati contabili dei vari ordini
     }
 }
