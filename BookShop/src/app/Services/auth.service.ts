@@ -42,7 +42,6 @@ export class AuthService {
   login(credentials:iAuthData) {
     return this.http.post<iAuthResponse>(this.loginUrl, credentials).pipe(tap(data => {
       this.authSubject.next(data.user)
-      console.log(data)
       localStorage.setItem('currentUser', JSON.stringify(data))
 
       this.autoLogout()
