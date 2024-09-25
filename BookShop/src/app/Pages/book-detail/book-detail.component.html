@@ -104,14 +104,14 @@
     <div class="row">
       <div class="card mb-3" *ngFor="let review of bookDetail.reviews">
         <div class="card-body">
-          <h5 class="card-title">
+          <h5 class="card-title fw-bold">
             Recensione di {{ review.user.name }} {{ review.user.name }}
           </h5>
           <p [innerHTML]="printStars(review.score)"></p>
           <p class="card-text">
             {{ review.description }}
           </p>
-          <a routerLink="#" class="btn btn-primary">Visualizza utente</a>
+          <a routerLink="#" class="book-btn-teal">Visualizza utente</a>
         </div>
       </div>
     </div>

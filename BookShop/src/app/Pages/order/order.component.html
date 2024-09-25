@@ -15,7 +15,7 @@
             Totale: <br />
             {{ getOrderTotal(order).toFixed(2) }} &euro;
           </div>
-          <div>
+          <div class="d-none d-md-block">
             Indirizzo: <br />
             {{ order.shippingAddress?.streetAddress }},
             {{ order.shippingAddress?.city }}
@@ -41,7 +41,10 @@
                 <div class="card-body">
                   <p class="card-title fw-bold">{{ orderItem.book.title }}</p>
                   <p>
-                    <button class="book-btn-teal white-btn">
+                    <button
+                      class="book-btn-teal white-btn"
+                      [routerLink]="'/book-detail/' + orderItem.bookId"
+                    >
                       Vedi l'articolo <i class="bi bi-arrow-return-left"></i>
                     </button>
                   </p>

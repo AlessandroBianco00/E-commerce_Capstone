@@ -1,23 +1,28 @@
-<div class="row justify-content-center text-start">
-  <div class="col-md-6">
-    <h2>Recensisci prodotto</h2>
-    <form>
-      <input
-        type="number"
-        name="score"
-        [(ngModel)]="newReview.score"
-        placeholder="Valutazione"
-        class="form-control mt-3"
-      />
-      <textarea
-        type="text"
-        name="description"
-        [(ngModel)]="newReview.description"
-        placeholder="Scrivi la tua recensione"
-        class="form-control mt-3"
-      ></textarea>
-
-      <button (click)="create()" class="btn btn-primary mt-3">Aggiungi</button>
+<div class="container">
+  <div class="row justify-content-center">
+    <form class="form-auth">
+      <p class="form-auth-title">Registrati</p>
+      <div class="input-container">
+        <input
+          type="number"
+          name="score"
+          [(ngModel)]="newReview.score"
+          placeholder="Valutazione"
+        />
+        <span> </span>
+      </div>
+      <div class="input-container">
+        <input
+          type="text"
+          name="description"
+          [(ngModel)]="newReview.description"
+          placeholder="Scrivi la tua recensione"
+        />
+        <span> </span>
+      </div>
+      <button type="button" class="submit" (click)="create()">
+        Recensisci
+      </button>
     </form>
   </div>
 </div>
