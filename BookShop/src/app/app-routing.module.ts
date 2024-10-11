@@ -80,6 +80,7 @@ const routes: Routes = [
     canActivateChild: [AuthGuard],
     title:"Review"
   },
+  { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
   {
     path: '**',
     loadChildren: () => import('./Pages/page404/page404.module').then(m => m.Page404Module),

@@ -124,7 +124,7 @@ namespace ApiBookStore.Controllers
             [FromQuery] string? title,
             [FromQuery] string? editor,
             [FromQuery] int page = 1, 
-            [FromQuery] int pageSize = 6) 
+            [FromQuery] int pageSize = 4) 
         {
             var query = _context.Books.AsQueryable();
 
@@ -210,6 +210,7 @@ namespace ApiBookStore.Controllers
             var lastCategoryId = await _context.Orders
                 .Where(o => o.UserId.ToString() == userId)  // or other condition
                 .OrderByDescending(o => o.OrderDate)  // get the most recent order
+                .ThenByDescending(o => o.OrderId)
                 .SelectMany(o => o.Books)
                 .Select(oi => oi.Book.Categories.Select(c => c.CategoryId).FirstOrDefault())  // get first category ID
                 .FirstOrDefaultAsync();
