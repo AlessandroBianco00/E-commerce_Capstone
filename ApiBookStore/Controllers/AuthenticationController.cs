@@ -76,13 +76,14 @@ namespace ApiBookStore.Controllers
                 // questo è il token da restituire al client
                 Token = new JwtSecurityTokenHandler().WriteToken(token), // writetoken lo scrive come stringa
                 TokenExpiration = expiration,
-                User = new UserDto
+                User = new UserLoginDto
                 {
                     UserId = user.UserId,
                     Name = user.Name,
                     Surname = user.Surname,
                     PhoneNumber = user.PhoneNumber,
-                    Email = user.Email
+                    Email = user.Email,
+                    Roles = user.Roles.Select(r => r.RoleName).ToList()
                 }
             });
         }

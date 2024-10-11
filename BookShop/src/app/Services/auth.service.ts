@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { iAuthResponse } from '../Models/auth-response';
 import { iAuthData } from '../Models/auth-data';
 import { iUserDto } from '../Dto/user-dto';
+import { iUserLoginDto } from '../Dto/user-login-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -15,14 +16,23 @@ export class AuthService {
 
   jwtHelper:JwtHelperService = new JwtHelperService()
 
-  authSubject = new BehaviorSubject<null|iUserDto>(null)
+  authSubject = new BehaviorSubject<null|iUserLoginDto>(null)
   user$ = this.authSubject.asObservable()
 
   syncIsLoggedIn:boolean = false;
+  syncIsAdmin:boolean = false;
 
   isLoggedIn$ = this.user$.pipe(
     map(user => !!user),
     tap(user => this.syncIsLoggedIn = user)
+  )
+
+  isAdmin$ = this.user$.pipe(
+    tap(user => {
+      if(user && user.roles.includes("Admin")) {
+        this.syncIsAdmin = true
+      }
+    })
   )
 
   constructor(
