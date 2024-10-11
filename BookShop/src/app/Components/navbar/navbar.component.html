@@ -36,6 +36,15 @@
             >Home</a
           >
         </li>
+        <li *ngIf="isAdmin" class="nav-item me-2">
+          <a
+            class="nav-link"
+            aria-current="admin"
+            routerLink="/admin"
+            routerLinkActive="custom-active"
+            >Admin</a
+          >
+        </li>
         <li class="nav-item me-2" *ngIf="isLoggedIn">
           <div class="dropdown">
             <button

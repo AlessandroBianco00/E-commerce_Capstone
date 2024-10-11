@@ -28,12 +28,9 @@ export class AuthService {
   )
 
   isAdmin$ = this.user$.pipe(
-    tap(user => {
-      if(user && user.roles.includes("Admin")) {
-        this.syncIsAdmin = true
-      }
-    })
-  )
+    map(user => !!(user && user.roles.includes("Admin"))),
+    tap(user => this.syncIsAdmin = user)
+  );
 
   constructor(
     private router:Router,
