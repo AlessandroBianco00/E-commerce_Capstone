@@ -89,6 +89,11 @@ const routes: Routes = [
     title:"Admin"
   },
   {
+    path: 'page403',
+    loadChildren: () => import('./Pages/page403/page403.module').then(m => m.Page403Module),
+    title: "403 - Forbidden"
+  },
+  {
     path: '**',
     loadChildren: () => import('./Pages/page404/page404.module').then(m => m.Page404Module),
     title: "404 - Not Found"

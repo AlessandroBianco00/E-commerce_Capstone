@@ -18,7 +18,7 @@ export class AdminGuard {
 
     if(this.AuthSvc.syncIsAdmin) return true;
 
-    this.router.navigate(['/']); // Pagina Unauthorize
+    this.router.navigate(['/page403']);
     return false;
   }
   canActivateChild(
