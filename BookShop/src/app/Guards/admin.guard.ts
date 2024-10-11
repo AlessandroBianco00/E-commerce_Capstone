@@ -15,7 +15,11 @@ export class AdminGuard {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): MaybeAsync<GuardResult> {
-    return true;
+
+    if(this.AuthSvc.syncIsAdmin) return true;
+
+    this.router.navigate(['/']); // Pagina Unauthorize
+    return false;
   }
   canActivateChild(
     childRoute: ActivatedRouteSnapshot,

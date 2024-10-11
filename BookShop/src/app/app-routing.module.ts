@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './Guards/auth.guard';
 import { GuestGuard } from './Guards/guest.guard';
+import { AdminGuard } from './Guards/admin.guard';
 
 const routes: Routes = [
   {
@@ -80,7 +81,13 @@ const routes: Routes = [
     canActivateChild: [AuthGuard],
     title:"Review"
   },
-  { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
+  {
+    path: 'admin',
+    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
+    canActivate:[AdminGuard],
+    canActivateChild: [AdminGuard],
+    title:"Admin"
+  },
   {
     path: '**',
     loadChildren: () => import('./Pages/page404/page404.module').then(m => m.Page404Module),
